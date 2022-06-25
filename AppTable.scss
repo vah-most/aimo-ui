@@ -1,11 +1,4 @@
-table {
-    tr {
-        height: 1px;
-        /* a hacky way that allows td child to fill the whole cell */
-
-        td {
-            height: 100%;
-        }
-    }
-
+.tableContainer {
+    height: unset;
+    width: 100%;
 }

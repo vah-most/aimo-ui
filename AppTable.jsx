@@ -1,28 +1,34 @@
 import React from "react";
 
-import "./AppTable.scss";
 import AppIcon from "./AppIcon";
+import AppAddButton from "./AppAddButton";
 
-const Table = ({ data, header, onSort, sortBy, sortDirAsc }) => {
+import "./AppTable.scss";
+
+const Table = ({ compactMode = true, compactFields = [], data, header, onAdd, onSort, sortBy, sortDirAsc, style }) => {
     const fields = [
         {
             field: "id",
-            title: "#",
+            title: <AppAddButton onClick={onAdd} />,
             size: 1,
-            isSortable: false
+            isSortable: false,
+            classes: "text-center"
+
         },
         ...header,
         {
             field: "operations",
             title: "Operations",
             size: 0,
-            isSortable: false
+            isSortable: false,
+            classes: "text-center"
         },
 
     ];
 
 
     const renderTableHeader = (
+        index,
         title,
         size,
         extraClasses = "",
@@ -34,7 +40,7 @@ const Table = ({ data, header, onSort, sortBy, sortDirAsc }) => {
         if (isSortable) {
             return (
                 <th
-                    key={title}
+                    key={index}
                     className={thClasses}
                     onClick={() => {
                         onSort && onSort(field, !sortDirAsc);
@@ -60,38 +66,46 @@ const Table = ({ data, header, onSort, sortBy, sortDirAsc }) => {
     };
 
     return (
-        <table className="table">
-            <thead>
-                <tr>
+        <div className="tableContainer" style={style} >
+            <table className="table">
+                <thead>
+                    <tr>
+                        {
+                            fields.map((column, index) => {
+                                if (compactMode && !compactFields.includes(column.field))
+                                    return null;
+                                return renderTableHeader(index, column.title, column.size, column.classes, column.isSortable, column.field);
+                            })
+                        }
+                    </tr>
+                </thead>
+                <tbody>
                     {
-                        fields.map(column => {
-                            return renderTableHeader(column.title, column.size, column.classes, column.isSortable, column.field);
+                        data.map((row, index) => {
+                            return <tr key={index}>
+                                {!compactMode &&
+                                    <th className="align-middle text-center" scope="row" >
+                                        {index + 1}
+                                    </th>}
+                                {
+                                    row.map((item, fIndex) => {
+                                        if (compactMode && !compactFields.includes(item.field))
+                                            return null;
+                                        return <td key={fIndex} className={item.cellClasses ? item.cellClasses : ""}>
+                                            {item.render()}
+                                        </td>;
+                                    })
+                                }
+                                {!compactMode &&
+                                    <th className="align-middle text-center" scope="row" >
+                                        &nbsp;
+                                    </th>}
+                            </tr>;
                         })
                     }
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    data.map((row, index) => {
-                        return <tr key={index}>
-                            <th className="align-middle" scope="row" >
-                                {index + 1}
-                            </th>
-                            {
-                                row.map((field, fIndex) => {
-                                    return <td key={fIndex} className={field.cellClasses ? field.cellClasses : ""}>
-                                        {field.render()}
-                                    </td>;
-                                })
-                            }
-                            <th className="align-middle" scope="row" >
-                                &nbsp;
-                            </th>
-                        </tr>;
-                    })
-                }
-            </tbody>
-        </table>);
+                </tbody>
+            </table>
+        </div>);
 };
 
 export default Table;
