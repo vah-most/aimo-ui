@@ -4,34 +4,40 @@ import AppIcon from "./AppIcon";
 
 import "./AppTextBubble.scss";
 
-function AppTextBubble({ backgroundColor = "#FFA500", onDelete, text }) {
-    const [displayDelete, setDisplayDelete] = useState(false);
+function AppTextBubble({
+  backgroundColor = "#FFA500",
+  className = "",
+  onDelete,
+  style = {},
+  text,
+}) {
+  const [displayDelete, setDisplayDelete] = useState(false);
 
-    return (
+  return (
+    <div
+      className={`textBubble ${className}`}
+      onMouseOut={() => {
+        setDisplayDelete(false);
+      }}
+      onMouseOver={() => {
+        setDisplayDelete(true);
+      }}
+      style={{ backgroundColor: backgroundColor, ...style }}
+    >
+      {onDelete && (
         <div
-            className="textBubble"
-            onMouseOut={() => {
-                setDisplayDelete(false);
-            }}
-            onMouseOver={() => {
-                setDisplayDelete(true);
-            }}
-            style={{ backgroundColor: backgroundColor }}
+          className="textBubbleDelete"
+          onClick={() => onDelete && onDelete(text)}
+          style={
+            displayDelete ? { visibility: "visible" } : { visibility: "hidden" }
+          }
         >
-            <div
-                className="textBubbleDelete"
-                onClick={onDelete}
-                style={
-                    displayDelete ? { visibility: "visible" } : { visibility: "hidden" }
-                }
-            >
-                <AppIcon name="times" />
-            </div>
-            <span>
-                {text}
-            </span>
+          <AppIcon name="times" />
         </div>
-    );
+      )}
+      <span>{text}</span>
+    </div>
+  );
 }
 
 export default AppTextBubble;

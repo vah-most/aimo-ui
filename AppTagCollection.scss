@@ -1,0 +1,19 @@
+.tagCollectionContainer {
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px 0px 10px 0px;
+}
+
+.tagAddIcon {
+  color: gray;
+}
+
+.tagItem {
+  margin: 2px;
+}
