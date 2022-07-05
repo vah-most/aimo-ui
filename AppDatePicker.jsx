@@ -1,6 +1,12 @@
-import Datetime from "react-datetime";
+/*
+ * Created on Mon Jul 04 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
 
-import "./AppDatePicker.scss";
+import Datetime from "react-datetime";
 
 import "react-datetime/css/react-datetime.css";
 

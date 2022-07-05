@@ -1,3 +1,11 @@
+/*
+ * Created on Mon Jul 04 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
 import { useState } from "react";
 import Select, { components } from "react-select";
 
