@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AppIcon from "./AppIcon";
 import AppAddButton from "./AppAddButton";
+import AppPagination from "./AppPagination";
 
 import "./AppTable.scss";
 
@@ -15,10 +16,12 @@ const Table = ({
   onRequestDelete,
   onSort,
   operationsInCompactMode = false,
+  rowsPerPage = 10,
   sortBy,
   sortDirAsc,
   style,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
   const fields = [
     {
       field: "id",
@@ -77,6 +80,18 @@ const Table = ({
     }
   };
 
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected + 1);
+  };
+
+  const getCurrentPageData = () => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const filteredData = data.slice(startIndex, startIndex + rowsPerPage);
+    return [...filteredData];
+  };
+
+  const filteredData = getCurrentPageData();
+
   return (
     <div className="tableContainer" style={style}>
       <table className="table">
@@ -103,7 +118,7 @@ const Table = ({
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => {
+          {filteredData.map((row, index) => {
             return (
               <tr key={index} className={`${row.className}`}>
                 {!compactMode && (
@@ -151,6 +166,12 @@ const Table = ({
           })}
         </tbody>
       </table>
+      <div>
+        <AppPagination
+          onPageChange={handlePageChange}
+          pageCount={data.length / rowsPerPage}
+        />
+      </div>
     </div>
   );
 };
