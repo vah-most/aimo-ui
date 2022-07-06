@@ -1,0 +1,45 @@
+/*
+ * Created on Wed Jul 06 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../../Animations.scss";
+
+.searchBarContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  color: #ffffff;
+  height: 100%;
+}
+
+.searchBar {
+  @include transitionBox(width);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 5px 10px 5px 5px;
+  margin-right: 10px;
+  height: 30px;
+}
+
+.searchInput {
+  width: 200px;
+  border-width: 0px;
+  margin-left: 5px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.searchIcon {
+  color: #808080;
+}

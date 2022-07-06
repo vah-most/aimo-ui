@@ -177,7 +177,7 @@ const Table = ({
       <div>
         <AppPagination
           onPageChange={handlePageChange}
-          pageCount={data.length / rowsPerPage}
+          pageCount={Math.ceil(data.length / rowsPerPage)}
         />
       </div>
     </div>
