@@ -13,7 +13,7 @@ import AppIcon from "./AppIcon";
 import "./AppTextBubble.scss";
 
 function AppTextBubble({
-  backgroundColor = "#FFA500",
+  backgroundColor,
   className = "",
   onDelete,
   style = {},

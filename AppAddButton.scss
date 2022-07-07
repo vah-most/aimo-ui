@@ -6,12 +6,14 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../../Display.scss";
+@import "../../Texts.scss";
+
 .addButton {
-  font-size: 11px;
+  @include flexCenterView(row);
+  @include addButtonTextProps();
+
   border-radius: 5px;
   height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0px 10px 0px 10px;
 }

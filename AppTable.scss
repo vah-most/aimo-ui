@@ -5,24 +5,23 @@
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
+@import "../../Display.scss";
+@import "../../Colors.scss";
+
+.rowOperationContainer {
+  @include flexCenterView(row);
+}
+
+.rowOperationDelete {
+  color: $rowOperationDeleteColor;
+  margin-bottom: 2px;
+}
+
+.rowOperationEdit {
+  color: $rowOperationEditColor;
+}
 
 .tableContainer {
   height: unset;
   width: 100%;
-}
-
-.rowOperationContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.rowOperationEdit {
-  color: #198754;
-}
-
-.rowOperationDelete {
-  margin-bottom: 2px;
-  color: #cb2f2f;
 }
