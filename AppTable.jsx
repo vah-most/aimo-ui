@@ -15,6 +15,7 @@ import AppPagination from "./AppPagination";
 import "./AppTable.scss";
 
 const Table = ({
+  className,
   compactFields = [],
   compactMode = true,
   data,
@@ -101,7 +102,7 @@ const Table = ({
   const filteredData = getCurrentPageData();
 
   return (
-    <div className="tableContainer" style={style}>
+    <div className={`tableContainer ${className}`} style={style}>
       <table className="table">
         <thead>
           <tr>
