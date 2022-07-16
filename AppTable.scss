@@ -15,10 +15,12 @@
 .rowOperationDelete {
   color: $rowOperationDeleteColor;
   margin-bottom: 2px;
+  cursor: pointer;
 }
 
 .rowOperationEdit {
   color: $rowOperationEditColor;
+  cursor: pointer;
 }
 
 .tableContainer {
