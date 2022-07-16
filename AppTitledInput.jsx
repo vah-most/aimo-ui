@@ -13,6 +13,7 @@ import "./AppTitledInput.scss";
 
 const AppTitledInput = ({
   className,
+  extraProps = null,
   onChange,
   placeholder,
   style,
@@ -56,7 +57,11 @@ const AppTitledInput = ({
         return (
           <AppTagCollection
             className="titledInput"
-            collection={value} //TODO: `Collection` should contain all existing groups
+            collection={
+              extraProps && typeof extraProps.collection === "function"
+                ? extraProps.collection()
+                : value
+            }
             onChange={(value) => {
               onChange && onChange(value);
             }}

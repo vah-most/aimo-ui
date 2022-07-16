@@ -55,6 +55,16 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
     <div className={`tagCollectionContainer ${className}`} style={style}>
       <Select
         components={{ DropdownIndicator }}
+        onChange={(item) => {
+          if (item.value) {
+            handleTagAdd(item.value);
+          }
+        }}
+        onInputChange={(input) => {
+          if (input) {
+            setTagInput(input);
+          }
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             handleTagAdd(tagInput);
@@ -67,11 +77,6 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
               })
             : []
         }
-        onInputChange={(input) => {
-          if (input) {
-            setTagInput(input);
-          }
-        }}
         placeholder="Add ..."
       />
       <div className="tagsContainer">
