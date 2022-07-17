@@ -1,0 +1,19 @@
+/*
+ * Created on Sun Jul 17 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+.tooltip-inner {
+  max-width: 500px !important;
+  background-color: #2e2a2a !important;
+  text-align: justify !important;
+  padding: 10px 15px 10px 15px !important;
+  color: #e5e5e5 !important;
+}
+
+.tooltip-arrow::before {
+  border-bottom-color: #2e2a2a !important;
+}

@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { searchTextChange } from "reducers/SearchReducer";
 
 import AppIcon from "./AppIcon";
+import AppTooltip from "./AppTooltip";
 
 import "./AppSearchBar.scss";
 
@@ -39,10 +40,12 @@ const AppSearchBar = () => {
         <AppIcon
           name="search"
           className="hand searchIcon"
+          id="menu_search"
           onClick={() => {
             setDisplayInput(!displayInput);
           }}
         />
+        <AppTooltip target="menu_search">Search tasks</AppTooltip>
       </div>
     </div>
   );
