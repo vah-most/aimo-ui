@@ -1,0 +1,22 @@
+/*
+ * Created on Sun Jul 17 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../../Colors.scss";
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: $colorWhite !important;
+  background-color: $colorOk !important;
+  border-color: $colorOk !important;
+  box-shadow: 0px 1px 1px $colorOk inset, 0 1px 1px $colorOk;
+  outline: 0px;
+}
+
+.page-link {
+  color: $colorOk !important;
+}

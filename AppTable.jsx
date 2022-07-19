@@ -43,7 +43,7 @@ const Table = ({
     {
       field: "operations",
       title: "Operations",
-      size: 0,
+      size: 2,
       isSortable: false,
       classes: "text-center",
     },
@@ -100,6 +100,7 @@ const Table = ({
   };
 
   const filteredData = getCurrentPageData();
+  const pageCount = Math.ceil(data.length / rowsPerPage);
 
   return (
     <div className={`tableContainer ${className}`} style={style}>
@@ -131,9 +132,9 @@ const Table = ({
             return (
               <tr key={index} className={`${row.className}`}>
                 {!compactMode && (
-                  <th className="align-middle text-center" scope="row">
+                  <td className="align-middle text-center rowIndex" scope="row">
                     {index + 1}
-                  </th>
+                  </td>
                 )}
                 {row.fields.map((item, fIndex) => {
                   if (compactMode && !compactFields.includes(item.field))
@@ -176,10 +177,12 @@ const Table = ({
         </tbody>
       </table>
       <div>
-        <AppPagination
-          onPageChange={handlePageChange}
-          pageCount={Math.ceil(data.length / rowsPerPage)}
-        />
+        {pageCount > 1 && (
+          <AppPagination
+            onPageChange={handlePageChange}
+            pageCount={pageCount}
+          />
+        )}
       </div>
     </div>
   );

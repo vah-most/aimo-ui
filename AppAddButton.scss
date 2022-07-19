@@ -6,6 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../../Colors.scss";
 @import "../../Display.scss";
 @import "../../Texts.scss";
 
@@ -13,6 +14,7 @@
   @include flexCenterView(row);
   @include addButtonTextProps();
 
+  background-color: $colorShinyGreen;
   border-radius: 5px;
   height: 20px;
   padding: 0px 10px 0px 10px;

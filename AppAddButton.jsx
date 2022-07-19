@@ -6,16 +6,15 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import AppTooltip from "./AppTooltip";
+
 import "./AppAddButton.scss";
 
-const AppAddButton = ({ backgroundColor = "#90EE90", onClick }) => {
+const AppAddButton = ({ onClick, style, ...extra }) => {
   return (
-    <div
-      className="addButton hand"
-      onClick={onClick}
-      style={{ backgroundColor: backgroundColor }}
-    >
-      <span>+ New ... </span>
+    <div className="addButton hand" onClick={onClick} style={style} {...extra}>
+      <span id="button_new_task">+ New ... </span>
+      <AppTooltip target="button_new_task">Add new task (F2)</AppTooltip>
     </div>
   );
 };

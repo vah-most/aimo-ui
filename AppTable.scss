@@ -5,8 +5,13 @@
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
-@import "../../Display.scss";
 @import "../../Colors.scss";
+@import "../../Display.scss";
+@import "../../Texts.scss";
+
+.rowIndex {
+  @include rowIndexTextProps();
+}
 
 .rowOperationContainer {
   @include flexCenterView(row);

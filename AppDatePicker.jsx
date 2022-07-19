@@ -9,10 +9,12 @@
 import Datetime from "react-datetime";
 
 import "react-datetime/css/react-datetime.css";
+import "./AppDatePicker.scss";
 
 const AppDatePicker = ({ value, className, onChange }) => {
   return (
     <Datetime
+      className="datePicker"
       closeOnSelect={true}
       closeOnClickOutside={true}
       inputProps={{
