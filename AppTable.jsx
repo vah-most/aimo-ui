@@ -132,7 +132,7 @@ const Table = ({
             return (
               <tr key={index} className={`${row.className}`}>
                 {!compactMode && (
-                  <td className="align-middle text-center rowIndex" scope="row">
+                  <td className="align-middle text-center rowIndex">
                     {index + 1}
                   </td>
                 )}
