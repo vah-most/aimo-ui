@@ -14,15 +14,16 @@ import "./AppTitledInput.scss";
 const AppTitledInput = ({
   className,
   extraProps = null,
+  inputType,
+  labelClassName,
   onChange,
   placeholder,
   style,
-  type,
   value = "",
   ...extra
 }) => {
   const getInputComponent = () => {
-    switch (type) {
+    switch (inputType) {
       case "textarea":
         return (
           <textarea
@@ -83,7 +84,6 @@ const AppTitledInput = ({
             }}
             placeholder={placeholder}
             style={style}
-            type={type}
             value={value}
             {...extra}
           />
@@ -93,7 +93,7 @@ const AppTitledInput = ({
   return (
     <div className={`titledInputParentContainer ${className}`}>
       <span
-        className="titledInputLabel"
+        className={`titledInputLabel ${labelClassName}`}
         style={{
           display: value ? "unset" : "none",
         }}

@@ -7,10 +7,11 @@
  */
 
 @import "../../Colors.scss";
+@import "../../Sizes.scss";
 
 .rdtPicker {
   border: 1px solid $colorShinyGreen;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 0px $boxBorderRadius $boxBorderRadius;
   box-shadow: 1px 1px 0px rgb(0 0 0 / 10%);
   border-top-width: 0px;
   background-color: $colorWhiteGreen;

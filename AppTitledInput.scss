@@ -7,13 +7,14 @@
  */
 
 @import "../../Colors.scss";
+@import "../../Sizes.scss";
 @import "../../Texts.scss";
 
 .titledInput {
   @include inputTextProps();
 
   border: 1px solid gray;
-  border-radius: 5px;
+  border-radius: $boxBorderRadius;
   padding: 10px;
   width: 100%;
 }
@@ -30,11 +31,10 @@
 .titledInputLabel {
   @include inputTextProps();
   position: absolute;
-  top: 0px;
-  left: 15px;
-  background-color: $inputBGColor;
+  top: -3px;
+  left: 5px;
   z-index: 1;
-  padding: 0px 4px 0px 4px;
+  padding: 2px 6px 2px 6px;
   color: $inputLabelColor;
 }
 

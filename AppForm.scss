@@ -1,0 +1,32 @@
+/*
+ * Created on Wed Jul 20 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../../Display.scss";
+
+.formContainer {
+  @include flexCenterView(column);
+  margin: 30px;
+}
+
+.formRow {
+  @include flexCenterView(row);
+}
+
+.formInput {
+  width: 300px;
+}
+
+.formInputLabel {
+  border-radius: 3px;
+}
+
+.submitButton {
+  width: 300px;
+  height: 40px;
+  margin-top: 20px;
+}

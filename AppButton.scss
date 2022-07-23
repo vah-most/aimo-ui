@@ -1,5 +1,5 @@
 /*
- * Created on Sat Jun 25 2022
+ * Created on Thu Jul 21 2022
  *
  * Copyright (c) 2022 Mostafa Vahabzadeh
  *
@@ -9,14 +9,10 @@
 @import "../../Colors.scss";
 @import "../../Display.scss";
 @import "../../Sizes.scss";
-@import "../../Texts.scss";
 
-.addButton {
+.button {
   @include flexCenterView(row);
-  @include addButtonTextProps();
-
-  background-color: $colorShinyGreen;
   border-radius: $boxBorderRadius;
-  height: 20px;
-  padding: 0px 10px 0px 10px;
+  background-color: $buttonBGColor;
+  color: $buttonTextColor;
 }
