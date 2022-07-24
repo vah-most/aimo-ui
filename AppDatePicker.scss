@@ -6,13 +6,10 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../../Colors.scss";
-@import "../../Sizes.scss";
+.datePicker {
+  z-index: 1000;
+}
 
-.rdtPicker {
-  border: 1px solid $colorShinyGreen;
-  border-radius: 0px 0px $boxBorderRadius $boxBorderRadius;
-  box-shadow: 1px 1px 0px rgb(0 0 0 / 10%);
-  border-top-width: 0px;
-  background-color: $colorWhiteGreen;
+.datePickerCalendar {
+  z-index: 1000;
 }

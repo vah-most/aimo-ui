@@ -6,33 +6,21 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import Datetime from "react-datetime";
+import DatePicker from "react-date-picker";
 
-import "react-datetime/css/react-datetime.css";
+import AppIcon from "./AppIcon";
+
+import "react-date-picker/dist/DatePicker.css";
 import "./AppDatePicker.scss";
 
 const AppDatePicker = ({ value, className, onChange }) => {
   return (
-    <Datetime
-      className="datePicker"
-      closeOnSelect={true}
-      closeOnClickOutside={true}
-      inputProps={{
-        placeholder: "Deadline",
-        className: { className },
-      }}
-      onChange={(selectedDate) => {
-        if (selectedDate) selectedDate = selectedDate.format("YYYY-MM-DD");
-        onChange && onChange(selectedDate);
-      }}
-      renderInput={(props, openCalendar, closeCalendar) => {
-        function clear() {
-          props.onChange({ target: { value: "" } });
-        }
-        return <input {...props} className="titledInput" />;
-      }}
-      timeFormat={false}
-      value={value ? new Date(value).getTime() : null}
+    <DatePicker
+      calendarClassName="datePickerCalendar"
+      calendarIcon={<AppIcon name="calendar" style={{ fontSize: "16px" }} />}
+      className={`datePicker ${className}`}
+      onChange={onChange}
+      value={value ? new Date(value) : null}
     />
   );
 };
