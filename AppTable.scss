@@ -9,6 +9,10 @@
 @import "../../Display.scss";
 @import "../../Texts.scss";
 
+.rowHeader {
+  @include taskTableHeader();
+}
+
 .rowIndex {
   @include rowIndexTextProps();
 }

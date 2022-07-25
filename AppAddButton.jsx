@@ -13,7 +13,7 @@ import "./AppAddButton.scss";
 const AppAddButton = ({ onClick, style, ...extra }) => {
   return (
     <div className="addButton hand" onClick={onClick} style={style} {...extra}>
-      <span id="button_new_task">+ New ... </span>
+      <span id="button_new_task">+New... </span>
       <AppTooltip target="button_new_task">Add new task (F2)</AppTooltip>
     </div>
   );

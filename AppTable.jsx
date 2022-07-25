@@ -59,11 +59,12 @@ const Table = ({
   ) => {
     const thClasses =
       (size > 0 ? `col-sm-${size}` : "col-sm") +
+      ` rowHeader` +
       ` ${extraClasses}` +
       (isSortable ? " hand" : "");
     if (isSortable) {
       return (
-        <th
+        <td
           key={index}
           className={thClasses}
           onClick={() => {
@@ -78,13 +79,13 @@ const Table = ({
             ) : (
               <AppIcon name="angle-up" />
             ))}
-        </th>
+        </td>
       );
     } else {
       return (
-        <th key={title} className={thClasses} scope="col">
+        <td key={title} className={thClasses} scope="col">
           {title}
-        </th>
+        </td>
       );
     }
   };
