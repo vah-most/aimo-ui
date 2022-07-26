@@ -12,6 +12,7 @@ import AppButton from "./AppButton";
 import "./AppForm.scss";
 
 const AppForm = ({
+  errors = {},
   inputLabelClassName,
   inputs,
   onChange,
@@ -23,17 +24,19 @@ const AppForm = ({
       {inputs.map((item) => {
         return (
           <div key={item.name} className="formRow">
-            <AppTitledInput
+            <span className="formRowLabel">{item.title}</span>
+            <input
               className="formInput"
-              inputType="input"
-              labelClassName={`formInputLabel ${inputLabelClassName}`}
-              onChange={(value) => {
-                onChange && onChange(item.name, value);
+              onChange={({ currentTarget }) => {
+                onChange && onChange(item.name, currentTarget.value);
               }}
               placeholder={item.title}
               type={item.type}
               value={values[item.name]}
             />
+            <span className="formRowError">
+              {item.name in errors ? errors[item.name] : ""}
+            </span>
           </div>
         );
       })}

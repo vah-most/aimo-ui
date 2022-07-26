@@ -7,6 +7,8 @@
  */
 
 @import "../../Display.scss";
+@import "../../Sizes.scss";
+@import "../../Texts.scss";
 
 .formContainer {
   @include flexCenterView(column);
@@ -14,11 +16,28 @@
 }
 
 .formRow {
-  @include flexCenterView(row);
+  @include flexView(column, center, flex-start);
+  margin-bottom: 20px;
+}
+
+.formRowError {
+  @include formInputErrorTextProps();
+}
+
+.formRowLabel {
+  @include formInputLabelTextProps();
+  padding-left: 5px;
+  margin-bottom: 2px;
+  color: $inputLabelColor;
 }
 
 .formInput {
+  @include formInputTextProps();
   width: 300px;
+  border-radius: $boxBorderRadius;
+  padding-left: 5px;
+  border-width: 1px;
+  height: 30px;
 }
 
 .formInputLabel {
