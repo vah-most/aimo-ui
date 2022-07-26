@@ -54,6 +54,7 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
   return (
     <div className={`tagCollectionContainer ${className}`} style={style}>
       <Select
+        className="tagCollection"
         components={{ DropdownIndicator }}
         onChange={(item) => {
           if (item.value) {

@@ -13,6 +13,7 @@ import "./AppTitledInput.scss";
 
 const AppTitledInput = ({
   className,
+  error = null,
   extraProps = null,
   inputType,
   labelClassName,
@@ -100,7 +101,10 @@ const AppTitledInput = ({
       >
         {placeholder}
       </span>
-      <div className="titledInputContainer">{getInputComponent()}</div>
+      <div className="titledInputContainer">
+        {getInputComponent()}
+        {error && <span className="titledInputError">{error}</span>}
+      </div>
     </div>
   );
 };

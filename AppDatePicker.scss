@@ -6,10 +6,44 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../../Colors.scss";
+@import "../../Texts.scss";
+
 .datePicker {
   z-index: 1000;
 }
 
 .datePickerCalendar {
   z-index: 1000;
+}
+
+.datePickerCalendarIcon {
+  &:hover {
+    color: $colorBlue;
+  }
+}
+
+.datePickerIcon {
+  font-size: 16px;
+  font-weight: 100;
+}
+
+.react-date-picker__button {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.react-date-picker__inputGroup__input {
+  &:focus,
+  &:active {
+    border-width: 0px;
+    outline-width: 0px;
+  }
+  &:invalid {
+    background-color: transparent;
+  }
+}
+
+.react-date-picker__wrapper {
+  border-width: 0px;
 }

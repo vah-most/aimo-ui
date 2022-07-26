@@ -17,7 +17,12 @@ const AppDatePicker = ({ value, className, onChange }) => {
   return (
     <DatePicker
       calendarClassName="datePickerCalendar"
-      calendarIcon={<AppIcon name="calendar" style={{ fontSize: "16px" }} />}
+      calendarIcon={
+        <AppIcon
+          className="datePickerIcon datePickerCalendarIcon"
+          name="calendar"
+        />
+      }
       className={`datePicker ${className}`}
       onChange={onChange}
       value={value ? new Date(value) : null}
