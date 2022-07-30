@@ -19,7 +19,10 @@ const AppAddButton = ({ className, onClick, style, ...extra }) => {
       {...extra}
     >
       <span id="button_new_task">Add Task </span>
-      <AppTooltip target="button_new_task">Add new task (F2)</AppTooltip>
+      <AppTooltip target="button_new_task">
+        <span>Add new task </span>
+        <span className="shortcutText">(F2)</span>
+      </AppTooltip>
     </div>
   );
 };

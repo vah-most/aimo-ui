@@ -64,7 +64,7 @@ const Table = ({
   ) => {
     const thClasses =
       (size > 0 ? `col-${size}` : "col") +
-      ` rowHeader` +
+      ` align-middle rowHeader` +
       ` ${extraClasses}` +
       (isSortable ? " hand" : "");
     if (isSortable) {

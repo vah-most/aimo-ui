@@ -6,7 +6,6 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AppTitledInput from "./AppTitledInput";
 import AppButton from "./AppButton";
 
 import "./AppForm.scss";

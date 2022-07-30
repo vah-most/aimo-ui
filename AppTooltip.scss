@@ -6,6 +6,12 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../../Display.scss";
+
+.shortcutText {
+  display: unset;
+}
+
 .tooltip-inner {
   max-width: 500px !important;
   background-color: #2e2a2a !important;
@@ -20,4 +26,10 @@
 
 .tooltipView {
   z-index: 999 !important;
+}
+
+@media (max-width: $minNormalWidth) {
+  .shortcutText {
+    display: none;
+  }
 }
