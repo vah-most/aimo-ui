@@ -6,8 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../../Display.scss";
 @import "../../Colors.scss";
+@import "../../Display.scss";
+@import "../../Sizes.scss";
 
 .tagAddIcon {
   color: $tagAddIconColor;
@@ -35,4 +36,8 @@
   @include flexView(row);
   flex-wrap: wrap;
   padding: 10px 0px 10px 0px;
+
+  max-height: $tagCollectionMaxHeight;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

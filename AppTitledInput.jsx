@@ -12,6 +12,7 @@ import AppTagCollection from "./AppTagCollection";
 import "./AppTitledInput.scss";
 
 const AppTitledInput = ({
+  alwaysShowLabel = false,
   className,
   error = null,
   extraProps = null,
@@ -34,7 +35,7 @@ const AppTitledInput = ({
               const { value } = e.currentTarget;
               onChange && onChange(value);
             }}
-            placeholder={placeholder}
+            placeholder={alwaysShowLabel ? null : placeholder}
             style={style}
             value={value}
             {...extra}
@@ -83,7 +84,7 @@ const AppTitledInput = ({
               const { value } = e.currentTarget;
               onChange && onChange(value);
             }}
-            placeholder={placeholder}
+            placeholder={alwaysShowLabel ? null : placeholder}
             style={style}
             value={value}
             {...extra}
@@ -96,7 +97,7 @@ const AppTitledInput = ({
       <span
         className={`titledInputLabel ${labelClassName}`}
         style={{
-          display: value ? "unset" : "none",
+          display: value || alwaysShowLabel ? "unset" : "none",
         }}
       >
         {placeholder}

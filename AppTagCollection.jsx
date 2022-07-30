@@ -26,7 +26,10 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
   };
 
   const handleTagAdd = (value) => {
-    if (tags.includes(value)) return;
+    if (!value) return;
+
+    value = value.trim();
+    if (value.length === 0 || tags.includes(value)) return;
 
     let newTags = [...tags];
     newTags.push(value);

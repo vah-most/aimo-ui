@@ -15,6 +15,7 @@
   border-radius: $boxBorderRadius;
   background-color: $buttonBGColor;
   color: $buttonTextColor;
+  min-width: 100px;
 
   &:active {
     background-color: $buttonClickedBGColor;
