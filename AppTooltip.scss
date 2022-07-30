@@ -17,3 +17,7 @@
 .tooltip-arrow::before {
   border-bottom-color: #2e2a2a !important;
 }
+
+.tooltipView {
+  z-index: 999 !important;
+}

@@ -13,6 +13,7 @@ import "./AppTooltip.scss";
 const AppTooltip = ({ target, children }) => {
   return (
     <UncontrolledTooltip
+      className="tooltipView"
       placement="bottom-start"
       delay={{ show: 100, hide: 0 }}
       target={target}

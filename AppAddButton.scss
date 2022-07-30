@@ -15,8 +15,10 @@
   @include flexCenterView(row);
   @include addButtonTextProps();
 
-  background-color: $colorShinyGreen;
+  background-color: $addButtonBGColor;
+  color: $colorWhitish;
+  font-weight: 600 !important;
   border-radius: $boxBorderRadius;
-  height: 20px;
+  height: 25px;
   padding: 0px 10px 0px 10px;
 }

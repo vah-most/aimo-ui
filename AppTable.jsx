@@ -70,7 +70,6 @@ const Table = ({
           onClick={() => {
             onSort && onSort(field, !sortDirAsc);
           }}
-          scope="col"
         >
           {title}
           {field === sortBy &&
@@ -83,7 +82,7 @@ const Table = ({
       );
     } else {
       return (
-        <td key={title} className={thClasses} scope="col">
+        <td key={title} className={thClasses}>
           {title}
         </td>
       );
