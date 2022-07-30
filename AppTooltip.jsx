@@ -6,20 +6,38 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import { UncontrolledTooltip } from "reactstrap";
+import { useState } from "react";
+import { Tooltip } from "reactstrap";
 
 import "./AppTooltip.scss";
 
-const AppTooltip = ({ target, children }) => {
+const AppTooltip = ({
+  autoHide = true,
+  autoHideTimeout = 2000,
+  children,
+  target,
+}) => {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  const toggle = () => {
+    setTooltipOpen(!tooltipOpen);
+  };
+
+  if (autoHide && tooltipOpen) {
+    setTimeout(() => {
+      setTooltipOpen(false);
+    }, autoHideTimeout);
+  }
+
   return (
-    <UncontrolledTooltip
-      className="tooltipView"
+    <Tooltip
+      isOpen={tooltipOpen}
       placement="bottom-start"
-      delay={{ show: 100, hide: 0 }}
       target={target}
+      toggle={toggle}
     >
       {children}
-    </UncontrolledTooltip>
+    </Tooltip>
   );
 };
 
