@@ -32,7 +32,30 @@
   cursor: pointer;
 }
 
+.smallTableAddButton {
+  margin-inline-start: 10px;
+  display: none;
+}
+
+.tableCellContainer {
+  @include flexView(row, unset, center);
+}
+
 .tableContainer {
   height: unset;
   width: 100%;
+}
+
+@media (max-width: $minNormalWidth) {
+  .smallTableAddButton {
+    display: block;
+  }
+
+  .table tr td {
+    max-width: 100px;
+  }
+
+  .table tr td:first-child {
+    display: none;
+  }
 }

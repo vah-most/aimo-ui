@@ -31,10 +31,15 @@ const Table = ({
   style,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const renderAddButton = (classes) => {
+    return <AppAddButton className={classes} onClick={onRequestAdd} />;
+  };
+
   const fields = [
     {
       field: "id",
-      title: <AppAddButton onClick={onRequestAdd} />,
+      title: renderAddButton(),
       size: 1,
       isSortable: false,
       classes: "text-center",
@@ -58,7 +63,7 @@ const Table = ({
     field = null
   ) => {
     const thClasses =
-      (size > 0 ? `col-sm-${size}` : "col-sm") +
+      (size > 0 ? `col-${size}` : "col") +
       ` rowHeader` +
       ` ${extraClasses}` +
       (isSortable ? " hand" : "");
@@ -71,13 +76,16 @@ const Table = ({
             onSort && onSort(field, !sortDirAsc);
           }}
         >
-          {title}
-          {field === sortBy &&
-            (sortDirAsc ? (
-              <AppIcon name="angle-down" />
-            ) : (
-              <AppIcon name="angle-up" />
-            ))}
+          <div className="tableCellContainer">
+            {title}
+            {index === 1 && renderAddButton("smallTableAddButton")}
+            {field === sortBy &&
+              (sortDirAsc ? (
+                <AppIcon name="angle-down" />
+              ) : (
+                <AppIcon name="angle-up" />
+              ))}
+          </div>
         </td>
       );
     } else {

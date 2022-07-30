@@ -24,7 +24,7 @@ const AppSearchBar = () => {
       <div
         className="searchBar"
         style={{
-          width: `${30 + (displayInput ? 200 : 0)}px`,
+          width: displayInput ? "300px" : "30px",
         }}
       >
         {displayInput && (

@@ -7,8 +7,9 @@
  */
 
 @import "../../Animations.scss";
-@import "../../Display.scss";
 @import "../../Colors.scss";
+@import "../../Display.scss";
+@import "../../Sizes.scss";
 
 .searchBar {
   @include transitionBox(width);
@@ -29,14 +30,21 @@
 
 .searchIcon {
   color: $searchBarIconColor;
+  font-size: $menuIconSize;
 }
 
 .searchInput {
-  width: 200px;
+  width: 95%;
   border-width: 0px;
   margin-left: 5px;
 
   &:focus {
     outline: none;
+  }
+}
+
+@media (max-width: $minNormalWidth) {
+  .searchBar {
+    max-width: 150px;
   }
 }
