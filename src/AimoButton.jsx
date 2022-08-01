@@ -6,9 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import "./AppButton.scss";
+import "./AimoButton.scss";
 
-const AppButton = ({ children, className, onClick }) => {
+const AimoButton = ({ children, className, onClick }) => {
   return (
     <div className={`hand button ${className}`} onClick={onClick}>
       {children}
@@ -16,4 +16,4 @@ const AppButton = ({ children, className, onClick }) => {
   );
 };
 
-export default AppButton;
+export default AimoButton;

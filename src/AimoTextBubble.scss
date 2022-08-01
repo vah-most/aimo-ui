@@ -6,9 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../../Colors.scss";
-@import "../../Sizes.scss";
-@import "../../Texts.scss";
+@import "./Colors.scss";
+@import "./Sizes.scss";
+@import "./Texts.scss";
 
 .textBubble {
   @include textBubbleTextProps();

@@ -1,0 +1,85 @@
+/*
+ * Created on Sat Jun 25 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+//---------------------- ROTATION ---------------------//
+
+//css-variable: --rotation-degree-start
+//css-variable: --rotation-degree-end
+@mixin rotater($duration, $count) {
+  --rotation-degree-start: 20deg;
+  --rotation-degree-end: -20deg;
+  animation-name: rotation;
+  animation-duration: $duration;
+  animation-iteration-count: $count;
+  animation-timing-function: linear;
+}
+@keyframes rotation {
+  20% {
+    transform: rotate(var(--rotation-degree-start));
+  }
+  50% {
+    transform: rotate(var(--rotation-degree-end));
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+}
+
+//---------------------- SHAKE ---------------------//
+
+//css-variable: --shake-size
+@mixin shaker($duration, $count, $delay, $direction: x) {
+  --shake-size: 2px;
+  @if ($direction == x) {
+    animation-name: shakerX;
+  } @else {
+    animation-name: shakerY;
+  }
+  animation-duration: $duration;
+  animation-iteration-count: $count;
+  animation-delay: $delay;
+}
+
+@keyframes shakerX {
+  10% {
+    transform: translateX(var(--shake-size));
+  }
+  20% {
+    transform: translateX(calc(0px - var(--shake-size)));
+  }
+  30% {
+    transform: translateX(var(--shake-size));
+  }
+  40% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes shakerY {
+  10% {
+    transform: translateY(var(--shake-size));
+  }
+  20% {
+    transform: translateY(calc(0px - var(--shake-size)));
+  }
+  30% {
+    transform: translateY(var(--shake-size));
+  }
+  40% {
+    transform: translateY(0px);
+  }
+}
+
+//---------------------- TRANSITION ---------------------//
+@mixin transitionBox($prop) {
+  overflow: hidden;
+  -webkit-transition: $prop 0.5s ease-in-out;
+  -moz-transition: $prop 0.5s ease-in-out;
+  -o-transition: $prop 0.5s ease-in-out;
+  transition: $prop 0.5s ease-in-out;
+}

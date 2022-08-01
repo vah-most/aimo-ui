@@ -6,12 +6,12 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AppDatePicker from "./AppDatePicker";
-import AppTagCollection from "./AppTagCollection";
+import AimoDatePicker from "./AimoDatePicker";
+import AimoTagCollection from "./AimoTagCollection";
 
-import "./AppTitledInput.scss";
+import "./AimoTitledInput.scss";
 
-const AppTitledInput = ({
+const AimoTitledInput = ({
   alwaysShowLabel = false,
   className,
   error = null,
@@ -44,7 +44,7 @@ const AppTitledInput = ({
 
       case "date":
         return (
-          <AppDatePicker
+          <AimoDatePicker
             className="titledInput"
             onChange={(value) => {
               onChange && onChange(value);
@@ -58,7 +58,7 @@ const AppTitledInput = ({
 
       case "tag":
         return (
-          <AppTagCollection
+          <AimoTagCollection
             className="titledInput"
             collection={
               extraProps && typeof extraProps.collection === "function"
@@ -110,4 +110,4 @@ const AppTitledInput = ({
   );
 };
 
-export default AppTitledInput;
+export default AimoTitledInput;

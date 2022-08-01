@@ -8,11 +8,11 @@
 
 import React, { useState } from "react";
 
-import AppIcon from "./AppIcon";
-import AppAddButton from "./AppAddButton";
-import AppPagination from "./AppPagination";
+import AimoIcon from "./AimoIcon";
+import AimoAddButton from "./AimoAddButton";
+import AimoPagination from "./AimoPagination";
 
-import "./AppTable.scss";
+import "./AimoTable.scss";
 
 const Table = ({
   className,
@@ -33,7 +33,7 @@ const Table = ({
   const [currentPage, setCurrentPage] = useState(1);
 
   const renderAddButton = (classes) => {
-    return <AppAddButton className={classes} onClick={onRequestAdd} />;
+    return <AimoAddButton className={classes} onClick={onRequestAdd} />;
   };
 
   const fields = [
@@ -81,9 +81,9 @@ const Table = ({
             {index === 1 && renderAddButton("smallTableAddButton")}
             {field === sortBy &&
               (sortDirAsc ? (
-                <AppIcon name="angle-down" />
+                <AimoIcon name="angle-down" />
               ) : (
-                <AppIcon name="angle-up" />
+                <AimoIcon name="angle-up" />
               ))}
           </div>
         </td>
@@ -161,7 +161,7 @@ const Table = ({
                   <th className="align-middle text-center" scope="row">
                     <div className="rowOperationContainer">
                       <div className="rowOperationEdit">
-                        <AppIcon
+                        <AimoIcon
                           name="edit"
                           onClick={() => {
                             onRequestEdit && onRequestEdit(row.id);
@@ -169,7 +169,7 @@ const Table = ({
                         />
                       </div>
                       <div className="ms-2 rowOperationDelete">
-                        <AppIcon
+                        <AimoIcon
                           name="remove"
                           onClick={() => {
                             onRequestDelete && onRequestDelete(row.id);
@@ -186,7 +186,7 @@ const Table = ({
       </table>
       <div>
         {pageCount > 1 && (
-          <AppPagination
+          <AimoPagination
             onPageChange={handlePageChange}
             pageCount={pageCount}
           />

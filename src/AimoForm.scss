@@ -6,9 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../../Display.scss";
-@import "../../Sizes.scss";
-@import "../../Texts.scss";
+@import "./Display.scss";
+@import "./Sizes.scss";
+@import "./Texts.scss";
 
 .formContainer {
   @include flexCenterView(column);

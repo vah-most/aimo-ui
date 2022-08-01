@@ -8,17 +8,17 @@
 
 import DatePicker from "react-date-picker";
 
-import AppIcon from "./AppIcon";
+import AimoIcon from "./AimoIcon";
 
 import "react-date-picker/dist/DatePicker.css";
-import "./AppDatePicker.scss";
+import "./AimoDatePicker.scss";
 
-const AppDatePicker = ({ value, className, onChange }) => {
+const AimoDatePicker = ({ value, className, onChange }) => {
   return (
     <DatePicker
       calendarClassName="datePickerCalendar"
       calendarIcon={
-        <AppIcon
+        <AimoIcon
           className="datePickerIcon datePickerCalendarIcon"
           name="calendar"
         />
@@ -30,4 +30,4 @@ const AppDatePicker = ({ value, className, onChange }) => {
   );
 };
 
-export default AppDatePicker;
+export default AimoDatePicker;

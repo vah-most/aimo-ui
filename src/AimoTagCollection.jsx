@@ -9,12 +9,18 @@
 import { useState } from "react";
 import Select, { components } from "react-select";
 
-import AppIcon from "./AppIcon";
-import AppTextBubble from "./AppTextBubble";
+import AimoIcon from "./AimoIcon";
+import AimoTextBubble from "./AimoTextBubble";
 
-import "./AppTagCollection.scss";
+import "./AimoTagCollection.scss";
 
-const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
+const AimoTagCollection = ({
+  className,
+  collection,
+  onChange,
+  style,
+  tags,
+}) => {
   const [tagInput, setTagInput] = useState("");
 
   const handleTagDelete = (value) => {
@@ -38,7 +44,7 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
 
   const displayAddIcon = () => {
     return (
-      <AppIcon
+      <AimoIcon
         name="plus"
         className="hand tagAddIcon"
         onClick={() => handleTagAdd(tagInput)}
@@ -87,7 +93,7 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
         {tags &&
           tags.map((tag, index) => {
             return (
-              <AppTextBubble
+              <AimoTextBubble
                 key={index}
                 className="tagItem"
                 onDelete={handleTagDelete}
@@ -100,4 +106,4 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
   );
 };
 
-export default AppTagCollection;
+export default AimoTagCollection;

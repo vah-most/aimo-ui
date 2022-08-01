@@ -7,11 +7,11 @@
  */
 
 import React, { useState } from "react";
-import AppIcon from "./AppIcon";
+import AimoIcon from "./AimoIcon";
 
-import "./AppPasswordInput.scss";
+import "./AimoPasswordInput.scss";
 
-const AppPasswordInput = ({ className, type, ...extra }) => {
+const AimoPasswordInput = ({ className, type, ...extra }) => {
   const [hide, setHide] = useState(true);
 
   const toggleHide = () => {
@@ -25,7 +25,7 @@ const AppPasswordInput = ({ className, type, ...extra }) => {
         type={hide ? "password" : "text"}
         {...extra}
       />
-      <AppIcon
+      <AimoIcon
         className="hand passwordInputIcon"
         name={hide ? "eye" : "eye-slash"}
         onClick={toggleHide}
@@ -34,4 +34,4 @@ const AppPasswordInput = ({ className, type, ...extra }) => {
   );
 };
 
-export default AppPasswordInput;
+export default AimoPasswordInput;

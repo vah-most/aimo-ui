@@ -9,9 +9,9 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-import "./AppPagination.scss";
+import "./AimoPagination.scss";
 
-const AppPagination = ({ onPageChange, pageCount }) => {
+const AimoPagination = ({ onPageChange, pageCount }) => {
   return (
     <ReactPaginate
       breakLabel="..."
@@ -33,4 +33,4 @@ const AppPagination = ({ onPageChange, pageCount }) => {
   );
 };
 
-export default AppPagination;
+export default AimoPagination;

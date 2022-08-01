@@ -8,11 +8,11 @@
 
 import React, { useState } from "react";
 
-import AppIcon from "./AppIcon";
+import AimoIcon from "./AimoIcon";
 
-import "./AppTextBubble.scss";
+import "./AimoTextBubble.scss";
 
-function AppTextBubble({
+function AimoTextBubble({
   backgroundColor,
   className = "",
   onDelete,
@@ -40,7 +40,7 @@ function AppTextBubble({
             displayDelete ? { visibility: "visible" } : { visibility: "hidden" }
           }
         >
-          <AppIcon name="times" />
+          <AimoIcon name="times" />
         </div>
       )}
       <span>{text}</span>
@@ -48,4 +48,4 @@ function AppTextBubble({
   );
 }
 
-export default AppTextBubble;
+export default AimoTextBubble;

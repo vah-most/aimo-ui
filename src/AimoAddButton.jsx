@@ -6,11 +6,11 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AppTooltip from "./AppTooltip";
+import AimoTooltip from "./AimoTooltip";
 
-import "./AppAddButton.scss";
+import "./AimoAddButton.scss";
 
-const AppAddButton = ({ className, onClick, style, ...extra }) => {
+const AimoAddButton = ({ className, onClick, style, ...extra }) => {
   return (
     <div
       className={`addButton hand ${className}`}
@@ -19,12 +19,12 @@ const AppAddButton = ({ className, onClick, style, ...extra }) => {
       {...extra}
     >
       <span id="button_new_task">Add Task </span>
-      <AppTooltip target="button_new_task">
+      <AimoTooltip target="button_new_task">
         <span>Add new task </span>
         <span className="shortcutText">(F2)</span>
-      </AppTooltip>
+      </AimoTooltip>
     </div>
   );
 };
 
-export default AppAddButton;
+export default AimoAddButton;

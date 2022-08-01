@@ -8,9 +8,9 @@
 
 import "font-awesome/css/font-awesome.css";
 
-const AppIcon = ({ name, className = "", ...extra }) => {
+const AimoIcon = ({ name, className = "", ...extra }) => {
   const classes = `fa fa-${name} ms-1 ${className}`;
   return <i aria-hidden="true" className={classes} {...extra} />;
 };
 
-export default AppIcon;
+export default AimoIcon;

@@ -6,10 +6,10 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../../Animations.scss";
-@import "../../Colors.scss";
-@import "../../Display.scss";
-@import "../../Sizes.scss";
+@import "./Animations.scss";
+@import "./Colors.scss";
+@import "./Display.scss";
+@import "./Sizes.scss";
 
 .searchBar {
   @include transitionBox(width);

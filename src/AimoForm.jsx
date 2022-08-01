@@ -7,12 +7,12 @@
  */
 
 import { KEY_CODES } from "utils/utils";
-import AppButton from "./AppButton";
-import AppPasswordInput from "./AppPasswordInput";
+import AimoButton from "./AimoButton";
+import AimoPasswordInput from "./AimoPasswordInput";
 
-import "./AppForm.scss";
+import "./AimoForm.scss";
 
-const AppForm = ({
+const AimoForm = ({
   errors = {},
   inputLabelClassName,
   inputs,
@@ -38,7 +38,7 @@ const AppForm = ({
 
     switch (item.type) {
       case "password":
-        return <AppPasswordInput {...props} />;
+        return <AimoPasswordInput {...props} />;
       default:
         return <input {...props} />;
     }
@@ -59,11 +59,11 @@ const AppForm = ({
           </div>
         );
       })}
-      <AppButton className="submitButton" onClick={onSubmit}>
+      <AimoButton className="submitButton" onClick={onSubmit}>
         Login
-      </AppButton>
+      </AimoButton>
     </div>
   );
 };
 
-export default AppForm;
+export default AimoForm;

@@ -9,9 +9,9 @@
 import { useState } from "react";
 import { Tooltip } from "reactstrap";
 
-import "./AppTooltip.scss";
+import "./AimoTooltip.scss";
 
-const AppTooltip = ({
+const AimoTooltip = ({
   autoHide = true,
   autoHideTimeout = 2000,
   children,
@@ -41,4 +41,4 @@ const AppTooltip = ({
   );
 };
 
-export default AppTooltip;
+export default AimoTooltip;

@@ -10,12 +10,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchTextChange } from "reducers/SearchReducer";
 
-import AppIcon from "./AppIcon";
-import AppTooltip from "./AppTooltip";
+import AimoIcon from "./AimoIcon";
+import AimoTooltip from "./AimoTooltip";
 
-import "./AppSearchBar.scss";
+import "./AimoSearchBar.scss";
 
-const AppSearchBar = () => {
+const AimoSearchBar = () => {
   const dispatch = useDispatch();
   const [displayInput, setDisplayInput] = useState(false);
 
@@ -37,7 +37,7 @@ const AppSearchBar = () => {
             }}
           />
         )}
-        <AppIcon
+        <AimoIcon
           name="search"
           className="hand searchIcon"
           id="menu_search"
@@ -45,10 +45,10 @@ const AppSearchBar = () => {
             setDisplayInput(!displayInput);
           }}
         />
-        <AppTooltip target="menu_search">Search tasks</AppTooltip>
+        <AimoTooltip target="menu_search">Search tasks</AimoTooltip>
       </div>
     </div>
   );
 };
 
-export default AppSearchBar;
+export default AimoSearchBar;
