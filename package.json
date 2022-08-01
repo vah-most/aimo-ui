@@ -1,0 +1,41 @@
+{
+  "name": "aimo-ui",
+  "version": "1.0.0",
+  "description": "A collection of useful react components to use in react apps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vah-most/aimo-ui.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "button",
+    "tooltip",
+    "form",
+    "table",
+    "date-picker",
+    "icon",
+    "pagination",
+    "password-input",
+    "labeled-input",
+    "tag-collection",
+    "text-bubble"
+  ],
+  "author": "Mostafa Vahabzadeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vah-most/aimo-ui/issues"
+  },
+  "homepage": "https://github.com/vah-most/aimo-ui#readme",
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "react": "^18.2.0",
+    "react-date-picker": "^8.4.0",
+    "react-paginate": "^8.1.3",
+    "reactstrap": "^9.1.2"
+  }
+}
