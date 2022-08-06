@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
+
 import AimoTooltip from "./AimoTooltip";
 
 import "./AimoAddButton.scss";

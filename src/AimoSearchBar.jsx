@@ -6,17 +6,14 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { searchTextChange } from "reducers/SearchReducer";
+import React, { useState } from "react";
 
 import AimoIcon from "./AimoIcon";
 import AimoTooltip from "./AimoTooltip";
 
 import "./AimoSearchBar.scss";
 
-const AimoSearchBar = () => {
-  const dispatch = useDispatch();
+const AimoSearchBar = ({ onChange, tooltip }) => {
   const [displayInput, setDisplayInput] = useState(false);
 
   return (
@@ -33,7 +30,7 @@ const AimoSearchBar = () => {
             className="searchInput"
             onChange={(e) => {
               const text = e.currentTarget.value;
-              dispatch(searchTextChange(text));
+              onChange && onChange(text);
             }}
           />
         )}
@@ -45,7 +42,7 @@ const AimoSearchBar = () => {
             setDisplayInput(!displayInput);
           }}
         />
-        <AimoTooltip target="menu_search">Search tasks</AimoTooltip>
+        <AimoTooltip target="menu_search">{tooltip}</AimoTooltip>
       </div>
     </div>
   );

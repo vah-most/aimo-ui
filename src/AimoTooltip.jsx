@@ -6,7 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Tooltip } from "reactstrap";
 
 import "./AimoTooltip.scss";

@@ -6,6 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
 import DatePicker from "react-date-picker";
 
 import AimoIcon from "./AimoIcon";

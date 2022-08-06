@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
+
 import AimoDatePicker from "./AimoDatePicker";
 import AimoTagCollection from "./AimoTagCollection";
 

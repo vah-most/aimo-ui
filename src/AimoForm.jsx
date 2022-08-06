@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
+
 import { KEY_CODES } from "./utils/Utils";
 import AimoButton from "./AimoButton";
 import AimoPasswordInput from "./AimoPasswordInput";
