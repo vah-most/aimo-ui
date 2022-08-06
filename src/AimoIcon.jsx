@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
+
 import "font-awesome/css/font-awesome.css";
 
 const AimoIcon = ({ name, className = "", ...extra }) => {

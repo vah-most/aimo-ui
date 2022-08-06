@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
+
 import "./AimoButton.scss";
 
 const AimoButton = ({ children, className, onClick }) => {

@@ -6,7 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import { KEY_CODES } from "utils/utils";
+import { KEY_CODES } from "./utils/Utils";
 import AimoButton from "./AimoButton";
 import AimoPasswordInput from "./AimoPasswordInput";
 
