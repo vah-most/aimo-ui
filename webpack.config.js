@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: "./demo/demo.js",
+  entry: "./src/demo/demo.js",
   mode: "development",
   output: {
     filename: "bundle.[hash].js",
@@ -10,7 +10,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./demo/demo.html",
+      template: "./src/demo/demo.html",
     }),
   ],
   resolve: {

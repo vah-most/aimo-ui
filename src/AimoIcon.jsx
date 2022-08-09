@@ -11,7 +11,7 @@ import React from "react";
 import "font-awesome/css/font-awesome.css";
 
 const AimoIcon = ({ name, className = "", ...extra }) => {
-  const classes = `fa fa-${name} ms-1 ${className}`;
+  const classes = `fa fa-${name} ${className}`;
   return <i aria-hidden="true" className={classes} {...extra} />;
 };
 

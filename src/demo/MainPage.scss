@@ -6,8 +6,20 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+.appBody {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.appContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
 .appTitle {
-  margin-top: 20px;
   text-align: center;
 }
 

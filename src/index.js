@@ -14,6 +14,7 @@ import AimoIcon from "./AimoIcon";
 import AimoPagination from "./AimoPagination";
 import AimoPasswordInput from "./AimoPasswordInput";
 import AimoSearchBar from "./AimoSearchBar";
+import AimoSideMenu from "./AimoSideMenu";
 import AimoTable from "./AimoTable";
 import AimoTagCollection from "./AimoTagCollection";
 import AimoTextBubble from "./AimoTextBubble";
@@ -30,6 +31,7 @@ const Aimo = {
   AimoPagination,
   AimoPasswordInput,
   AimoSearchBar,
+  AimoSideMenu,
   AimoTable,
   AimoTagCollection,
   AimoTextBubble,
