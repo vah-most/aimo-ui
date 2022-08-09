@@ -2,10 +2,14 @@
   "name": "aimo-ui",
   "version": "1.0.0",
   "description": "A collection of useful react components to use in react apps.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "start": "webpack serve  --hot --open",
-    "build": "webpack --config webpack.config.js --mode production",
+    "build": "rmdir /s /q dist && npx babel ./src/ --out-dir dist --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,6 +19,8 @@
   "keywords": [
     "react",
     "reactjs",
+    "component",
+    "component-library",
     "button",
     "tooltip",
     "form",
@@ -43,6 +49,9 @@
     "reactstrap": "^9.1.2",
     "sass": "^1.54.0",
     "sass-loader": "^13.0.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",

@@ -8,7 +8,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Aimo from "../";
+import Aimo from "../src";
 
 import "./demo.scss";
 
