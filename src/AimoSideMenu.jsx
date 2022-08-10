@@ -7,6 +7,8 @@
  */
 
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import AimoIcon from "./AimoIcon";
 
 import "./AimoSideMenu.scss";
@@ -131,6 +133,20 @@ const AimoSideMenu = ({
       </div>
     </div>
   );
+};
+
+AimoSideMenu.propTypes = {
+  containerClassName: PropTypes.string,
+  headerText: PropTypes.string,
+  hideCompactView: PropTypes.bool,
+  hideHeader: PropTypes.bool,
+  iconContainerClassName: PropTypes.string,
+  menuItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  renderHeaderIcon: PropTypes.func,
+  renderHeaderText: PropTypes.func,
+  renderSeparator: PropTypes.func,
+  rtl: PropTypes.bool,
+  textContainerClassName: PropTypes.string,
 };
 
 export default AimoSideMenu;
