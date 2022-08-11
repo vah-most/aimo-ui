@@ -19,7 +19,7 @@ A collection of useful react components
 To install **aimo-ui** package in react (requires version > 18.0.0), you can use [yarn][]:
 
 ```sh
-yarn install aimo-ui
+yarn add aimo-ui
 ```
 
 or [npm][]:
@@ -82,10 +82,16 @@ const  App= () => {
 These are the components that are part of **aimo-ui** so far:  
 | Name | Description | API |
 | ------------ | ----------- | --- |
-| AimoIcon | Easy icon-display component which uses **font-awesome** icon library | [] |
-| AimoSideMenu | A fully-controllable accordion side-menu component | [] |
-| AimoTable | An easy-to-use table component | [] |
+| AimoIcon | Easy icon-display component which uses **font-awesome** icon library | |
+| AimoSideMenu | A fully-controllable accordion side-menu component | |
+| AimoTable | An easy-to-use table component | |
 
 ## License
 
 [MIT][license] © [Mostafa Vahabzadeh][author]
+
+[react]: http://reactjs.org
+[yarn]: https://yarnpkg.com/cli/add
+[npm]: https://docs.npmjs.com/cli/install
+[license]: LICENSE
+[author]: https://github.com/vah-most

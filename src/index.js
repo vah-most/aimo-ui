@@ -6,37 +6,15 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AimoAddButton from "./AimoAddButton";
-import AimoButton from "./AimoButton";
-import AimoDatePicker from "./AimoDatePicker";
-import AimoForm from "./AimoForm";
-import AimoIcon from "./AimoIcon";
-import AimoPagination from "./AimoPagination";
-import AimoPasswordInput from "./AimoPasswordInput";
-import AimoSearchBar from "./AimoSearchBar";
-import AimoSideMenu from "./AimoSideMenu";
-import AimoTable from "./AimoTable";
-import AimoTagCollection from "./AimoTagCollection";
-import AimoTextBubble from "./AimoTextBubble";
-import AimoTitledInput from "./AimoTitledInput";
-import AimoTooltip from "./AimoTooltip";
+import React from "react";
 
-const Aimo = {
-  AimoIcon,
-  AimoAddButton,
-  AimoButton,
-  AimoDatePicker,
-  AimoForm,
-  AimoIcon,
-  AimoPagination,
-  AimoPasswordInput,
-  AimoSearchBar,
-  AimoSideMenu,
-  AimoTable,
-  AimoTagCollection,
-  AimoTextBubble,
-  AimoTitledInput,
-  AimoTooltip,
-};
+import ReactDOM from "react-dom/client";
 
-export default Aimo;
+import MainPage from "./docs/MainPage";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <MainPage />
+  </React.StrictMode>
+);

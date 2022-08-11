@@ -8,7 +8,7 @@
 
 import React from "react";
 
-import Aimo from "../index";
+import Aimo from "../components/index";
 
 import "./MainPage.scss";
 

@@ -10,11 +10,13 @@ import React from "react";
 
 import ReactDOM from "react-dom/client";
 
-import MainPage from "./MainPage";
+//import MainPage from "./MainPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <MainPage />
+    <div style={{ backgroundColor: "red", width: "100%", height: "100%" }}>
+      ME
+    </div>
   </React.StrictMode>
 );
