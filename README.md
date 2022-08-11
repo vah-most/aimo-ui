@@ -16,10 +16,10 @@ A collection of useful react components
 
 ## Install
 
-To install **aimo-ui** package in react (requires version > 18.0.0), you can use [yarn][]:
+To install **aimo-ui** package in react (requires react >= 18.0.0), you can use [yarn][]:
 
 ```sh
-yarn install aimo-ui
+yarn add aimo-ui
 ```
 
 or [npm][]:
@@ -36,16 +36,16 @@ In order to use aimo-ui components, you can either import the **Aimo** super-com
 import  Aimo  from  "aimo-ui";
 ...
 const  App= () => {
-    return (
+	return (
         <div  className="appContainer">
             <Aimo.AimoSideMenu
-                headerText="Aimo-UI Components"
+                headerText="Aimo-UI Example"
 				menuItems={menuItems}
 			/>
 			<div  className="appBody">
 				<h1  className="appTitle">
 					<Aimo.AimoIcon  name="sitemap"  className="appTitleIcon"  />
-					Welcome to Aimo-UI Component Library Tutorial
+					Aimo-UI Component Library Example
 				</h1>
 			</div>
 	    </div>
@@ -63,13 +63,13 @@ const  App= () => {
     return (
         <div  className="appContainer">
             <AimoSideMenu
-                headerText="Aimo-UI Components"
+                headerText="Aimo-UI Example"
 				menuItems={menuItems}
 			/>
 			<div  className="appBody">
 				<h1  className="appTitle">
 					<AimoIcon  name="sitemap"  className="appTitleIcon"  />
-					Welcome to Aimo-UI Component Library Tutorial
+					Aimo-UI Component Library Example
 				</h1>
 			</div>
 	    </div>
@@ -82,10 +82,15 @@ const  App= () => {
 These are the components that are part of **aimo-ui** so far:  
 | Name | Description | API |
 | ------------ | ----------- | --- |
-| AimoIcon | Easy icon-display component which uses **font-awesome** icon library | [] |
-| AimoSideMenu | A fully-controllable accordion side-menu component | [] |
-| AimoTable | An easy-to-use table component | [] |
+| AimoSideMenu | A fully-controllable accordion side-menu component | [View][aimosidemenu]|
 
 ## License
 
 [MIT][license] © [Mostafa Vahabzadeh][author]
+
+[react]: http://reactjs.org
+[yarn]: https://yarnpkg.com/cli/add
+[npm]: https://docs.npmjs.com/cli/install
+[aimosidemenu]: docs/AimoSideMenu.md
+[license]: LICENSE
+[author]: https://github.com/vah-most
