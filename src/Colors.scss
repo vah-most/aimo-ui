@@ -9,6 +9,7 @@
 //---------------------- PALETTE ---------------------//
 $colorDark: #00322d;
 $colorGray: #555555;
+$colorLightGray: #d3d3d3;
 $colorLightGreen: #d1fcd1;
 $colorShinyGreen: #90ee90;
 $colorWhiteGreen: #f4fff4;
@@ -66,6 +67,12 @@ $menuIconAlertHoverColor: $colorAlert;
 $menuIconColor: $colorWhite;
 $menuIconDisabledColor: $colorDisabled;
 $menuIconOkHoverColor: $colorDimBlue;
+
+$paginationBGColor: $colorWhite;
+$paginationBorderColor: $colorLightGray;
+$paginationTextColor: $colorDimBlue;
+$paginationSelectedBGColor: $colorDimBlue;
+$paginationSelectedTextColor: $colorWhite;
 
 $rowDoneBGColor: $colorLighterBlue;
 $rowOperationDeleteColor: $colorAlert;

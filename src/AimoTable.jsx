@@ -97,8 +97,8 @@ const Table = ({
     }
   };
 
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected + 1);
+  const handlePageChange = (selected) => {
+    setCurrentPage(selected);
   };
 
   const getCurrentPageData = () => {

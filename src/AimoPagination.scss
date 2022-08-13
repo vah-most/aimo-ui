@@ -7,16 +7,36 @@
  */
 
 @import "./Colors.scss";
+@import "./Display.scss";
 
-.page-item.active .page-link {
-  z-index: 3;
-  color: $colorWhite !important;
-  background-color: $colorOk !important;
-  border-color: $colorOk !important;
-  box-shadow: 0px 1px 1px $colorOk inset, 0 1px 1px $colorOk;
-  outline: 0px;
+.clickablePageContainer {
+  cursor: pointer;
 }
 
-.page-link {
-  color: $colorOk !important;
+.clickablePageText {
+  color: $paginationTextColor;
+}
+
+.pageContainer {
+  @include flexCenterView();
+  border: 1px solid $paginationBorderColor;
+  border-width: 1px 1px 1px 0px;
+  padding: 2px 8px 2px 8px;
+  background-color: $paginationBGColor;
+}
+
+.paginationContainer {
+  @include flexView(row);
+  margin-left: 5px;
+  margin-right: 5px;
+  width: max-content;
+  border-left: 1px solid $paginationBorderColor;
+}
+
+.selectedPageContainer {
+  background-color: $paginationSelectedBGColor;
+}
+
+.selectedPageText {
+  color: $paginationSelectedTextColor;
 }
