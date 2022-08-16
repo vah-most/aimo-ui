@@ -8,20 +8,27 @@
 
 //---------------------- PALETTE ---------------------//
 $colorDark: #00322d;
+
 $colorGray: #555555;
 $colorLightGray: #d3d3d3;
+$colorDarkGray: #313131;
+
 $colorLightGreen: #d1fcd1;
 $colorShinyGreen: #90ee90;
 $colorWhiteGreen: #f4fff4;
 $colorBlueGreen: #d6e9e0;
+
 $colorCoolBlue: #44b7ae;
 $colorDimBlue: #407ab3;
 $colorBlue: #0000ff;
 $colorDarkBlue: #00008b;
 $colorLighterBlue: #e6f1f1;
+
 $colorOrange: #ffa500;
+
 $colorRed: #ff0000;
 $colorCoolRed: #e03a3e;
+
 $colorLight: #eee3e3;
 $colorWhitish: #f0f8ff;
 $colorAlmostWhite: #fff4d3;
@@ -85,3 +92,6 @@ $tagAddIconColor: $colorPlaceholder;
 
 $textBubbleBGColor: $colorCoolBlue;
 $textBubbleColor: $colorWhitish;
+
+$tooltipBGColor: $colorDarkGray;
+$tooltipTextColor: $colorWhitish;

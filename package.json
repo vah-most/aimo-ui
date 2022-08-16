@@ -46,7 +46,6 @@
     "react-date-picker": "^8.4.0",
     "react-dom": "^18.2.0",
     "react-select": "^5.4.0",
-    "reactstrap": "^9.1.2",
     "sass": "^1.54.0",
     "sass-loader": "^13.0.2"
   },

@@ -6,30 +6,72 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "./Colors.scss";
 @import "./Display.scss";
 
-.shortcutText {
-  display: unset;
+.tooltipArrow {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  width: 0px;
+  height: 0px;
 }
 
-.tooltip-inner {
-  max-width: 500px !important;
-  background-color: #2e2a2a !important;
-  text-align: justify !important;
-  padding: 10px 15px 10px 15px !important;
-  color: #e5e5e5 !important;
+.tooltipArrowBottom {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid $tooltipBGColor;
 }
 
-.tooltip-arrow::before {
-  border-bottom-color: #2e2a2a !important;
+.tooltipArrowTop {
+  border-top: 5px solid $tooltipBGColor;
+  border-bottom: 5px solid transparent;
 }
 
-.tooltipView {
-  z-index: 999 !important;
+.tooltipBody {
+  background-color: $tooltipBGColor;
+  color: $tooltipTextColor;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 6px 6px 6px 6px;
+  max-width: 200px;
+  direction: ltr;
+  text-align: center;
 }
 
-@media (max-width: $minNormalWidth) {
-  .shortcutText {
-    display: none;
-  }
+.tooltipBodyBottom.tooltipBodyLeft {
+  border-top-left-radius: 0px;
+}
+
+.tooltipBodyBottom.tooltipBodyRight {
+  border-top-right-radius: 0px;
+}
+
+.tooltipBodyTop.tooltipBodyLeft {
+  border-bottom-left-radius: 0px;
+}
+
+.tooltipBodyTop.tooltipBodyRight {
+  border-bottom-right-radius: 0px;
+}
+
+.tooltipContainer {
+  position: absolute;
+  visibility: hidden;
+  z-index: 1;
+  display: flex;
+}
+
+.tooltipContainerBottom {
+  flex-direction: column;
+}
+
+.tooltipContainerLeft {
+  direction: ltr;
+}
+
+.tooltipContainerRight {
+  direction: rtl;
+}
+
+.tooltipContainerTop {
+  flex-direction: column-reverse;
 }
