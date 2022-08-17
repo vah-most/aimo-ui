@@ -82,7 +82,8 @@ const  App= () => {
 These are the components that are part of **aimo-ui** so far:  
 | Name | Description | API |
 | ------------ | ----------- | --- |
-| AimoSideMenu | A fully-controllable accordion side-menu component | [View][aimosidemenu]|
+| **AimoPagination** | A table-pagination component with fully-controllable style | [View][aimopagination]|
+| **AimoSideMenu** | A fully-controllable accordion side-menu component | [View][aimosidemenu]|
 
 ## License
 
@@ -91,6 +92,7 @@ These are the components that are part of **aimo-ui** so far:
 [react]: http://reactjs.org
 [yarn]: https://yarnpkg.com/cli/add
 [npm]: https://docs.npmjs.com/cli/install
+[aimopagination]: docs/AimoPagination.md
 [aimosidemenu]: docs/AimoSideMenu.md
 [license]: LICENSE
 [author]: https://github.com/vah-most
