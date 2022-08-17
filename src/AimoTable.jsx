@@ -7,52 +7,52 @@
  */
 
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import AimoIcon from "./AimoIcon";
-import AimoAddButton from "./AimoAddButton";
 import AimoPagination from "./AimoPagination";
 
 import "./AimoTable.scss";
 
-const Table = ({
+const AimoTable = ({
   className,
-  compactFields = [],
-  compactMode = true,
   data,
+  disableDeleteOperation = false,
+  disableEditOperation = false,
   header,
-  onRequestAdd,
-  onRequestEdit,
+  onPageChange,
   onRequestDelete,
+  onRequestEdit,
   onSort,
-  operationsInCompactMode = false,
   rowsPerPage = 10,
-  sortBy,
-  sortDirAsc,
-  style,
+  showPagination = true,
+  sortedBy,
+  sortedDirAsc,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const renderAddButton = (classes) => {
-    return <AimoAddButton className={classes} onClick={onRequestAdd} />;
-  };
-
-  const fields = [
-    {
-      field: "id",
-      title: renderAddButton(),
-      size: 1,
-      isSortable: false,
-      classes: "text-center",
-    },
-    ...header,
-    {
+  let fields = [...header];
+  if (!disableDeleteOperation || !disableEditOperation)
+    fields.push({
       field: "operations",
       title: "Operations",
       size: 2,
       isSortable: false,
       classes: "text-center",
-    },
-  ];
+    });
+
+  const columns = fields.map((f) => f.field);
+
+  const getCurrentPageData = () => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const filteredData = data.slice(startIndex, startIndex + rowsPerPage);
+    return [...filteredData];
+  };
+
+  const handlePageChange = (selected) => {
+    setCurrentPage(selected);
+    onPageChange && onPageChange(selected);
+  };
 
   const renderTableHeader = (
     index,
@@ -73,14 +73,13 @@ const Table = ({
           key={index}
           className={thClasses}
           onClick={() => {
-            onSort && onSort(field, !sortDirAsc);
+            onSort && onSort(field, !sortedDirAsc);
           }}
         >
           <div className="tableCellContainer">
             {title}
-            {index === 1 && renderAddButton("smallTableAddButton")}
-            {field === sortBy &&
-              (sortDirAsc ? (
+            {field === sortedBy &&
+              (sortedDirAsc ? (
                 <AimoIcon name="angle-down" />
               ) : (
                 <AimoIcon name="angle-up" />
@@ -97,41 +96,23 @@ const Table = ({
     }
   };
 
-  const handlePageChange = (selected) => {
-    setCurrentPage(selected);
-  };
-
-  const getCurrentPageData = () => {
-    const startIndex = (currentPage - 1) * rowsPerPage;
-    const filteredData = data.slice(startIndex, startIndex + rowsPerPage);
-    return [...filteredData];
-  };
-
   const filteredData = getCurrentPageData();
   const pageCount = Math.ceil(data.length / rowsPerPage);
 
   return (
-    <div className={`tableContainer ${className}`} style={style}>
+    <div className={`tableContainer ${className}`}>
       <table className="table">
         <thead>
           <tr>
             {fields.map((column, index) => {
-              const shouldShow =
-                !compactMode ||
-                (compactMode &&
-                  operationsInCompactMode &&
-                  column.field === "operations") ||
-                (compactMode && compactFields.includes(column.field));
-              return shouldShow
-                ? renderTableHeader(
-                    index,
-                    column.title,
-                    column.size,
-                    column.classes,
-                    column.isSortable,
-                    column.field
-                  )
-                : null;
+              return renderTableHeader(
+                index,
+                column.title,
+                column.size,
+                column.classes,
+                column.isSortable,
+                column.field
+              );
             })}
           </tr>
         </thead>
@@ -139,43 +120,40 @@ const Table = ({
           {filteredData.map((row, index) => {
             return (
               <tr key={index} className={`${row.className}`}>
-                {!compactMode && (
-                  <td className="align-middle text-center rowIndex">
-                    {index + 1}
-                  </td>
-                )}
                 {row.fields.map((item, fIndex) => {
-                  if (compactMode && !compactFields.includes(item.field))
-                    return null;
-                  if (item.render === null) return null;
+                  if (!columns.includes(item.field)) return null;
                   return (
                     <td
                       key={fIndex}
                       className={item.cellClasses ? item.cellClasses : ""}
                     >
-                      {item.render()}
+                      {item.render ? item.render() : item.text}
                     </td>
                   );
                 })}
-                {(!compactMode || operationsInCompactMode) && (
+                {(!disableDeleteOperation || !disableEditOperation) && (
                   <th className="align-middle text-center" scope="row">
                     <div className="rowOperationContainer">
-                      <div className="rowOperationEdit">
-                        <AimoIcon
-                          name="edit"
-                          onClick={() => {
-                            onRequestEdit && onRequestEdit(row.id);
-                          }}
-                        />
-                      </div>
-                      <div className="ms-2 rowOperationDelete">
-                        <AimoIcon
-                          name="remove"
-                          onClick={() => {
-                            onRequestDelete && onRequestDelete(row.id);
-                          }}
-                        />
-                      </div>
+                      {!disableEditOperation && (
+                        <div className="rowOperationEdit">
+                          <AimoIcon
+                            name="edit"
+                            onClick={() => {
+                              onRequestEdit && onRequestEdit(row.id);
+                            }}
+                          />
+                        </div>
+                      )}
+                      {!disableDeleteOperation && (
+                        <div className="ms-2 rowOperationDelete">
+                          <AimoIcon
+                            name="remove"
+                            onClick={() => {
+                              onRequestDelete && onRequestDelete(row.id);
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   </th>
                 )}
@@ -185,7 +163,7 @@ const Table = ({
         </tbody>
       </table>
       <div>
-        {pageCount > 1 && (
+        {showPagination && pageCount > 1 && (
           <AimoPagination
             onPageChange={handlePageChange}
             pageCount={pageCount}
@@ -196,4 +174,20 @@ const Table = ({
   );
 };
 
-export default Table;
+AimoTable.propTypes = {
+  className: PropTypes.string,
+  data: PropTypes.array.isRequired,
+  disableDeleteOperation: PropTypes.bool,
+  disableEditOperation: PropTypes.bool,
+  header: PropTypes.array.isRequired,
+  onPageChange: PropTypes.func,
+  onRequestDelete: PropTypes.func,
+  onRequestEdit: PropTypes.func,
+  onSort: PropTypes.func,
+  rowsPerPage: PropTypes.number,
+  showPagination: PropTypes.bool,
+  sortedBy: PropTypes.string,
+  sortedDirAsc: PropTypes.bool,
+};
+
+export default AimoTable;
