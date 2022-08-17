@@ -17,7 +17,7 @@ This component is a fully-controllable side-menu component for React. It support
 
 ## Use
 
-In order to use aimo-ui components, you can either import the **Aimo** super-component, and use components as a part of **Aimo**. See [here][aimo-ui#use] for how to import **aimo-ui** components.
+In order to use aimo-ui components, you can either import the **Aimo** super-component, and use components as a part of **Aimo**. See [here][aimo-ui#use] for details on how to import **aimo-ui** components.
 
 A simple example of using **AimoSideMenu** is like this:
 
@@ -66,12 +66,12 @@ Below is the list of all the props that we can use with `<AimoSideMenu>` compone
 
 **menuItems** property is an array of objects with the following properties:
 
-| Name            | Type       | Default | Description                                                                                                          |
-| --------------- | ---------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
-| **isSeparator** | `boolean`  | `false` | Display a separator line after last item                                                                             |
-| **text**        | `string`   | `null`  | Menu-item text                                                                                                       |
-| **renderIcon**  | `function` | `null`  | Render function for displaying icon of the menu-item                                                                 |
-| **renderText**  | `function` | `null`  | Render function for displaying text of the menu-item. Setting one of `text` or `renderText` properties are required. |
+| Name            | Type       | Default | Description                                                                                                         |
+| --------------- | ---------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
+| **isSeparator** | `boolean`  | `false` | Display a separator line after last item                                                                            |
+| **text**        | `string`   | `null`  | Menu-item text                                                                                                      |
+| **renderIcon**  | `function` | `null`  | Render function for displaying icon of the menu-item                                                                |
+| **renderText**  | `function` | `null`  | Render function for displaying text of the menu-item. Setting one of `text` or `renderText` properties is required. |
 
 ## License
 
