@@ -136,7 +136,7 @@ const AimoPagination = ({
   );
 };
 
-AimoPagination.PropTypes = {
+AimoPagination.propTypes = {
   breakLabel: PropTypes.string,
   breakContainerClassName: PropTypes.string,
   breakTextClassName: PropTypes.string,
