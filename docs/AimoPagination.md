@@ -23,7 +23,7 @@ Below is an example of using **AimoPagination** for a table:
 
 ```js
 ...
-          <Aimo.AimoPagination
+          <AimoPagination
             onPageChange={(page) => console.log("Selected page changed to: ", page)}
             pageCount={Math.ceil(totalData.length / rowsPerPage)}
           />
@@ -32,7 +32,7 @@ Below is an example of using **AimoPagination** for a table:
 
 ## API
 
-Below is the list of all the props that can be use with `<AimoPagination>` component.
+Below is the list of all the props that can be used with `<AimoPagination>` component.
 
 | Name                           | Type       | Default | Description                                                                                                                               |
 | ------------------------------ | ---------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |

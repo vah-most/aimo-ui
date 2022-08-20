@@ -23,7 +23,7 @@ A simple example of using **AimoSideMenu** is like this:
 
 ```js
 ...
-    <Aimo.AimoSideMenu
+    <AimoSideMenu
         headerText="Example Menu"
         menuItems={[
             {
