@@ -84,6 +84,7 @@ These are the components that are part of **aimo-ui** so far:
 | ------------ | ----------- | --- |
 | **AimoPagination** | A table-pagination component with fully-controllable style | [View][aimopagination]|
 | **AimoSideMenu** | A fully-controllable accordion side-menu component | [View][aimosidemenu]|
+| **AimoTooltip** | An on-hover tooltip component | [View][aimotooltip]|
 
 ## License
 
@@ -94,5 +95,6 @@ These are the components that are part of **aimo-ui** so far:
 [npm]: https://docs.npmjs.com/cli/install
 [aimopagination]: docs/AimoPagination.md
 [aimosidemenu]: docs/AimoSideMenu.md
+[aimotooltip]: docs/AimoTooltip.md
 [license]: LICENSE
 [author]: https://github.com/vah-most
