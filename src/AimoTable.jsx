@@ -16,14 +16,15 @@ import "./AimoTable.scss";
 
 const AimoTable = ({
   className,
+  columnProps,
   data,
   disableDeleteOperation = false,
   disableEditOperation = false,
-  header,
   onPageChange,
   onRequestDelete,
   onRequestEdit,
   onSort,
+  renderPagination,
   rowsPerPage = 10,
   showPagination = true,
   sortedBy,
@@ -31,17 +32,13 @@ const AimoTable = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  let fields = [...header];
+  let fields = { ...columnProps };
   if (!disableDeleteOperation || !disableEditOperation)
-    fields.push({
-      field: "operations",
-      title: "Operations",
-      size: 2,
+    fields.operations = {
+      headerTitle: "Operations",
       isSortable: false,
-      classes: "text-center",
-    });
-
-  const columns = fields.map((f) => f.field);
+      headerClassName: "col text-center",
+    };
 
   const getCurrentPageData = () => {
     const startIndex = (currentPage - 1) * rowsPerPage;
@@ -57,43 +54,54 @@ const AimoTable = ({
   const renderTableHeader = (
     index,
     title,
-    size,
-    extraClasses = "",
+    className = "",
     isSortable = false,
-    field = null
+    fieldName = null
   ) => {
     const thClasses =
-      (size > 0 ? `col-${size}` : "col") +
-      ` align-middle rowHeader` +
-      ` ${extraClasses}` +
+      ` align-middle rowHeader col` +
+      ` ${className}` +
       (isSortable ? " hand" : "");
     if (isSortable) {
       return (
         <td
-          key={index}
+          key={`header-${index}`}
           className={thClasses}
           onClick={() => {
-            onSort && onSort(field, !sortedDirAsc);
+            onSort && onSort(fieldName, !sortedDirAsc);
           }}
         >
-          <div className="tableCellContainer">
+          <div className={`tableCellContainer`}>
             {title}
-            {field === sortedBy &&
+            {fieldName === sortedBy &&
               (sortedDirAsc ? (
-                <AimoIcon name="angle-down" />
+                <AimoIcon className="tableHeaderSortArrow" name="angle-down" />
               ) : (
-                <AimoIcon name="angle-up" />
+                <AimoIcon className="tableHeaderSortArrow" name="angle-up" />
               ))}
           </div>
         </td>
       );
     } else {
       return (
-        <td key={title} className={thClasses}>
+        <td key={`header-${index}`} className={thClasses}>
           {title}
         </td>
       );
     }
+  };
+
+  const renderTablePagination = () => {
+    if (!showPagination) return null;
+
+    if (typeof renderPagination === "function")
+      return renderPagination(pageCount);
+
+    if (pageCount <= 1) return null;
+
+    return (
+      <AimoPagination onPageChange={handlePageChange} pageCount={pageCount} />
+    );
   };
 
   const filteredData = getCurrentPageData();
@@ -104,14 +112,13 @@ const AimoTable = ({
       <table className="table">
         <thead>
           <tr>
-            {fields.map((column, index) => {
+            {Object.entries(fields).map(([keyName, column], index) => {
               return renderTableHeader(
                 index,
-                column.title,
-                column.size,
-                column.classes,
+                column.headerTitle,
+                column.headerClassName,
                 column.isSortable,
-                column.field
+                keyName
               );
             })}
           </tr>
@@ -120,17 +127,23 @@ const AimoTable = ({
           {filteredData.map((row, index) => {
             return (
               <tr key={index} className={`${row.className}`}>
-                {row.fields.map((item, fIndex) => {
-                  if (!columns.includes(item.field)) return null;
-                  return (
-                    <td
-                      key={fIndex}
-                      className={item.cellClasses ? item.cellClasses : ""}
-                    >
-                      {item.render ? item.render() : item.text}
-                    </td>
-                  );
-                })}
+                {Object.entries(columnProps).map(
+                  ([keyName, column], fIndex) => {
+                    return (
+                      <td
+                        key={`${index}-${keyName}`}
+                        className={
+                          column.cellClassName ? column.cellClassName : ""
+                        }
+                      >
+                        {column.renderFunc
+                          ? column.renderFunc(row)
+                          : row[keyName]}
+                      </td>
+                    );
+                  }
+                )}
+
                 {(!disableDeleteOperation || !disableEditOperation) && (
                   <th className="align-middle text-center" scope="row">
                     <div className="rowOperationContainer">
@@ -139,7 +152,7 @@ const AimoTable = ({
                           <AimoIcon
                             name="edit"
                             onClick={() => {
-                              onRequestEdit && onRequestEdit(row.id);
+                              onRequestEdit && onRequestEdit(row);
                             }}
                           />
                         </div>
@@ -149,7 +162,7 @@ const AimoTable = ({
                           <AimoIcon
                             name="remove"
                             onClick={() => {
-                              onRequestDelete && onRequestDelete(row.id);
+                              onRequestDelete && onRequestDelete(row);
                             }}
                           />
                         </div>
@@ -162,28 +175,22 @@ const AimoTable = ({
           })}
         </tbody>
       </table>
-      <div>
-        {showPagination && pageCount > 1 && (
-          <AimoPagination
-            onPageChange={handlePageChange}
-            pageCount={pageCount}
-          />
-        )}
-      </div>
+      <div>{renderTablePagination()}</div>
     </div>
   );
 };
 
 AimoTable.propTypes = {
   className: PropTypes.string,
+  columnProps: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   disableDeleteOperation: PropTypes.bool,
   disableEditOperation: PropTypes.bool,
-  header: PropTypes.array.isRequired,
   onPageChange: PropTypes.func,
   onRequestDelete: PropTypes.func,
   onRequestEdit: PropTypes.func,
   onSort: PropTypes.func,
+  renderPagination: PropTypes.func,
   rowsPerPage: PropTypes.number,
   showPagination: PropTypes.bool,
   sortedBy: PropTypes.string,
