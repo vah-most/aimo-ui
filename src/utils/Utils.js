@@ -12,6 +12,16 @@ export function getRemainingDays(fromTime, toTime) {
   return diff;
 }
 
+export function getTimeParts (seconds) {
+    let remaining = seconds;
+    const hours = Math.floor(remaining / 3600);
+    remaining -= hours * 3600;
+    const minutes = Math.floor(remaining / 60);
+    remaining -= minutes * 60;
+    
+    return {hours: hours, minutes: minutes, seconds: remaining};
+}
+
 export const KEY_CODES = {
   KEY_ENTER: 13,
   KEY_ESCAPE: 27,
