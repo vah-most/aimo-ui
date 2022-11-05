@@ -1,8 +1,8 @@
 [← Back to main page][main-page]
 
-# AimoSideMenu
+# AimoTable
 
-This component is a fully-controllable side-menu component for React. It supports right-to-left view, and gives you full control to pass extra css classes for different sections and define and use you own render functions for your customized view.
+**AimoTable** is a component to display tables in React. It's easy to use to gives you full control to customize the way data is being displayed the way you like.
 
 ## Contents
 
@@ -13,17 +13,17 @@ This component is a fully-controllable side-menu component for React. It support
 
 ## Install
 
-**AimoSideMenu** is a part of **aimo-ui** component library. See [here][aimo-ui#install] for installation guides.
+**AimoTable** is a part of **aimo-ui** component library. See [here][aimo-ui#install] for installation guides.
 
 ## Use
 
 In order to use aimo-ui components, you can either import the **Aimo** super-component, and use components as a part of **Aimo**. See [here][aimo-ui#use] for details on how to import **aimo-ui** components.
 
-A simple example of using **AimoSideMenu** is like this:
+A simple example of using **AimoTable** is like this:
 
 ```js
 ...
-    <AimoSideMenu
+    <AimoTable
         headerText="Example Menu"
         menuItems={[
             {
