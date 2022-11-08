@@ -10,26 +10,27 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
+import AimoIcon from "./AimoIcon";
+
 import "./AimoPagination.scss";
 
 const AimoPagination = ({
   breakLabel = "...",
-  breakContainerClassName,
-  breakTextClassName,
-  containerClassName,
-  nextLabel = ">",
-  nextContainerClassName,
-  nextTextClassName,
-  onPageChange,
-  pageContainerClassName,
-  pageCount,
-  pageTextClassName,
-  previousLabel = "<",
-  prevContainerClassName,
-  prevTextClassName,
+  breakContainerClassName = "",
+  breakTextClassName = "",
+  containerClassName = "",
+  nextContainerClassName = "",
+  onPageChange = null,
+  pageContainerClassName = "",
+  pageContainerDisabledClassName = "",
+  pageCount = 1,
+  pageTextClassName = "",
+  prevContainerClassName = "",
+  renderNext = null,
   renderOnZeroPage = null,
-  selectedContainerClassName,
-  selectedTextClassName,
+  renderPrev = null,
+  selectedContainerClassName = "",
+  selectedTextClassName = "",
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -38,7 +39,7 @@ const AimoPagination = ({
 
   let visiblePages = [];
   if (pageCount > 1) {
-    visiblePages = new Set([1, 2, pageCount - 1, pageCount]);
+    visiblePages = new Set([1, pageCount]);
 
     if (pageCount > 4) {
       if (currentPage > 1) visiblePages.add(currentPage - 1);
@@ -51,11 +52,15 @@ const AimoPagination = ({
 
   let pages = [
     {
-      className: prevContainerClassName,
+      className: `${pageContainerClassName} ${prevContainerClassName}`,
+      disabledClassName: pageContainerDisabledClassName,
       number: 0,
       onClick: () => handlePageChange(currentPage - 1),
-      text: previousLabel,
-      textClassName: prevTextClassName,
+      render: renderPrev
+        ? (isClickable) => renderPrev(isClickable)
+        : (isClickable) => (
+            <AimoIcon className={`${pageTextClassName} `} name="caret-left" />
+          ),
     },
   ];
 
@@ -63,8 +68,9 @@ const AimoPagination = ({
   visiblePages.forEach((pageNum, index) => {
     if (pageNum - prevPage > 1)
       pages.push({
-        className: breakContainerClassName,
-        number: 0,
+        className: `${pageContainerDisabledClassName} ${breakContainerClassName}`,
+        disabledClassName: pageContainerDisabledClassName,
+        number: -1,
         onClick: null,
         text: breakLabel,
         textClassName: breakTextClassName,
@@ -72,6 +78,7 @@ const AimoPagination = ({
 
     pages.push({
       className: pageContainerClassName,
+      disabledClassName: pageContainerDisabledClassName,
       number: pageNum,
       onClick: () => handlePageChange(pageNum),
       text: `${pageNum}`,
@@ -81,11 +88,15 @@ const AimoPagination = ({
     prevPage = pageNum;
   });
   pages.push({
-    className: nextContainerClassName,
+    className: `${pageContainerClassName} ${nextContainerClassName}`,
+    disabledClassName: pageContainerDisabledClassName,
     number: pageCount + 1,
     onClick: () => handlePageChange(currentPage + 1),
-    text: nextLabel,
-    textClassName: nextTextClassName,
+    render: renderNext
+      ? (isClickable) => renderNext(isClickable)
+      : (isClickable) => (
+          <AimoIcon className={`${pageTextClassName}`} name="caret-right" />
+        ),
   });
 
   const handlePageChange = (page) => {
@@ -97,6 +108,7 @@ const AimoPagination = ({
 
   const isPageClickable = (page) => {
     if (page === currentPage) return false;
+    if (page < 0) return false; // break-cells have page-number equal to -1;
     if (page === 0 && currentPage === 1) return false;
     if (page === pageCount + 1 && currentPage === pageCount) return false;
 
@@ -106,29 +118,36 @@ const AimoPagination = ({
   return (
     <div className={`paginationContainer ${containerClassName}`}>
       {pages.map((page, index) => {
+        const isClickable = isPageClickable(page.number);
         return (
           <div
             key={index}
             className={`pageContainer ${
+              isClickable
+                ? `clickablePageContainer ${page.className}`
+                : `${page.disabledClassName}`
+            } ${
               currentPage === page.number
-                ? `selectedPageContainer ${selectedContainerClassName}`
+                ? `${page.disabledClassName} selectedPageContainer ${selectedContainerClassName}`
                 : ""
-            } ${isPageClickable(page.number) ? "clickablePageContainer" : ""} ${
-              page.className
             }`}
-            onClick={isPageClickable(page.number) ? page.onClick : null}
+            onClick={isClickable ? page.onClick : null}
           >
-            <span
-              className={`${page.textClassName} ${
-                isPageClickable(page.number) ? "clickablePageText" : ""
-              } ${
-                currentPage === page.number
-                  ? `selectedPageText ${selectedTextClassName}`
-                  : null
-              }`}
-            >
-              {page.text}
-            </span>
+            {page.render ? (
+              page.render(isClickable)
+            ) : (
+              <span
+                className={`${page.textClassName} ${
+                  isPageClickable(page.number) ? "clickablePageText" : ""
+                } ${
+                  currentPage === page.number
+                    ? `selectedPageText ${selectedTextClassName}`
+                    : null
+                }`}
+              >
+                {page.text}
+              </span>
+            )}
           </div>
         );
       })}
@@ -141,17 +160,16 @@ AimoPagination.propTypes = {
   breakContainerClassName: PropTypes.string,
   breakTextClassName: PropTypes.string,
   containerClassName: PropTypes.string,
-  nextLabel: PropTypes.string,
   nextContainerClassName: PropTypes.string,
-  nextTextClassName: PropTypes.string,
   onPageChange: PropTypes.func.isRequired,
   pageContainerClassName: PropTypes.string,
+  pageContainerDisabledClassName: PropTypes.string,
   pageCount: PropTypes.number.isRequired,
   pageTextClassName: PropTypes.string,
-  previousLabel: PropTypes.string,
   prevContainerClassName: PropTypes.string,
-  prevTextClassName: PropTypes.string,
+  renderNext: PropTypes.func,
   renderOnZeroPage: PropTypes.func,
+  renderPrev: PropTypes.func,
   selectedContainerClassName: PropTypes.string,
   selectedTextClassName: PropTypes.string,
 };

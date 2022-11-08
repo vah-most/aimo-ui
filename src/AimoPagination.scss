@@ -27,9 +27,8 @@
 
 .paginationContainer {
   @include flexView(row);
-  margin-left: 5px;
   margin-right: 5px;
-  width: max-content;
+  width: 100%;
   border-left: 1px solid $paginationBorderColor;
 }
 

@@ -4,6 +4,12 @@
 
 **AimoPagination** is an implementation of table-pagination for react with fully-controllable style.
 
+<div style="text-align: left">
+<img src="AimoPagination1.gif" width="175px" height="29px"/>
+<img src="AimoPagination2.gif" width="175px" height="29px"/>
+<img src="AimoPagination3.gif" width="175px" height="29px"/>
+</div>
+
 ## Contents
 
 - [Install](#install)
@@ -34,25 +40,24 @@ Below is an example of using **AimoPagination** for a table:
 
 Below is the list of all the props that can be used with `<AimoPagination>` component.
 
-| Name                           | Type       | Default | Description                                                                                                                               |
-| ------------------------------ | ---------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **breakLabel**                 | `string`   | `'...'` | Replace break-label with this character/text                                                                                              |
-| **breakContainerClassName**    | `string`   | `null`  | Extra class name for break-label container `<div>`                                                                                        |
-| **breakTextClassName**         | `string`   | `null`  | Extra class name for break-label text                                                                                                     |
-| **containerClassName**         | `string`   | `null`  | Extra class name for pagination component container `<div>`                                                                               |
-| **nextLabel**                  | `string`   | `'>'`   | Replace next-label with this character/text                                                                                               |
-| **nextContainerClassName**     | `string`   | `null`  | Extra class name for next-label container `<div>`                                                                                         |
-| **nextTextClassName**          | `string`   | `null`  | Extra class name for next-label text                                                                                                      |
-| **onPageChange**               | `function` | `null`  | **Required.** Callback function for onPageChange event                                                                                    |
-| **pageCount**                  | `number`   | `null`  | **Required.** Number of pages                                                                                                             |
-| **pageContainerClassName**     | `string`   | `null`  | Extra class name for page-number container `<div>`                                                                                        |
-| **pageTextClassName**          | `string`   | `null`  | Extra class name for page-number text                                                                                                     |
-| **previousLabel**              | `string`   | `'<'`   | Replace previous-label with this character/text                                                                                           |
-| **prevContainerClassName**     | `string`   | `null`  | Extra class name for previous-label container `<div>`                                                                                     |
-| **prevTextClassName**          | `string`   | `null`  | Extra class name for previous-label text                                                                                                  |
-| **renderOnZeroPage**           | `function` | `null`  | Render function to have custom view when `pageCount` is zero. By default, pagination component will not be displayed if `pageCount === 0` |
-| **selectedContainerClassName** | `string`   | `null`  | Extra class name for selected page-number container `<div>`                                                                               |
-| **selectedTextClassName**      | `string`   | `null`  | Extra class name for selected page-number text                                                                                            |
+| Name                               | Type       | Default | Description                                                                                                                               |
+| ---------------------------------- | ---------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **breakLabel**                     | `string`   | `'...'` | Replace break-label with this character/text                                                                                              |
+| **breakContainerClassName**        | `string`   | `null`  | Extra class name for break-label container `<div>`                                                                                        |
+| **breakTextClassName**             | `string`   | `null`  | Extra class name for break-label text                                                                                                     |
+| **containerClassName**             | `string`   | `null`  | Extra class name for pagination component container `<div>`                                                                               |
+| **nextContainerClassName**         | `string`   | `null`  | Extra class name for next-label container `<div>`                                                                                         |
+| **onPageChange**                   | `function` | `null`  | **Required.** Callback function for onPageChange event                                                                                    |
+| **pageContainerClassName**         | `string`   | `null`  | Extra class name for page-number container `<div>`                                                                                        |
+| **pageContainerDisabledClassName** | `string`   | `null`  | Extra class name for page-number container `<div>` when page is disabled                                                                  |
+| **pageCount**                      | `number`   | `null`  | **Required.** Number of pages                                                                                                             |
+| **pageTextClassName**              | `string`   | `null`  | Extra class name for page-number text                                                                                                     |
+| **prevContainerClassName**         | `string`   | `null`  | Extra class name for previous-label container `<div>`                                                                                     |
+| **renderNext**                     | `function` | `null`  | Render function to have custom `next` label                                                                                               |
+| **renderOnZeroPage**               | `function` | `null`  | Render function to have custom view when `pageCount` is zero. By default, pagination component will not be displayed if `pageCount === 0` |
+| **renderPrev**                     | `function` | `null`  | Render function to have custom `previous` label                                                                                           |
+| **selectedContainerClassName**     | `string`   | `null`  | Extra class name for selected page-number container `<div>`                                                                               |
+| **selectedTextClassName**          | `string`   | `null`  | Extra class name for selected page-number text                                                                                            |
 
 ## License
 
