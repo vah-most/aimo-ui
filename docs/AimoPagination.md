@@ -36,7 +36,7 @@ npm install @aimo.ui/aimo-pagination
 In order to use **AimoPagination** component, you should import it using:
 
 ```js
-import AimoPagination from "@aimo.ui/AimoPagination";
+import AimoPagination from "@aimo.ui/aimo-pagination";
 ```
 
 Following example shows how you can use `<AimoPagination>` component in your code:
