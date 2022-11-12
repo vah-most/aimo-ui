@@ -10,8 +10,6 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import AimoIcon from "./AimoIcon";
-
 import "./AimoPagination.scss";
 
 const AimoPagination = ({
@@ -59,7 +57,13 @@ const AimoPagination = ({
       render: renderPrev
         ? (isClickable) => renderPrev(isClickable)
         : (isClickable) => (
-            <AimoIcon className={`${pageTextClassName} `} name="caret-left" />
+            <div
+              className={`paginationArrow ${
+                isClickable ? "clickablePageText" : "pageDisabled"
+              } ${pageTextClassName}`}
+            >
+              «
+            </div>
           ),
     },
   ];
@@ -73,7 +77,7 @@ const AimoPagination = ({
         number: -1,
         onClick: null,
         text: breakLabel,
-        textClassName: breakTextClassName,
+        textClassName: `pageDisabled ${breakTextClassName}`,
       });
 
     pages.push({
@@ -95,7 +99,13 @@ const AimoPagination = ({
     render: renderNext
       ? (isClickable) => renderNext(isClickable)
       : (isClickable) => (
-          <AimoIcon className={`${pageTextClassName}`} name="caret-right" />
+          <div
+            className={`paginationArrow ${
+              isClickable ? "clickablePageText" : ""
+            } ${pageTextClassName}`}
+          >
+            »
+          </div>
         ),
   });
 

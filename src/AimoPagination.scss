@@ -11,6 +11,10 @@
 
 .clickablePageContainer {
   cursor: pointer;
+
+  &:hover {
+    background-color: $paginationHoverColor;
+  }
 }
 
 .clickablePageText {
@@ -23,6 +27,14 @@
   border-width: 1px 1px 1px 0px;
   padding: 2px 8px 2px 8px;
   background-color: $paginationBGColor;
+}
+
+.paginationArrow {
+  margin-bottom: 2px;
+}
+
+.pageDisabled {
+  color: $colorDisabled;
 }
 
 .paginationContainer {
