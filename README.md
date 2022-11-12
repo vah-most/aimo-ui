@@ -83,9 +83,6 @@ These are the components that are part of **aimo-ui** so far:
 | Name | Description | API |
 | ------------ | ----------- | --- |
 | **AimoPagination** | A table-pagination component with fully-controllable style | [View][aimopagination]|
-| **AimoSideMenu** | A fully-controllable accordion side-menu component | [View][aimosidemenu]|
-| **AimoTable** | A powerful table component | [View][aimotable]|
-| **AimoTooltip** | An on-hover tooltip component | [View][aimotooltip]|
 
 ## License
 
