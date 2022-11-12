@@ -18,6 +18,7 @@ These are the components that are part of **aimo-ui** so far:
 | Name | Description | API |
 | ------------ | ----------- | --- |
 | **AimoPagination** | A fully-controllable table-pagination component | [View][aimo-pagination]|
+| **AimoTable** | A powerful table component | [View][aimo-table]|
 
 ## License
 
@@ -25,5 +26,6 @@ These are the components that are part of **aimo-ui** so far:
 
 [react]: http://reactjs.org
 [aimo-pagination]: docs/AimoPagination.md
+[aimo-table]: docs/AimoTable.md
 [license]: LICENSE
 [author]: https://github.com/vah-most
