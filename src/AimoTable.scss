@@ -9,8 +9,20 @@
 @import "./Display.scss";
 @import "./Texts.scss";
 
+.paginationContainer {
+  margin-top: 20px;
+}
+
 .rowHeader {
   @include taskTableHeader();
+}
+
+.rowHeader:first-child {
+  border-top-left-radius: 5px;
+}
+
+.rowHeader:last-child {
+  border-top-right-radius: 5px;
 }
 
 .rowIndex {
@@ -23,18 +35,25 @@
 
 .rowOperationDelete {
   color: $rowOperationDeleteColor;
-  margin-bottom: 2px;
+  margin-top: 3px;
+  font-size: 10px;
   cursor: pointer;
 }
 
 .rowOperationEdit {
   color: $rowOperationEditColor;
+  margin-right: 8px;
+  font-size: 14px;
   cursor: pointer;
 }
 
 .smallTableAddButton {
   margin-inline-start: 10px;
   display: none;
+}
+
+.sortableHeader {
+  cursor: pointer;
 }
 
 .tableCellContainer {

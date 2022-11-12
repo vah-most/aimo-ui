@@ -9,35 +9,38 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import AimoIcon from "./AimoIcon";
 import AimoPagination from "./AimoPagination";
 
 import "./AimoTable.scss";
 
 const AimoTable = ({
-  className,
-  columnProps,
-  data,
+  className = "",
+  columnProps = {},
+  data = [],
   disableDeleteOperation = false,
   disableEditOperation = false,
-  onPageChange,
-  onRequestDelete,
-  onRequestEdit,
-  onSort,
-  renderPagination,
+  onPageChange = null,
+  onRequestDelete = null,
+  onRequestEdit = null,
+  onSort = null,
+  operationCellClassName = "",
+  operationHeaderClassName = "",
+  renderPagination = null,
+  rowClassName = "",
   rowsPerPage = 10,
   showPagination = true,
-  sortedBy,
-  sortedDirAsc,
+  sortedBy = null,
+  sortedDirAsc = true,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const pageCount = Math.ceil(data.length / rowsPerPage);
 
   let fields = { ...columnProps };
   if (!disableDeleteOperation || !disableEditOperation)
     fields.operations = {
       headerTitle: "Operations",
       isSortable: false,
-      headerClassName: "col text-center",
+      headerClassName: `col text-center ${operationHeaderClassName}`,
     };
 
   const getCurrentPageData = () => {
@@ -61,7 +64,7 @@ const AimoTable = ({
     const thClasses =
       ` align-middle rowHeader col` +
       ` ${className}` +
-      (isSortable ? " hand" : "");
+      (isSortable ? " sortableHeader" : "");
     if (isSortable) {
       return (
         <td
@@ -75,9 +78,9 @@ const AimoTable = ({
             {title}
             {fieldName === sortedBy &&
               (sortedDirAsc ? (
-                <AimoIcon className="tableHeaderSortArrow" name="angle-down" />
+                <div className="tableHeaderSortArrow">↓</div>
               ) : (
-                <AimoIcon className="tableHeaderSortArrow" name="angle-up" />
+                <div className="tableHeaderSortArrow">↑</div>
               ))}
           </div>
         </td>
@@ -100,12 +103,15 @@ const AimoTable = ({
     if (pageCount <= 1) return null;
 
     return (
-      <AimoPagination onPageChange={handlePageChange} pageCount={pageCount} />
+      <AimoPagination
+        containerClassName="paginationContainer"
+        onPageChange={handlePageChange}
+        pageCount={pageCount}
+      />
     );
   };
 
   const filteredData = getCurrentPageData();
-  const pageCount = Math.ceil(data.length / rowsPerPage);
 
   return (
     <div className={`tableContainer ${className}`}>
@@ -126,7 +132,7 @@ const AimoTable = ({
         <tbody>
           {filteredData.map((row, index) => {
             return (
-              <tr key={index} className={`${row.className}`}>
+              <tr key={index} className={`${rowClassName}`}>
                 {Object.entries(columnProps).map(
                   ([keyName, column], fIndex) => {
                     return (
@@ -145,26 +151,31 @@ const AimoTable = ({
                 )}
 
                 {(!disableDeleteOperation || !disableEditOperation) && (
-                  <th className="align-middle text-center" scope="row">
-                    <div className="rowOperationContainer">
+                  <th
+                    className={`align-middle text-center  ${operationCellClassName}`}
+                    scope="row"
+                  >
+                    <div className={"rowOperationContainer"}>
                       {!disableEditOperation && (
                         <div className="rowOperationEdit">
-                          <AimoIcon
-                            name="edit"
+                          <div
                             onClick={() => {
                               onRequestEdit && onRequestEdit(row);
                             }}
-                          />
+                          >
+                            📝
+                          </div>
                         </div>
                       )}
                       {!disableDeleteOperation && (
                         <div className="ms-2 rowOperationDelete">
-                          <AimoIcon
-                            name="remove"
+                          <div
                             onClick={() => {
                               onRequestDelete && onRequestDelete(row);
                             }}
-                          />
+                          >
+                            ❌
+                          </div>
                         </div>
                       )}
                     </div>
@@ -190,7 +201,10 @@ AimoTable.propTypes = {
   onRequestDelete: PropTypes.func,
   onRequestEdit: PropTypes.func,
   onSort: PropTypes.func,
+  operationCellClassName: PropTypes.string,
+  operationHeaderClassName: PropTypes.string,
   renderPagination: PropTypes.func,
+  rowClassName: PropTypes.string,
   rowsPerPage: PropTypes.number,
   showPagination: PropTypes.bool,
   sortedBy: PropTypes.string,
