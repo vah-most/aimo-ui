@@ -1,0 +1,37 @@
+{
+  "name": "@aimo.ui/aimo-pagination",
+  "version": "1.0.2",
+  "description": "A fully customizable pagination component for react",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "dist/*.css",
+    "dist/*.js"
+  ],
+  "scripts": {
+    "cleandist": "run-script-os",
+    "cleandist:win32": "del /S /Q .\\dist\\*",
+    "cleandist:default": "rm -R ./dist/*",
+    "prepublish": "npm run cleandist & node-sass ./ -o dist/ & npx babel ./ --out-dir dist --copy-files",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vah-most/aimo-ui.git"
+  },
+  "keywords": [
+    "pagination"
+  ],
+  "author": "Mostafa Vahabzadeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vah-most/aimo-ui/issues"
+  },
+  "homepage": "https://github.com/vah-most/aimo-ui#readme",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "run-script-os": "^1.1.6"
+  }
+}

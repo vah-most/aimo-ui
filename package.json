@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/vah-most/aimo-ui#readme",
   "dependencies": {
+    "@aimo.ui/aimo-pagination": "^1.0.2",
     "font-awesome": "^4.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

@@ -10,7 +10,7 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import "./AimoPagination.scss";
+import "./AimoPagination.css";
 
 const AimoPagination = ({
   breakLabel = "...",

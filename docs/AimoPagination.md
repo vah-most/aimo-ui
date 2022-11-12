@@ -19,21 +19,63 @@
 
 ## Install
 
-**AimoPagination** is a part of **aimo-ui** component library. See [here][aimo-ui#install] for installation guides.
+To install **AimoPagination** package in react (requires react >= 18.0.0), you can use [yarn][]:
+
+```sh
+yarn add @aimo.ui/aimo-pagination
+```
+
+or [npm][]:
+
+```sh
+npm install @aimo.ui/aimo-pagination
+```
 
 ## Use
 
-In order to use aimo-ui components, you can either import the **Aimo** super-component, and use components as a part of **Aimo**. See [here][aimo-ui#use] for details on how to import **aimo-ui** components.
+In order to use **AimoPagination** component, you should import it using:
 
-Below is an example of using **AimoPagination** for a table:
+```js
+import AimoPagination from "@aimo.ui/AimoPagination";
+```
+
+Following example shows how you can use `<AimoPagination>` component in your code:
 
 ```js
 ...
-          <AimoPagination
-            onPageChange={(page) => console.log("Selected page changed to: ", page)}
-            pageCount={Math.ceil(totalData.length / rowsPerPage)}
-          />
-...
+const App= () => {
+  ...
+  return (
+    <div  className="appBody">
+      <table>
+      ...
+      </table>
+      <AimoPagination
+        containerClassName="paginationContainer"
+        disabledArrowClassName="paginationDisabledArrow"
+        onPageChange={handlePageChange}
+        pageContainerClassName="paginationPage"
+        pageContainerDisabledClassName="paginationDisabledPage"
+        pageCount={pageCount}
+        pageTextClassName="paginationPageText"
+        renderNext={(isClickable) => (
+          <div
+            className={`paginationArrow ${ isClickable ? "" : "paginationDisabledArrow" }`} >
+            »
+          </div>
+        )}
+        renderPrev={(isClickable) => (
+          <div
+            className={`paginationArrow ${ isClickable ? "" : "paginationDisabledArrow" }`} >
+            «
+          </div>
+        )}
+        selectedTextClassName="paginationSelectedPageText"
+        selectedContainerClassName="paginationSelectedPageContainer"
+      />
+    </div>
+  );
+};
 ```
 
 ## API
@@ -64,7 +106,11 @@ Below is the list of all the props that can be used with `<AimoPagination>` comp
 [MIT][license] © [Mostafa Vahabzadeh][author]
 
 [main-page]: ../README.md
-[aimo-ui#install]: ../README.md#install
-[aimo-ui#use]: ../README.md#use
+[yarn]: https://yarnpkg.com/cli/add
+[npm]: https://docs.npmjs.com/cli/install
 [license]: ../LICENSE
 [author]: https://github.com/vah-most
+
+```
+
+```

@@ -6,6 +6,6 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AimoPagination from "./AimoPagination";
+import AimoPagination from "./dist/AimoPagination";
 
 export default AimoPagination;
