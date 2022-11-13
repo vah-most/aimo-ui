@@ -1,0 +1,84 @@
+/*
+ * Created on Sat Jun 25 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+@import "../Colors.scss";
+@import "../Display.scss";
+@import "../Texts.scss";
+
+.paginationContainer {
+  margin-top: 20px;
+}
+
+.rowHeader {
+  @include taskTableHeader();
+}
+
+.rowHeader:first-child {
+  border-top-left-radius: 5px;
+}
+
+.rowHeader:last-child {
+  border-top-right-radius: 5px;
+}
+
+.rowIndex {
+  @include rowIndexTextProps();
+}
+
+.rowOperationContainer {
+  @include flexCenterView(row);
+}
+
+.rowOperationDelete {
+  color: $rowOperationDeleteColor;
+  margin-top: 3px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.rowOperationEdit {
+  color: $rowOperationEditColor;
+  margin-right: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.smallTableAddButton {
+  margin-inline-start: 10px;
+  display: none;
+}
+
+.sortableHeader {
+  cursor: pointer;
+}
+
+.tableCellContainer {
+  @include flexView(row, inherit, center);
+}
+
+.tableContainer {
+  height: unset;
+  width: 100%;
+}
+
+.tableHeaderSortArrow {
+  margin-inline-start: 5px;
+}
+
+@media (max-width: $minNormalWidth) {
+  .smallTableAddButton {
+    display: block;
+  }
+
+  .table tr td {
+    max-width: 100px;
+  }
+
+  .table tr td:first-child {
+    display: none;
+  }
+}
