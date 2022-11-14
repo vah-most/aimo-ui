@@ -110,7 +110,3 @@ Below is the list of all the props that can be used with `<AimoPagination>` comp
 [npm]: https://docs.npmjs.com/cli/install
 [license]: ../LICENSE
 [author]: https://github.com/vah-most
-
-```
-
-```

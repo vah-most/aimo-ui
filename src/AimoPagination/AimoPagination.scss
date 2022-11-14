@@ -27,6 +27,10 @@
   border-width: 1px 1px 1px 0px;
   padding: 2px 8px 2px 8px;
   background-color: $paginationBGColor;
+
+  &:first-child {
+    border-left-width: 1px;
+  }
 }
 
 .paginationArrow {
