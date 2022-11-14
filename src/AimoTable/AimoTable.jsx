@@ -14,11 +14,13 @@ import AimoPagination from "@aimo.ui/aimo-pagination";
 import "./AimoTable.css";
 
 const AimoTable = ({
+  autoAddRowNumbers = false,
   className = "",
   columnProps = {},
   data = [],
   disableDeleteOperation = false,
   disableEditOperation = false,
+  headerClassName = "",
   onPageChange = null,
   onRequestDelete = null,
   onRequestEdit = null,
@@ -33,20 +35,37 @@ const AimoTable = ({
   sortedDirAsc = true,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [innerSortedBy, setInnerSortedBy] = useState(sortedBy);
+  const [innerSortedDirAsc, setInnerSortedDirAsc] = useState(sortedDirAsc);
+
   const pageCount = Math.ceil(data.length / rowsPerPage);
 
-  let fields = { ...columnProps };
-  if (!disableDeleteOperation || !disableEditOperation)
-    fields.operations = {
-      headerTitle: "Operations",
-      isSortable: false,
-      headerClassName: `col text-center ${operationHeaderClassName}`,
-    };
-
-  const getCurrentPageData = () => {
+  const getCurrentPageData = (data) => {
     const startIndex = (currentPage - 1) * rowsPerPage;
     const filteredData = data.slice(startIndex, startIndex + rowsPerPage);
     return [...filteredData];
+  };
+
+  const handleInnerSort = (fieldName, sortedDirAsc) => {
+    setInnerSortedBy(fieldName);
+    setInnerSortedDirAsc(sortedDirAsc);
+  };
+
+  const performInnerDataSort = () => {
+    const sortedData = data.sort((item1, item2) => {
+      if (item1[innerSortedBy] > item2[innerSortedBy])
+        return innerSortedDirAsc ? 1 : -1;
+      else return innerSortedDirAsc ? -1 : 1;
+    });
+
+    return sortedData;
+  };
+
+  const addDataRowNumber = (data) => {
+    return data.map((row, index) => ({
+      number: index + 1,
+      ...row,
+    }));
   };
 
   const handlePageChange = (selected) => {
@@ -62,7 +81,7 @@ const AimoTable = ({
     fieldName = null
   ) => {
     const thClasses =
-      ` align-middle rowHeader col` +
+      `columnHeader col` +
       ` ${className}` +
       (isSortable ? " sortableHeader" : "");
     if (isSortable) {
@@ -71,13 +90,15 @@ const AimoTable = ({
           key={`header-${index}`}
           className={thClasses}
           onClick={() => {
-            onSort && onSort(fieldName, !sortedDirAsc);
+            onSort
+              ? onSort(fieldName, !sortedDirAsc)
+              : handleInnerSort(fieldName, !innerSortedDirAsc);
           }}
         >
           <div className={`tableCellContainer`}>
             {title}
-            {fieldName === sortedBy &&
-              (sortedDirAsc ? (
+            {fieldName === innerSortedBy &&
+              (innerSortedDirAsc ? (
                 <div className="tableHeaderSortArrow">↓</div>
               ) : (
                 <div className="tableHeaderSortArrow">↑</div>
@@ -105,20 +126,38 @@ const AimoTable = ({
     return (
       <AimoPagination
         containerClassName="paginationContainer"
+        disabledArrowClassName="paginationDisabledArrow"
         onPageChange={handlePageChange}
+        pageContainerClassName="paginationPage"
+        pageContainerDisabledClassName="paginationPage paginationDisabledPage"
         pageCount={pageCount}
+        pageTextClassName="paginationPageText"
+        selectedTextClassName="paginationSelectedPageText"
+        selectedContainerClassName="paginationPage paginationSelectedPage"
       />
     );
   };
 
-  const filteredData = getCurrentPageData();
+  let finalData = data;
+  if (!onSort) {
+    finalData = performInnerDataSort();
+    if (autoAddRowNumbers) finalData = addDataRowNumber(finalData);
+    finalData = getCurrentPageData(finalData);
+  }
 
   return (
     <div className={`tableContainer ${className}`}>
       <table className="table">
         <thead>
           <tr>
-            {Object.entries(fields).map(([keyName, column], index) => {
+            {autoAddRowNumbers && (
+              <td
+                className={`columnHeader columnNumberHeader ${headerClassName}`}
+              >
+                #
+              </td>
+            )}
+            {Object.entries(columnProps).map(([keyName, column], index) => {
               return renderTableHeader(
                 index,
                 column.headerTitle,
@@ -127,20 +166,31 @@ const AimoTable = ({
                 keyName
               );
             })}
+            {(!disableDeleteOperation || !disableEditOperation) && (
+              <td
+                className={`centeredText columnHeader ${headerClassName} ${operationHeaderClassName}`}
+              >
+                Operations
+              </td>
+            )}
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((row, index) => {
+          {finalData.map((row, index) => {
             return (
               <tr key={index} className={`${rowClassName}`}>
+                {autoAddRowNumbers && (
+                  <td className={`centeredText`}>
+                    <div className="centeredText">{row.number}</div>
+                  </td>
+                )}
                 {Object.entries(columnProps).map(
                   ([keyName, column], fIndex) => {
                     return (
                       <td
                         key={`${index}-${keyName}`}
-                        className={
-                          column.cellClassName ? column.cellClassName : ""
-                        }
+                        className={`itemCell 
+                          ${column.cellClassName ? column.cellClassName : ""}`}
                       >
                         {column.renderFunc
                           ? column.renderFunc(row)
@@ -192,11 +242,13 @@ const AimoTable = ({
 };
 
 AimoTable.propTypes = {
+  autoAddRowNumbers: PropTypes.bool,
   className: PropTypes.string,
   columnProps: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   disableDeleteOperation: PropTypes.bool,
   disableEditOperation: PropTypes.bool,
+  headerClassName: PropTypes.string,
   onPageChange: PropTypes.func,
   onRequestDelete: PropTypes.func,
   onRequestEdit: PropTypes.func,

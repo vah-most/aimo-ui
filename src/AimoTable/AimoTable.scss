@@ -5,28 +5,106 @@
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
+
 @import "../Colors.scss";
 @import "../Display.scss";
 @import "../Texts.scss";
+
+$headerBGColor: #2f302d;
+$headerTextColor: #e4dede;
+$paginationBorderColor: #eeefeb;
+$paginationTextColor: #636461;
+$selectedTextColor: #e4dede;
+$selectedBGColor: #2f302d;
+$selectedTextColor: #efefef;
+$tableEvenRowBGColor: #efefef;
+$textColor: #302d2d;
+
+.centeredText {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.columnHeader {
+  padding: 8px 15px 8px 15px;
+  background-color: $headerBGColor;
+  color: $headerTextColor;
+  position: relative;
+  vertical-align: middle;
+
+  &:first-child {
+    border-top-left-radius: 5px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 5px;
+  }
+}
+
+.columnNumberHeader {
+  text-align: center;
+}
+
+.itemCell {
+  padding: 15px 10px 15px 15px;
+  font-size: 14px;
+  color: $textColor;
+}
 
 .paginationContainer {
   margin-top: 20px;
 }
 
-.rowHeader {
-  @include taskTableHeader();
+.paginationArrow {
+  color: $paginationTextColor;
 }
 
-.rowHeader:first-child {
-  border-top-left-radius: 5px;
+.paginationContainer {
+  border-left-width: 0px;
 }
 
-.rowHeader:last-child {
-  border-top-right-radius: 5px;
+.paginationPage {
+  @include flexCenterView(row);
+  height: 35px;
+  width: 35px;
+  padding: 0px;
+  border: 1px solid $paginationBorderColor;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #dee2e6;
+  }
 }
 
-.rowIndex {
-  @include rowIndexTextProps();
+.paginationPageText {
+  color: $paginationTextColor;
+  font-size: 14px;
+}
+
+.paginationDisabledArrow {
+  color: $colorDisabled !important;
+}
+
+.paginationDisabledPage {
+  color: $colorDisabled;
+  cursor: unset;
+
+  &:hover {
+    background-color: inherit;
+  }
+}
+
+.paginationSelectedPage {
+  background-color: $selectedBGColor;
+  cursor: unset;
+
+  &:hover {
+    background-color: $selectedBGColor;
+  }
+}
+
+.paginationSelectedPageText {
+  color: $selectedTextColor;
 }
 
 .rowOperationContainer {
@@ -47,11 +125,6 @@
   cursor: pointer;
 }
 
-.smallTableAddButton {
-  margin-inline-start: 10px;
-  display: none;
-}
-
 .sortableHeader {
   cursor: pointer;
 }
@@ -63,6 +136,13 @@
 .tableContainer {
   height: unset;
   width: 100%;
+
+  table {
+    border-spacing: 0px;
+    tr:nth-child(even) {
+      background-color: $tableEvenRowBGColor;
+    }
+  }
 }
 
 .tableHeaderSortArrow {
