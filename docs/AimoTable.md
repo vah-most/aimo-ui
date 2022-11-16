@@ -41,18 +41,25 @@ Following example shows how you can use `<AimoTable>` component in your code:
 
 ```js
 ...
-      <AimoTable
-        columnProps={demoColumnProps}
-        data={data}
-        operationCellClassName="itemCell"
-        operationHeaderClassName="columnHeader operationColumnHeader"
-        sortedBy={sortedBy}
-        sortedDirAsc={sortedDirAsc}
-        onSort={handleSort}
-        className="demoTable"
-      />
+  <AimoTable
+    autoAddRowNumbers={true}
+    columnProps={{
+      name: { headerTitle: "Name" },
+      credit: { headerTitle: "Credit", isSortable: true },
+    }}
+    data={[
+      { name: "Olive Yew", credit: 54 },
+      { name: "Aida Bugg", credit: 135 },
+      { name: "Maureen Biologist", credit: 23 },
+      { name: "Teri Dactyl", credit: -12 },
+      { name: "Peg Legge", credit: 453 },
+      { name: "Allie Grater", credit: 0 },
+    ]}
+  />
 ...
 ```
+
+Also you can check out [**Aimo-Table Sample Usage Code**][demo-table] for more advanced usage example.
 
 ## API
 
@@ -61,11 +68,12 @@ Below is the list of all the props that we can use with `<AimoTable>` component.
 | Name                         | Type       | Default | Description                                                                                                                                                                                                                                                                                                                                                         |
 | ---------------------------- | ---------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **autoAddRowNumbers**        | `boolean`  | `false` | Whether to automatically add number (`#`) column for each row. Appliable **only if** component's built-in sort is enabled (`onSort` property is not set)                                                                                                                                                                                                            |
+| **cellClassName**            | `string`   | `''`    | Extra class name for each data cell                                                                                                                                                                                                                                                                                                                                 |
 | **className**                | `string`   | `''`    | Extra class name for table container                                                                                                                                                                                                                                                                                                                                |
 | **columnProps**              | `object`   | `{}`    | **Required.** Object containing properties for each visible column                                                                                                                                                                                                                                                                                                  |
 | **data**                     | `array`    | `[]`    | **Required.** Array containing data to be shown. Each array cell is an object with keys as introduced in `columnProps` property.                                                                                                                                                                                                                                    |
-| **disableDeleteOperation**   | `boolean`  | `false` | Whether to remove `delete` button for each row                                                                                                                                                                                                                                                                                                                      |
-| **disableEditOperation**     | `boolean`  | `false` | Whether to remove `edit` button for each row                                                                                                                                                                                                                                                                                                                        |
+| **disableDeleteOperation**   | `boolean`  | `true`  | Whether to remove `delete` button for each row                                                                                                                                                                                                                                                                                                                      |
+| **disableEditOperation**     | `boolean`  | `true`  | Whether to remove `edit` button for each row                                                                                                                                                                                                                                                                                                                        |
 | **headerClassName**          | `string`   | `''`    | Extra class name for header cells                                                                                                                                                                                                                                                                                                                                   |
 | **onPageChange**             | `function` | `null`  | Callback function for onPageChange event (Applies only when `renderPagination` is `null` and table uses its own pagination component). `selected-page` will be sent to given function.                                                                                                                                                                              |
 | **onRequestDelete**          | `function` | `null`  | Function to be called for delete-button click event. Respective `data` cell will be sent to given function.                                                                                                                                                                                                                                                         |
@@ -97,6 +105,7 @@ Below is the list of all the props that we can use with `<AimoTable>` component.
 [main-page]: ../README.md
 [yarn]: https://yarnpkg.com/cli/add
 [npm]: https://docs.npmjs.com/cli/install
+[demo-table]: ../src/demo/DemoTable/DemoTable.jsx
 [aimo-pagination]: ./AimoPagination.md
 [license]: ../LICENSE
 [author]: https://github.com/vah-most

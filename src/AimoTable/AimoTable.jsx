@@ -15,11 +15,12 @@ import "./AimoTable.css";
 
 const AimoTable = ({
   autoAddRowNumbers = false,
+  cellClassName = "",
   className = "",
   columnProps = {},
   data = [],
-  disableDeleteOperation = false,
-  disableEditOperation = false,
+  disableDeleteOperation = true,
+  disableEditOperation = true,
   headerClassName = "",
   onPageChange = null,
   onRequestDelete = null,
@@ -180,7 +181,7 @@ const AimoTable = ({
             return (
               <tr key={index} className={`${rowClassName}`}>
                 {autoAddRowNumbers && (
-                  <td className={`centeredText`}>
+                  <td className={`centeredText ${cellClassName}`}>
                     <div className="centeredText">{row.number}</div>
                   </td>
                 )}
@@ -189,7 +190,7 @@ const AimoTable = ({
                     return (
                       <td
                         key={`${index}-${keyName}`}
-                        className={`itemCell 
+                        className={`itemCell ${cellClassName}
                           ${column.cellClassName ? column.cellClassName : ""}`}
                       >
                         {column.renderFunc
@@ -201,8 +202,8 @@ const AimoTable = ({
                 )}
 
                 {(!disableDeleteOperation || !disableEditOperation) && (
-                  <th
-                    className={`align-middle text-center  ${operationCellClassName}`}
+                  <td
+                    className={`align-middle text-center  ${cellClassName} ${operationCellClassName}`}
                     scope="row"
                   >
                     <div className={"rowOperationContainer"}>
@@ -229,7 +230,7 @@ const AimoTable = ({
                         </div>
                       )}
                     </div>
-                  </th>
+                  </td>
                 )}
               </tr>
             );
@@ -243,6 +244,7 @@ const AimoTable = ({
 
 AimoTable.propTypes = {
   autoAddRowNumbers: PropTypes.bool,
+  cellClassName: PropTypes.string,
   className: PropTypes.string,
   columnProps: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
