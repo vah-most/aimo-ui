@@ -6,24 +6,33 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../Animations.scss";
+@import "../Display.scss";
+
 .appBody {
-  text-align: center;
+  @include flexView(column, unset, center);
   width: 100%;
   height: 100%;
 }
 
 .appContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   width: 100%;
   height: 100%;
+}
+
+.appContent {
+  padding-top: 20px;
 }
 
 .appTitle {
   text-align: center;
 }
 
-.appTitleIcon {
-  font-size: 24px;
-  padding-inline-end: 5px;
+.menuIcon {
+  &:hover {
+    color: #b4f08c;
+    @include shaker(2s, infinite, 0s, x);
+  }
 }

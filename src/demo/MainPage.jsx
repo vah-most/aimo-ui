@@ -6,42 +6,52 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import React from "react";
+import React, { useState } from "react";
 
-import Aimo from "../index";
+import AimoSideMenu from "../AimoSideMenu";
+import DemoTable from "./DemoTable";
 
 import "./MainPage.scss";
 
-const menuItems = [
-  {
-    renderIcon: () => <Aimo.AimoIcon name="info" />,
-    text: "AimoIcon",
-  },
-  {
-    renderIcon: () => <Aimo.AimoIcon name="server" />,
-    text: "AimoSideMenu",
-  },
-  {
-    renderIcon: () => <Aimo.AimoIcon name="table" />,
-    text: "AimoTable",
-  },
-  {
-    isSeparator: true,
-  },
-];
-
 const MainPage = () => {
+  const [currentPage, setCurrentPage] = useState(null);
+
+  const menuItems = [
+    {
+      renderIcon: () => <span className="menuIcon">🏼</span>,
+      text: "AimoTable",
+      onClick: () => {
+        setCurrentPage("DemoTable");
+      },
+    },
+    {
+      renderIcon: () => <span className="menuIcon">⇿</span>,
+      text: "AimoPagination",
+      onClick: () => {
+        setCurrentPage("DemoTable");
+      },
+    },
+    {
+      isSeparator: true,
+    },
+  ];
+
+  const renderContent = () => {
+    switch (currentPage) {
+      case "DemoTable":
+        return <DemoTable />;
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="appContainer">
-      <Aimo.AimoSideMenu
-        headerText="Aimo-UI Components"
-        menuItems={menuItems}
-      />
+      <AimoSideMenu headerText="Aimo-UI Components" menuItems={menuItems} />
       <div className="appBody">
-        <h1 className="appTitle">
-          <Aimo.AimoIcon name="sitemap" className="appTitleIcon" />
-          Welcome to Aimo-UI Component Library Tutorial
-        </h1>
+        <h1 className="appTitle">Welcome to Aimo-UI Components Demo Page</h1>
+        <div className="appContent">{renderContent()}</div>
       </div>
     </div>
   );

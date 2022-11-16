@@ -1,0 +1,27 @@
+/*
+ * Created on Sat Nov 05 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../../Colors.scss";
+
+.centeredCell {
+  text-align: center;
+  justify-content: center;
+}
+
+.demoTable {
+  table {
+    border-spacing: 0px;
+    tr:nth-child(even) {
+      background-color: #dbebdb;
+    }
+  }
+}
+
+.demoTableCell {
+  padding: 10px;
+}
