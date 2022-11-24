@@ -1,0 +1,41 @@
+/*
+ * Created on Wed Nov 23 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../../Display.scss";
+
+.demoTitledInputContainer {
+  @include flexView(column);
+}
+
+.usernameInput {
+  order: 1;
+}
+
+.passwordInput {
+  order: 2;
+}
+
+.descriptionInput {
+  order: 3;
+}
+
+.demoInputContainer {
+  margin-bottom: 10px;
+}
+
+.demoInputContainerActive {
+  border-color: #0aac0a;
+}
+
+.demoInputPlaceholder {
+  color: #0aac0a;
+}
+
+.demoTextareaContainer {
+  height: 170px;
+}

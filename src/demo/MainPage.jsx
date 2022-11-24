@@ -10,6 +10,7 @@ import React, { useState } from "react";
 
 import AimoSideMenu from "../AimoSideMenu";
 import DemoTable from "./DemoTable";
+import DemoTitledInput from "./DemoTitledInput";
 
 import "./MainPage.scss";
 
@@ -32,6 +33,13 @@ const MainPage = () => {
       },
     },
     {
+      renderIcon: () => <span className="menuIcon">✎</span>,
+      text: "AimoTitledInput",
+      onClick: () => {
+        setCurrentPage("DemoTitledInput");
+      },
+    },
+    {
       isSeparator: true,
     },
   ];
@@ -40,6 +48,8 @@ const MainPage = () => {
     switch (currentPage) {
       case "DemoTable":
         return <DemoTable />;
+      case "DemoTitledInput":
+        return <DemoTitledInput />;
 
       default:
         return null;
