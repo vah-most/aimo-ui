@@ -93,10 +93,10 @@
 }
 
 //---------------------- TRANSITION ---------------------//
-@mixin transitionBox($prop) {
+@mixin transitionBox($prop, $duration: 1s, $timing: ease-in-out, $delay: 0s) {
   overflow: hidden;
-  -webkit-transition: $prop 0.5s ease-in-out;
-  -moz-transition: $prop 0.5s ease-in-out;
-  -o-transition: $prop 0.5s ease-in-out;
-  transition: $prop 0.5s ease-in-out;
+  -webkit-transition: $prop $duration $timing $delay;
+  -moz-transition: $prop $duration $timing $delay;
+  -o-transition: $prop $duration $timing $delay;
+  transition: $prop $duration $timing $delay;
 }
