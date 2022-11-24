@@ -1,53 +1,55 @@
 /*
- * Created on Mon Jul 04 2022
+ * Created on Wed Nov 23 2022
  *
  * Copyright (c) 2022 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "./Colors.scss";
-@import "./Sizes.scss";
-@import "./Texts.scss";
+@import "./Animations.scss";
+@import "./Display.scss";
 
-.titledInput {
-  @include inputTextProps();
+$borderColor: #808080;
+$borderColorFocused: #4747ee;
 
-  border: 1px solid gray;
-  border-radius: $boxBorderRadius;
-  padding: 10px;
-  width: 100%;
-  &:focus-within {
-    outline-width: 0px !important;
-    border: 2px solid $inputFocusBorder !important;
+.inputContainer {
+  @include flexView(column, center);
+
+  border: 1px solid $borderColor;
+  padding: 2px 5px 5px 5px;
+  border-radius: 5px;
+
+  height: 30px;
+}
+
+.inputContainerFocused {
+  border-color: $borderColorFocused;
+  @include flexView(column, start);
+}
+
+.inputPlaceholder {
+  @include transitionBox(font-size, 0.05s, ease-in-out);
+  font-size: 16px;
+  color: $borderColor;
+}
+
+.inputPlaceholderFocused {
+  font-size: 10px;
+  color: $borderColorFocused;
+}
+
+.inputText {
+  border: 0px;
+  outline: 0px;
+  resize: none;
+}
+
+.inputTextContainer {
+  height: 0px;
+
+  & > input,
+  & > textarea {
+    height: 0px;
+    opacity: 0;
   }
-}
-
-.titledInputContainer {
-  position: relative;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: fit-content;
-  height: fit-content;
-  width: 100%;
-}
-
-.titledInputError {
-  @include inputErrorProps();
-}
-
-.titledInputLabel {
-  @include inputTextProps();
-  position: absolute;
-  top: -3px;
-  left: 5px;
-  z-index: 10000;
-  padding: 2px 6px 2px 6px;
-  color: $inputLabelColor;
-  background-color: $colorWhite;
-}
-
-.titledInputParentContainer {
-  position: relative;
-  width: 90%;
 }

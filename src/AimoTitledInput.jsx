@@ -1,115 +1,90 @@
 /*
- * Created on Mon Jul 04 2022
+ * Created on Wed Nov 23 2022
  *
  * Copyright (c) 2022 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import React from "react";
-
-import AimoDatePicker from "./AimoDatePicker";
-import AimoTagCollection from "./AimoTagCollection";
+import React, { useRef, useState } from "react";
+import PropTypes from "prop-types";
 
 import "./AimoTitledInput.scss";
 
 const AimoTitledInput = ({
-  alwaysShowLabel = false,
-  className,
-  error = null,
-  extraProps = null,
-  inputType,
-  labelClassName,
+  activeStateClassName,
+  activeStatePlaceholderClassName,
+  inactiveStateClassName,
+  inactiveStatePlaceholderClassName,
+  inputClassName,
+  inputType = "text",
   onChange,
   placeholder,
-  style,
-  value = "",
+  value,
   ...extra
 }) => {
-  const getInputComponent = () => {
-    switch (inputType) {
-      case "textarea":
-        return (
-          <textarea
-            className="titledInput"
-            onChange={(e) => {
-              if (!e.currentTarget) return;
-              const { value } = e.currentTarget;
-              onChange && onChange(value);
-            }}
-            placeholder={alwaysShowLabel ? null : placeholder}
-            style={style}
-            value={value}
-            {...extra}
-          />
-        );
+  const [isFocused, setIsFocued] = useState(false);
+  const inputVisible = (value && value.length > 0) || isFocused ? true : false;
 
-      case "date":
-        return (
-          <AimoDatePicker
-            className="titledInput"
-            onChange={(value) => {
-              onChange && onChange(value);
-            }}
-            placeholder={placeholder}
-            style={style}
-            value={value}
-            {...extra}
-          />
-        );
+  const inputRef = useRef(null);
 
-      case "tag":
-        return (
-          <AimoTagCollection
-            className="titledInput"
-            collection={
-              extraProps && typeof extraProps.collection === "function"
-                ? extraProps.collection()
-                : value
-            }
-            onChange={(value) => {
-              onChange && onChange(value);
-            }}
-            style={style}
-            tags={value}
-            {...extra}
-          />
-        );
-
-      case "input":
-      default:
-        return (
-          <input
-            className="titledInput"
-            onChange={(e) => {
-              if (!e.currentTarget) return;
-              const { value } = e.currentTarget;
-              onChange && onChange(value);
-            }}
-            placeholder={alwaysShowLabel ? null : placeholder}
-            style={style}
-            value={value}
-            {...extra}
-          />
-        );
-    }
+  const setInputFocus = () => {
+    window.setTimeout(() => inputRef.current.focus(), 0);
+    setIsFocued(true);
   };
+
+  const renderInput = () => {
+    const InputComponent = inputType === "textarea" ? "textarea" : "input";
+    return (
+      <InputComponent
+        autoFocus={true}
+        className={`inputText ${inputClassName}`}
+        onBlur={() => setIsFocued(false)}
+        onChange={(e) => onChange(e.target.value)}
+        onFocus={() => setIsFocued(true)}
+        ref={inputRef}
+        type={inputType}
+        value={value}
+        {...extra}
+      />
+    );
+  };
+
   return (
-    <div className={`titledInputParentContainer ${className}`}>
-      <span
-        className={`titledInputLabel ${labelClassName}`}
-        style={{
-          display: value || alwaysShowLabel ? "unset" : "none",
-        }}
+    <div
+      className={`inputContainer ${
+        inputVisible ? "inputContainerFocused" : ""
+      } ${inputVisible ? activeStateClassName : inactiveStateClassName}`}
+      onClick={!inputVisible ? setInputFocus : null}
+    >
+      <div
+        className={`inputPlaceholder ${
+          inputVisible ? "inputPlaceholderFocused" : ""
+        } ${
+          inputVisible
+            ? activeStatePlaceholderClassName
+            : inactiveStatePlaceholderClassName
+        }`}
       >
         {placeholder}
-      </span>
-      <div className="titledInputContainer">
-        {getInputComponent()}
-        {error && <span className="titledInputError">{error}</span>}
+      </div>
+      <div className={!inputVisible ? "inputTextContainer" : ""}>
+        {renderInput()}
       </div>
     </div>
   );
+};
+
+AimoTitledInput.propTypes = {
+  activeStateClassName: PropTypes.string,
+  activeStatePlaceholderClassName: PropTypes.string,
+  inactiveStateClassName: PropTypes.string,
+  inactiveStatePlaceholderClassName: PropTypes.string,
+  inputClassName: PropTypes.string,
+  inputType: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
 };
 
 export default AimoTitledInput;
