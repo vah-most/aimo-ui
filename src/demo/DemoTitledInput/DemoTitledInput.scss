@@ -8,10 +8,6 @@
 
 @import "../../Display.scss";
 
-.demoTitledInputContainer {
-  @include flexView(column);
-}
-
 .usernameInput {
   order: 1;
 }
@@ -24,12 +20,16 @@
   order: 3;
 }
 
+.demoTitledInputContainer {
+  @include flexView(column);
+}
+
 .demoInputContainer {
   margin-bottom: 10px;
 }
 
 .demoInputContainerActive {
-  border-color: #0aac0a;
+  border-color: #a1d5a1;
 }
 
 .demoInputPlaceholder {

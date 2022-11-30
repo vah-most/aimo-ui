@@ -50,7 +50,6 @@ const MainPage = () => {
         return <DemoTable />;
       case "DemoTitledInput":
         return <DemoTitledInput />;
-
       default:
         return null;
     }
