@@ -20,10 +20,12 @@ const AimoTitledInput = ({
   inputType = "text",
   onChange,
   placeholder,
+  showPasswordDisplayIcon = true,
   value,
   ...extra
 }) => {
   const [isFocused, setIsFocued] = useState(false);
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const inputVisible = (value && value.length > 0) || isFocused ? true : false;
 
   const inputRef = useRef(null);
@@ -35,18 +37,32 @@ const AimoTitledInput = ({
 
   const renderInput = () => {
     const InputComponent = inputType === "textarea" ? "textarea" : "input";
+    const type =
+      inputType === "password" && !isPasswordHidden ? "text" : inputType;
     return (
-      <InputComponent
-        autoFocus={true}
-        className={`inputText ${inputClassName}`}
-        onBlur={() => setIsFocued(false)}
-        onChange={(e) => onChange(e.target.value)}
-        onFocus={() => setIsFocued(true)}
-        ref={inputRef}
-        type={inputType}
-        value={value}
-        {...extra}
-      />
+      <React.Fragment>
+        <div className={!inputVisible ? "inputTextContainer" : ""}>
+          <InputComponent
+            autoFocus={true}
+            className={`inputText ${inputClassName}`}
+            onBlur={() => setIsFocued(false)}
+            onChange={(e) => onChange(e.target.value)}
+            onFocus={() => setIsFocued(true)}
+            ref={inputRef}
+            type={type}
+            value={value}
+            {...extra}
+          />
+        </div>
+        {inputType === "password" && showPasswordDisplayIcon && (
+          <div
+            className="passwordEye"
+            onClick={() => setIsPasswordHidden(!isPasswordHidden)}
+          >
+            {isPasswordHidden ? <span>🔒</span> : <span>🔓</span>}
+          </div>
+        )}
+      </React.Fragment>
     );
   };
 
@@ -68,9 +84,7 @@ const AimoTitledInput = ({
       >
         {placeholder}
       </div>
-      <div className={!inputVisible ? "inputTextContainer" : ""}>
-        {renderInput()}
-      </div>
+      {renderInput()}
     </div>
   );
 };
@@ -84,6 +98,7 @@ AimoTitledInput.propTypes = {
   inputType: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  showPasswordDisplayIcon: PropTypes.bool,
   value: PropTypes.string.isRequired,
 };
 

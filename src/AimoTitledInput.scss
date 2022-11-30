@@ -9,39 +9,48 @@
 @import "./Animations.scss";
 @import "./Display.scss";
 
-$borderColor: #808080;
-$borderColorFocused: #4747ee;
+$backgroundColor: #f7fbff;
+$backgroundColorFocused: #ffffff;
+$borderColor: #cfcece;
+$borderColorFocused: #c4c4f3;
+$placeHolderColor: #aba8a8;
+$placeHolderColorFocused: #4141b7;
+$textColor: #464646;
 
 .inputContainer {
   @include flexView(column, center);
 
+  position: relative;
   border: 1px solid $borderColor;
   padding: 2px 5px 5px 5px;
   border-radius: 5px;
+  background-color: $backgroundColor;
 
   height: 30px;
 }
 
 .inputContainerFocused {
   border-color: $borderColorFocused;
+  background-color: $backgroundColorFocused;
   @include flexView(column, start);
 }
 
 .inputPlaceholder {
   @include transitionBox(font-size, 0.05s, ease-in-out);
   font-size: 16px;
-  color: $borderColor;
+  color: $placeHolderColor;
 }
 
 .inputPlaceholderFocused {
   font-size: 10px;
-  color: $borderColorFocused;
+  color: $placeHolderColorFocused;
 }
 
 .inputText {
   border: 0px;
   outline: 0px;
   resize: none;
+  color: $textColor;
 }
 
 .inputTextContainer {
@@ -52,4 +61,12 @@ $borderColorFocused: #4747ee;
     height: 0px;
     opacity: 0;
   }
+}
+
+.passwordEye {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0.8;
 }
