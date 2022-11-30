@@ -9,7 +9,7 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 
-import "./AimoTitledInput.scss";
+import "./AimoTitledInput.css";
 
 const AimoTitledInput = ({
   activeStateClassName,
