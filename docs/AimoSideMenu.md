@@ -2,7 +2,11 @@
 
 # AimoSideMenu
 
-This component is a fully-controllable side-menu component for React. It supports right-to-left view, and gives you full control to pass extra css classes for different sections and define and use you own render functions for your customized view.
+**AimoSideMenu** is a fully-controllable side-menu component for React. It supports right-to-left view, and gives you full control to pass extra css classes for different sections and define and use you own render functions for your customized view.
+
+<div style="text-align: center">
+<img src="AimoSideMenu.gif" />
+</div>
 
 ## Contents
 
@@ -13,13 +17,27 @@ This component is a fully-controllable side-menu component for React. It support
 
 ## Install
 
-**AimoSideMenu** is a part of **aimo-ui** component library. See [here][aimo-ui#install] for installation guides.
+To install **AimoSideMenu** package in react (requires react >= 18.0.0), you can use [yarn][]:
+
+```sh
+yarn add @aimo.ui/aimo-sidemenu
+```
+
+or [npm][]:
+
+```sh
+npm install @aimo.ui/aimo-sidemenu
+```
 
 ## Use
 
-In order to use aimo-ui components, you can either import the **Aimo** super-component, and use components as a part of **Aimo**. See [here][aimo-ui#use] for details on how to import **aimo-ui** components.
+In order to use **AimoSideMenu** component, you should import it using:
 
-A simple example of using **AimoSideMenu** is like this:
+```js
+import AimoSideMenu from "@aimo.ui/aimo-sidemenu";
+```
+
+Following example shows how you can use `<AimoSideMenu>` component in your code:
 
 ```js
 ...
@@ -45,6 +63,8 @@ A simple example of using **AimoSideMenu** is like this:
       />
 ...
 ```
+
+Also you can check out [**Aimo-SideMenu Sample Usage Code**][demo-sidemenu] for more advanced usage example.
 
 ## API
 
@@ -78,7 +98,8 @@ Below is the list of all the props that we can use with `<AimoSideMenu>` compone
 [MIT][license] © [Mostafa Vahabzadeh][author]
 
 [main-page]: ../README.md
-[aimo-ui#install]: ../README.md#install
-[aimo-ui#use]: ../README.md#use
+[yarn]: https://yarnpkg.com/cli/add
+[npm]: https://docs.npmjs.com/cli/install
+[demo-sidemenu]: ../src/demo/MainPage.jsx
 [license]: ../LICENSE
 [author]: https://github.com/vah-most

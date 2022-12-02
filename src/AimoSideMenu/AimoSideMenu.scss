@@ -6,9 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "./Animations.scss";
-@import "./Colors.scss";
-@import "./Display.scss";
+@import "../Animations.scss";
+@import "../Colors.scss";
+@import "../Display.scss";
 
 .sideMenuClickableItem {
   cursor: pointer;
@@ -37,7 +37,8 @@
 }
 
 .sideMenuFullHidden {
-  @include transitionBox(max-width);
+  @include transitionBox(max-width, 1s, cubic-bezier(0, 0.52, 0, 1));
+
   max-width: 0px !important;
 }
 

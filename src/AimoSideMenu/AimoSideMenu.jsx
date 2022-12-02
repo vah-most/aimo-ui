@@ -9,9 +9,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import AimoIcon from "./AimoIcon";
-
-import "./AimoSideMenu.scss";
+import "./AimoSideMenu.css";
 
 const AimoSideMenu = ({
   containerClassName,
@@ -35,11 +33,8 @@ const AimoSideMenu = ({
     let icon = null;
     if (renderHeaderIcon) icon = renderHeaderIcon();
     else if (isCompact || hideCompactView)
-      icon = <AimoIcon name="bars" onClick={() => toggleCompact(false)} />;
-    else
-      icon = (
-        <AimoIcon name="toggle-left" onClick={() => toggleCompact(true)} />
-      );
+      icon = <span onClick={() => toggleCompact(false)}>☰</span>;
+    else icon = <span onClick={() => toggleCompact(true)}>⇛</span>;
 
     return (
       <div
@@ -80,7 +75,7 @@ const AimoSideMenu = ({
         {typeof item.renderIcon === "function" ? (
           item.renderIcon()
         ) : (
-          <AimoIcon name="square" />
+          <span>∎</span>
         )}
       </div>
     );

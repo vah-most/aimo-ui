@@ -1,0 +1,4 @@
+dist/dist
+dist/*.map
+dist/index.js
+AimoSideMenu.scss
