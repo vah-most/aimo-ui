@@ -8,7 +8,7 @@
 
 import React from "react";
 
-import AimoTitledInput from "../../AimoTitledInput";
+import AimoTitledInput from "@aimo.ui/aimo-titledinput";
 
 import "./DemoTitledInput.scss";
 
