@@ -8,7 +8,8 @@
 
 import React, { useState } from "react";
 
-import AimoSideMenu from "../AimoSideMenu";
+import AimoSideMenu from "@aimo.ui/aimo-sidemenu";
+
 import DemoTable from "./DemoTable";
 import DemoTitledInput from "./DemoTitledInput";
 
