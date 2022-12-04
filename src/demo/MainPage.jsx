@@ -12,6 +12,7 @@ import AimoSideMenu from "@aimo.ui/aimo-sidemenu";
 
 import DemoTable from "./DemoTable";
 import DemoTitledInput from "./DemoTitledInput";
+import DemoSearchBar from "./DemoSearchBar";
 
 import "./MainPage.scss";
 
@@ -34,10 +35,20 @@ const MainPage = () => {
       },
     },
     {
+      isSeparator: true,
+    },
+    {
       renderIcon: () => <span className="menuIcon">✎</span>,
       text: "AimoTitledInput",
       onClick: () => {
         setCurrentPage("DemoTitledInput");
+      },
+    },
+    {
+      renderIcon: () => <span className="menuIcon">♾</span>,
+      text: "AimoSearchBar",
+      onClick: () => {
+        setCurrentPage("DemoSearchBar");
       },
     },
     {
@@ -51,6 +62,8 @@ const MainPage = () => {
         return <DemoTable />;
       case "DemoTitledInput":
         return <DemoTitledInput />;
+      case "DemoSearchBar":
+        return <DemoSearchBar />;
       default:
         return null;
     }
