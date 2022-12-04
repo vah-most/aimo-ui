@@ -12,13 +12,12 @@
 @import "./Sizes.scss";
 
 .searchBar {
-  @include transitionBox(width);
-  @include flexCenterView(row);
+  @include flexCenterView(row-reverse);
 
   background-color: $searchBarBGColor;
   border-radius: 10px;
-  height: 30px;
-  padding: 5px 10px 5px 5px;
+  height: 25px;
+  padding: 5px;
 }
 
 .searchBarContainer {
@@ -29,18 +28,24 @@
 }
 
 .searchIcon {
+  cursor: pointer;
   color: $searchBarIconColor;
   font-size: $menuIconSize;
 }
 
 .searchInput {
-  width: 95%;
+  width: 200px;
   border-width: 0px;
-  margin-left: 5px;
+
+  @include transitionBox(width);
 
   &:focus {
     outline: none;
   }
+}
+
+.searchInputHidden {
+  width: 0px !important;
 }
 
 @media (max-width: $minNormalWidth) {

@@ -8,41 +8,56 @@
 
 import React, { useState } from "react";
 
-import AimoIcon from "./AimoIcon";
-import AimoTooltip from "./AimoTooltip";
+import "./AimoSearchBar.css";
 
-import "./AimoSearchBar.scss";
-
-const AimoSearchBar = ({ onChange, tooltip }) => {
+const AimoSearchBar = ({
+  className,
+  iconSide = "left",
+  inputClassName,
+  onChange,
+  onSearch,
+  placeholder = "search...",
+  renderIcon,
+}) => {
   const [displayInput, setDisplayInput] = useState(false);
 
   return (
-    <div className="searchBarContainer">
+    <div className={`searchBarContainer ${className}`}>
       <div
         className="searchBar"
         style={{
-          width: displayInput ? "300px" : "30px",
+          flexDirection: iconSide === "right" ? "row" : "row-reverse",
         }}
       >
-        {displayInput && (
+        <div>
           <input
-            placeholder="search..."
-            className="searchInput"
+            className={`searchInput ${inputClassName} ${
+              displayInput ? "" : "searchInputHidden"
+            }`}
             onChange={(e) => {
-              const text = e.currentTarget.value;
-              onChange && onChange(text);
+              if (onChange) {
+                const text = e.currentTarget.value;
+                onChange(text);
+              }
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                if (onSearch) {
+                  const text = e.currentTarget.value;
+                  onSearch(text);
+                }
+              }
+            }}
+            placeholder={placeholder}
           />
-        )}
-        <AimoIcon
-          name="search"
-          className="hand searchIcon"
-          id="menu_search"
+        </div>
+        <div
           onClick={() => {
             setDisplayInput(!displayInput);
           }}
-        />
-        <AimoTooltip target="menu_search">{tooltip}</AimoTooltip>
+        >
+          {renderIcon ? renderIcon() : <span className="searchIcon">🔍</span>}
+        </div>
       </div>
     </div>
   );
