@@ -10,14 +10,22 @@
 @import "../Display.scss";
 @import "../Texts.scss";
 
-$headerBGColor: #2f302d;
-$headerTextColor: #e4dede;
+$headerBGColor: #ffffff;
+$headerTextColor: #302d2d;
+
 $paginationBorderColor: #eeefeb;
 $paginationTextColor: #636461;
+
+$rowBorderColor: #efefef;
+
 $selectedTextColor: #e4dede;
 $selectedBGColor: #2f302d;
 $selectedTextColor: #efefef;
-$tableEvenRowBGColor: #efefef;
+
+$tableBorderColor: #e9e7e7;
+$tableEvenRowBGColor: $headerBGColor;
+$tableRowBGColor: $headerBGColor;
+
 $textColor: #302d2d;
 
 .centeredText {
@@ -31,6 +39,7 @@ $textColor: #302d2d;
   color: $headerTextColor;
   position: relative;
   vertical-align: middle;
+  border-bottom: 1px solid $rowBorderColor;
 
   &:first-child {
     border-top-left-radius: 5px;
@@ -43,12 +52,14 @@ $textColor: #302d2d;
 
 .columnNumberHeader {
   text-align: center;
+  min-width: unset !important;
 }
 
 .itemCell {
   padding: 15px 10px 15px 15px;
   font-size: 14px;
   color: $textColor;
+  border-bottom: 1px solid $rowBorderColor;
 }
 
 .paginationContainer {
@@ -107,6 +118,10 @@ $textColor: #302d2d;
   color: $selectedTextColor;
 }
 
+.rowNumberCell {
+  min-width: unset !important;
+}
+
 .rowOperationContainer {
   @include flexCenterView(row);
 }
@@ -135,11 +150,17 @@ $textColor: #302d2d;
 
 .tableContainer {
   height: unset;
+  border: 1px solid $tableBorderColor;
+  padding: 10px;
 
   table {
     border-spacing: 0px;
-    tr:nth-child(even) {
-      background-color: $tableEvenRowBGColor;
+    tr {
+      background-color: $tableRowBGColor;
+
+      &:nth-child(even) {
+        background-color: $tableEvenRowBGColor;
+      }
     }
   }
 }

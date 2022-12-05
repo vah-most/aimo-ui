@@ -181,7 +181,7 @@ const AimoTable = ({
             return (
               <tr key={index} className={`${rowClassName}`}>
                 {autoAddRowNumbers && (
-                  <td className={`centeredText ${cellClassName}`}>
+                  <td className={`centeredText ${cellClassName} rowNumberCell`}>
                     <div className="centeredText">{row.number}</div>
                   </td>
                 )}
@@ -203,7 +203,7 @@ const AimoTable = ({
 
                 {(!disableDeleteOperation || !disableEditOperation) && (
                   <td
-                    className={`align-middle text-center  ${cellClassName} ${operationCellClassName}`}
+                    className={`itemCell align-middle text-center  ${cellClassName} ${operationCellClassName}`}
                     scope="row"
                   >
                     <div className={"rowOperationContainer"}>
