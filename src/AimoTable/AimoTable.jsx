@@ -34,6 +34,7 @@ const AimoTable = ({
   showPagination = true,
   sortedBy = null,
   sortedDirAsc = true,
+  title,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [innerSortedBy, setInnerSortedBy] = useState(sortedBy);
@@ -148,6 +149,7 @@ const AimoTable = ({
 
   return (
     <div className={`tableContainer ${className}`}>
+      {title && <div className="tableTitleContainer">{title}</div>}
       <table className="table">
         <thead>
           <tr>

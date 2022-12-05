@@ -24,9 +24,14 @@ $selectedTextColor: #efefef;
 
 $tableBorderColor: #e9e7e7;
 $tableEvenRowBGColor: $headerBGColor;
+$tableHorizontalPadding: 15px;
 $tableRowBGColor: $headerBGColor;
 
 $textColor: #302d2d;
+
+$titleBGColor: $headerBGColor;
+$titleBorderColor: #797575;
+$titleTextColor: #474545;
 
 .centeredText {
   text-align: center;
@@ -34,7 +39,7 @@ $textColor: #302d2d;
 }
 
 .columnHeader {
-  padding: 8px 15px 8px 15px;
+  padding: 8px $tableHorizontalPadding 8px $tableHorizontalPadding;
   background-color: $headerBGColor;
   color: $headerTextColor;
   position: relative;
@@ -167,6 +172,15 @@ $textColor: #302d2d;
 
 .tableHeaderSortArrow {
   margin-inline-start: 5px;
+}
+
+.tableTitleContainer {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0px $tableHorizontalPadding 10px $tableHorizontalPadding;
+  background-color: $titleBGColor;
+  border-bottom: 1px solid $titleBorderColor;
+  color: $titleTextColor;
 }
 
 @media (max-width: $minNormalWidth) {
