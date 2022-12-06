@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/vah-most/aimo-ui#readme",
   "dependencies": {
+    "@aimo.ui/aimo-searchbar": "^1.0.0",
     "@aimo.ui/aimo-sidemenu": "^1.0.0",
     "@aimo.ui/aimo-table": "^1.1.1",
     "@aimo.ui/aimo-titledinput": "^1.0.0",

@@ -8,7 +8,7 @@
 
 import React from "react";
 
-import AimoSearchBar from "../../AimoSearchBar";
+import AimoSearchBar from "@aimo.ui/aimo-searchbar";
 
 import "./DemoSearchBar.scss";
 
