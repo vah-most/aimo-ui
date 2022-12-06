@@ -31,10 +31,12 @@ const AimoSideMenu = ({
     if (hideHeader) return null;
 
     let icon = null;
-    if (renderHeaderIcon) icon = renderHeaderIcon();
-    else if (isCompact || hideCompactView)
+    if (renderHeaderIcon) icon = renderHeaderIcon(isCompact, toggleCompact);
+    else if (hideCompactView)
       icon = <span onClick={() => toggleCompact(false)}>☰</span>;
-    else icon = <span onClick={() => toggleCompact(true)}>⇛</span>;
+    else if (isCompact)
+      icon = <span onClick={() => toggleCompact(false)}>≪</span>;
+    else icon = <span onClick={() => toggleCompact(true)}>≫</span>;
 
     return (
       <div
