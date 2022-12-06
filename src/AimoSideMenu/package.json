@@ -1,6 +1,6 @@
 {
   "name": "@aimo.ui/aimo-sidemenu",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Accordion Sidebar Menu for React",
   "main": "index.js",
   "files": [

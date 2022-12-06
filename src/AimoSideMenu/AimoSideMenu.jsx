@@ -35,8 +35,8 @@ const AimoSideMenu = ({
     else if (hideCompactView)
       icon = <span onClick={() => toggleCompact(false)}>☰</span>;
     else if (isCompact)
-      icon = <span onClick={() => toggleCompact(false)}>≪</span>;
-    else icon = <span onClick={() => toggleCompact(true)}>≫</span>;
+      icon = <span onClick={() => toggleCompact(false)}>≫</span>;
+    else icon = <span onClick={() => toggleCompact(true)}>≪</span>;
 
     return (
       <div
@@ -118,15 +118,23 @@ const AimoSideMenu = ({
       ${containerClassName}`}
       style={rtl ? { flexDirection: "row-reverse" } : null}
     >
-      <div className="sideMenuCompact">
-        {renderMenuHeaderIcon(compact, setCompact)}
-        {renderRowSeparator()}
-        {menuItems.map((item, index) => renderItemIcon(item, index))}
+      <div className="sideMenuHeader">
+        <div className={compact ? "sideMenuFullHidden" : "sideMenuFull"}>
+          {renderMenuHeaderText()}
+          {renderRowSeparator()}
+        </div>
+        <div className="sideMenuCompact">
+          {renderMenuHeaderIcon(compact, setCompact)}
+          {renderRowSeparator()}
+        </div>
       </div>
-      <div className={compact ? "sideMenuFullHidden" : "sideMenuFull"}>
-        {renderMenuHeaderText()}
-        {renderRowSeparator()}
-        {menuItems.map((item, index) => renderItemText(item, index))}
+      <div className="sideMenuItems">
+        <div className="sideMenuCompact">
+          {menuItems.map((item, index) => renderItemIcon(item, index))}
+        </div>
+        <div className={compact ? "sideMenuFullHidden" : "sideMenuFull"}>
+          {menuItems.map((item, index) => renderItemText(item, index))}
+        </div>
       </div>
     </div>
   );
