@@ -31,13 +31,13 @@
 }
 
 .sideMenuFull {
-  @include transitionBox(max-width);
+  @include transitionBox(max-width, 1s);
 
   max-width: 800px;
 }
 
 .sideMenuFullHidden {
-  @include transitionBox(max-width, 1s, cubic-bezier(0, 0.52, 0, 1));
+  @include transitionBox(max-width, 0.5s, cubic-bezier(0, 0.52, 0, 1));
 
   max-width: 0px !important;
 }
