@@ -30,7 +30,11 @@ const AimoSearchBar = ({
           flexDirection: iconSide === "right" ? "row" : "row-reverse",
         }}
       >
-        <div>
+        <div
+          className={`searchInputContainer ${
+            displayInput ? "" : "searchInputContainerHidden"
+          }`}
+        >
           <input
             className={`searchInput ${inputClassName} ${
               displayInput ? "" : "searchInputHidden"

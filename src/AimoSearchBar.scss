@@ -35,22 +35,26 @@
   font-size: $menuIconSize;
 }
 
-.searchInput {
+.searchInputContainer {
+  @include flexCenterView(row);
+
   width: 200px;
+  @include transitionBox(width);
+}
+
+.searchInputContainerHidden {
+  width: 0px !important;
+  border-width: 0px;
+}
+
+.searchInput {
+  width: 90%;
   border-width: 0px;
   border-bottom: 1px solid lightgray;
-  margin: 0px 10px 0px 10px;
-
-  @include transitionBox(width);
 
   &:focus {
     outline: none;
   }
-}
-
-.searchInputHidden {
-  width: 0px !important;
-  border-width: 0px;
 }
 
 @media (max-width: $minNormalWidth) {
