@@ -8,6 +8,7 @@
 
 import React, { useState } from "react";
 
+import searchIcon from "./AimoSearchBarIcon.svg";
 import "./AimoSearchBar.css";
 
 const AimoSearchBar = ({
@@ -56,7 +57,11 @@ const AimoSearchBar = ({
             setDisplayInput(!displayInput);
           }}
         >
-          {renderIcon ? renderIcon() : <span className="searchIcon">🔍</span>}
+          {renderIcon ? (
+            renderIcon()
+          ) : (
+            <img className="searchIcon" src={searchIcon} alt="?" />
+          )}
         </div>
       </div>
     </div>

@@ -28,6 +28,8 @@
 }
 
 .searchIcon {
+  width: 13px;
+  height: 13px;
   cursor: pointer;
   color: $searchBarIconColor;
   font-size: $menuIconSize;
@@ -36,6 +38,8 @@
 .searchInput {
   width: 200px;
   border-width: 0px;
+  border-bottom: 1px solid lightgray;
+  margin: 0px 10px 0px 10px;
 
   @include transitionBox(width);
 
@@ -46,6 +50,7 @@
 
 .searchInputHidden {
   width: 0px !important;
+  border-width: 0px;
 }
 
 @media (max-width: $minNormalWidth) {
