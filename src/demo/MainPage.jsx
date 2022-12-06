@@ -71,11 +71,11 @@ const MainPage = () => {
 
   return (
     <div className="appContainer">
-      <AimoSideMenu headerText="Aimo-UI Components" menuItems={menuItems} />
       <div className="appBody">
         <h1 className="appTitle">Welcome to Aimo-UI Components Demo Page</h1>
         <div className="appContent">{renderContent()}</div>
       </div>
+      <AimoSideMenu headerText="Aimo-UI Components" menuItems={menuItems} />
     </div>
   );
 };
