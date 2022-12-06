@@ -10,6 +10,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import AimoPagination from "@aimo.ui/aimo-pagination";
+import AimoSearchBar from "@aimo.ui/aimo-searchbar";
+
+import RefreshIcon from "./RefreshIcon.svg";
 
 import "./AimoTable.css";
 
@@ -21,8 +24,11 @@ const AimoTable = ({
   data = [],
   disableDeleteOperation = true,
   disableEditOperation = true,
+  disableRefreshOperation = true,
+  disableSearchOperation = true,
   headerClassName = "",
   onPageChange = null,
+  onRefresh = null,
   onRequestDelete = null,
   onRequestEdit = null,
   onSort = null,
@@ -39,8 +45,7 @@ const AimoTable = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [innerSortedBy, setInnerSortedBy] = useState(sortedBy);
   const [innerSortedDirAsc, setInnerSortedDirAsc] = useState(sortedDirAsc);
-
-  const pageCount = Math.ceil(data.length / rowsPerPage);
+  const [searchText, setSearchText] = useState("");
 
   const getCurrentPageData = (data) => {
     const startIndex = (currentPage - 1) * rowsPerPage;
@@ -53,7 +58,7 @@ const AimoTable = ({
     setInnerSortedDirAsc(sortedDirAsc);
   };
 
-  const performInnerDataSort = () => {
+  const performInnerDataSort = (data) => {
     const sortedData = data.sort((item1, item2) => {
       if (item1[innerSortedBy] > item2[innerSortedBy])
         return innerSortedDirAsc ? 1 : -1;
@@ -61,6 +66,21 @@ const AimoTable = ({
     });
 
     return sortedData;
+  };
+
+  const filterData = (data) => {
+    if (searchText.length === 0) return data;
+    const search = searchText.toLowerCase();
+    const filteredData = data.filter((row) => {
+      for (const [key, value] of Object.entries(row)) {
+        if (value.toString().toLowerCase().includes(search)) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    return filteredData;
   };
 
   const addDataRowNumber = (data) => {
@@ -117,7 +137,7 @@ const AimoTable = ({
     }
   };
 
-  const renderTablePagination = () => {
+  const renderTablePagination = (pageCount) => {
     if (!showPagination) return null;
 
     if (typeof renderPagination === "function")
@@ -141,15 +161,41 @@ const AimoTable = ({
   };
 
   let finalData = data;
+  if (!disableSearchOperation) {
+    finalData = filterData(finalData);
+  }
+
+  const pageCount = Math.ceil(finalData.length / rowsPerPage);
+
   if (!onSort) {
-    finalData = performInnerDataSort();
+    finalData = performInnerDataSort(finalData);
     if (autoAddRowNumbers) finalData = addDataRowNumber(finalData);
     finalData = getCurrentPageData(finalData);
   }
 
+  const showTitleHeader = title || !disableSearchOperation;
+
   return (
     <div className={`tableContainer ${className}`}>
-      {title && <div className="tableTitleContainer">{title}</div>}
+      {showTitleHeader && (
+        <div className="tableTitleContainer">
+          {title && <div>{title}</div>}
+          {!disableSearchOperation && (
+            <div className="titleOperationsContainer">
+              <AimoSearchBar
+                className="titleSearchBar"
+                iconSide="right"
+                onChange={setSearchText}
+              />
+              {!disableRefreshOperation && (
+                <div className="titleRefresh" onClick={onRefresh}>
+                  <img alt="↺" className="titleRefreshIcon" src={RefreshIcon} />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
       <table className="table">
         <thead>
           <tr>
@@ -239,7 +285,7 @@ const AimoTable = ({
           })}
         </tbody>
       </table>
-      <div>{renderTablePagination()}</div>
+      <div>{renderTablePagination(pageCount)}</div>
     </div>
   );
 };
@@ -252,8 +298,11 @@ AimoTable.propTypes = {
   data: PropTypes.array.isRequired,
   disableDeleteOperation: PropTypes.bool,
   disableEditOperation: PropTypes.bool,
+  disableRefreshOperation: PropTypes.bool,
+  disableSearchOperation: PropTypes.bool,
   headerClassName: PropTypes.string,
   onPageChange: PropTypes.func,
+  onRefresh: PropTypes.func,
   onRequestDelete: PropTypes.func,
   onRequestEdit: PropTypes.func,
   onSort: PropTypes.func,

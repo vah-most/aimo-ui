@@ -19,7 +19,7 @@ $paginationTextColor: #636461;
 $rowBorderColor: #efefef;
 
 $selectedTextColor: #e4dede;
-$selectedBGColor: #2f302d;
+$selectedBGColor: #626262;
 $selectedTextColor: #efefef;
 
 $tableBorderColor: #e9e7e7;
@@ -175,12 +175,35 @@ $titleTextColor: #474545;
 }
 
 .tableTitleContainer {
+  @include flexView(row);
   font-size: 20px;
   font-weight: 600;
   padding: 0px $tableHorizontalPadding 10px $tableHorizontalPadding;
   background-color: $titleBGColor;
   border-bottom: 1px solid $titleBorderColor;
   color: $titleTextColor;
+}
+
+.titleOperationsContainer {
+  @include flexCenterView(row);
+  flex-grow: 1;
+  > div {
+    margin-right: 2px;
+  }
+}
+
+.titleSearchBar {
+  flex-grow: 1;
+}
+
+.titleRefresh {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.titleRefreshIcon {
+  width: 12px;
+  height: 12px;
 }
 
 @media (max-width: $minNormalWidth) {
