@@ -18,6 +18,7 @@ These are the components that are part of **aimo-ui** so far:
 | Name | Description | API |
 | ------------ | ----------- | --- |
 | **AimoPagination** | A fully-controllable table-pagination component | [View][aimo-pagination]|
+| **AimoSearchBar** | An accordion search-bar | [View][aimo-searchbar]|
 | **AimoSideMenu** | An accordion Sidebar Menu | [View][aimo-sidemenu]|
 | **AimoTable** | A powerful table component | [View][aimo-table]|
 | **AimoTitledInput** | An input component with sticky label | [View][aimo-titledinput]|
@@ -28,6 +29,7 @@ These are the components that are part of **aimo-ui** so far:
 
 [react]: http://reactjs.org
 [aimo-pagination]: docs/AimoPagination.md
+[aimo-searchbar]: docs/AimoSearchBar.md
 [aimo-sidemenu]: docs/AimoSideMenu.md
 [aimo-table]: docs/AimoTable.md
 [aimo-titledinput]: docs/AimoTitledInput.md
