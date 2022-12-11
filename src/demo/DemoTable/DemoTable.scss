@@ -13,15 +13,21 @@
   justify-content: center;
 }
 
-.demoTable {
-  table {
-    border-spacing: 0px;
-    tr:nth-child(even) {
-      background-color: #dbebdb;
-    }
-  }
-}
-
 .demoTableCell {
   padding: 10px;
+  min-width: 120px;
+}
+
+.demoColumnName {
+  width: 120px;
+}
+
+.demoColumnLastname {
+  width: 120px;
+}
+
+.demoColumnEmail {
+  width: 150px;
+  text-align: center;
+  justify-content: center;
 }

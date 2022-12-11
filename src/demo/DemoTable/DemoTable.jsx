@@ -16,17 +16,21 @@ import "./DemoTable.scss";
 
 const demoColumnProps = {
   name: {
+    cellClassName: "demoColumnName",
+    headerClassName: "demoColumnName",
     headerTitle: "Name",
     isSortable: true,
   },
   lastname: {
+    cellClassName: "demoColumnLastname",
+    headerClassName: "demoColumnLastname",
     headerTitle: "Lastname",
     isSortable: true,
   },
   email: {
-    cellClassName: " centeredCell",
+    cellClassName: "demoColumnEmail",
+    headerClassName: "demoColumnEmail",
     headerTitle: "Email",
-    headerClassName: "centeredCell",
     isSortable: true,
   },
 };
@@ -36,7 +40,7 @@ class DemoTable extends React.Component {
     data: [],
   };
 
-  rowsPerPage = 10;
+  rowsPerPage = 8;
   pageCount = 1;
 
   componentDidMount() {
@@ -71,12 +75,15 @@ class DemoTable extends React.Component {
     return (
       <AimoTable
         autoAddRowNumbers={true}
-        className="demoTable"
         cellClassName="demoTableCell"
         columnProps={demoColumnProps}
         data={data}
         disableDeleteOperation={false}
+        disableRefreshOperation={false}
+        disableSearchOperation={false}
         onRequestDelete={this.handleRequestDelete}
+        rowsPerPage={this.rowsPerPage}
+        title="Member List"
       />
     );
   }
