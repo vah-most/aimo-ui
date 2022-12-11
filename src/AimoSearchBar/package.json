@@ -1,6 +1,6 @@
 {
   "name": "@aimo.ui/aimo-searchbar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Accordion searchbar component for React",
   "main": "index.js",
   "files": [

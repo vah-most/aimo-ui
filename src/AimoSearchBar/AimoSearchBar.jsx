@@ -57,6 +57,7 @@ const AimoSearchBar = ({
           />
         </div>
         <div
+          className="searchIconContainer"
           onClick={() => {
             setDisplayInput(!displayInput);
           }}

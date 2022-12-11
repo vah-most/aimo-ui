@@ -35,6 +35,11 @@
   font-size: $menuIconSize;
 }
 
+.searchIconContainer {
+  @include flexCenterView(row);
+  width: 25px;
+}
+
 .searchInputContainer {
   @include flexCenterView(row);
 
