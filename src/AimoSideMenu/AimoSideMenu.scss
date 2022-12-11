@@ -22,7 +22,7 @@
 }
 
 .sideMenuContainer {
-  @include flexView(column);
+  @include flexView(column, flex-start, unset);
 
   height: 100%;
   flex-grow: 1;
@@ -30,6 +30,19 @@
   color: $colorWhite;
   font-size: 16px;
   padding: 0px 10px 0px 10px;
+}
+
+.sideMenuContainerBottom {
+  @include flexView(column-reverse, space-between, unset);
+
+  .sideMenuHeader {
+    .sideMenuFull {
+      flex-direction: column-reverse;
+    }
+    .sideMenuCompact {
+      flex-direction: column-reverse;
+    }
+  }
 }
 
 .sideMenuHeader,
@@ -42,6 +55,7 @@
 }
 
 .sideMenuFull {
+  @include flexView(column);
   @include transitionBox(max-width, 1s);
 
   max-width: 800px;

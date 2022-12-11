@@ -13,6 +13,7 @@ import "./AimoSideMenu.css";
 
 const AimoSideMenu = ({
   containerClassName,
+  headerPosition = "top",
   headerText = "Menu",
   hideCompactView = false,
   hideHeader = false,
@@ -112,6 +113,11 @@ const AimoSideMenu = ({
   return (
     <div
       className={`sideMenuContainer 
+      ${
+        !hideHeader && headerPosition === "bottom"
+          ? "sideMenuContainerBottom"
+          : ""
+      }
       ${compact ? "sideMenuContainerCompact" : "sideMenuContainerFull"} 
       ${containerClassName}`}
       style={rtl ? { flexDirection: "row-reverse" } : null}
@@ -142,6 +148,7 @@ const AimoSideMenu = ({
 
 AimoSideMenu.propTypes = {
   containerClassName: PropTypes.string,
+  headerPosition: PropTypes.oneOf(["top", "bottom"]),
   headerText: PropTypes.string,
   hideCompactView: PropTypes.bool,
   hideHeader: PropTypes.bool,
