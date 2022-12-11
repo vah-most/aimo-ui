@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import searchIcon from "./AimoSearchBarIcon.svg";
 import "./AimoSearchBar.css";
@@ -71,6 +72,16 @@ const AimoSearchBar = ({
       </div>
     </div>
   );
+};
+
+AimoSearchBar.propTypes = {
+  className: PropTypes.string,
+  iconSide: PropTypes.oneOf(["left", "right"]),
+  inputClassName: PropTypes.string,
+  onChange: PropTypes.func,
+  onSearch: PropTypes.func,
+  placeholder: PropTypes.string,
+  renderIcon: PropTypes.func,
 };
 
 export default AimoSearchBar;
