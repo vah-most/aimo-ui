@@ -44,7 +44,9 @@ const AimoPagination = ({
       if (currentPage < pageCount) visiblePages.add(currentPage + 1);
     }
 
-    visiblePages = Array.from(visiblePages).sort();
+    visiblePages = Array.from(visiblePages).sort((a, b) =>
+      a < b ? -1 : a > b ? 1 : 0
+    );
   }
 
   let pages = [
