@@ -36,6 +36,10 @@
   @include flexView(column-reverse, space-between, unset);
 
   .sideMenuHeader {
+    .sideMenuFullHidden {
+      flex-direction: column-reverse;
+    }
+
     .sideMenuFull {
       flex-direction: column-reverse;
     }
@@ -63,6 +67,7 @@
 }
 
 .sideMenuFullHidden {
+  @include flexView(column);
   @include transitionBox(max-width, 0.5s, cubic-bezier(0, 0.52, 0, 1));
 
   max-width: 0px !important;
