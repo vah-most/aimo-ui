@@ -45,14 +45,6 @@ $titleTextColor: #474545;
   position: relative;
   vertical-align: middle;
   border-bottom: 1px solid $rowBorderColor;
-
-  &:first-child {
-    border-top-left-radius: 5px;
-  }
-
-  &:last-child {
-    border-top-right-radius: 5px;
-  }
 }
 
 .columnNumberHeader {

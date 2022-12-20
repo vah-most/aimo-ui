@@ -103,7 +103,7 @@ const AimoTable = ({
     fieldName = null
   ) => {
     const thClasses =
-      `columnHeader col` +
+      `columnHeader col ${headerClassName}` +
       ` ${className}` +
       (isSortable ? " sortableHeader" : "");
     if (isSortable) {
