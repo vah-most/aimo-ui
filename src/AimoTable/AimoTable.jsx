@@ -34,6 +34,9 @@ const AimoTable = ({
   onSort = null,
   operationCellClassName = "",
   operationHeaderClassName = "",
+  paginationDisabledPageClassName = "",
+  paginationPageClassName = "",
+  paginationSelectedPageClassName = "",
   renderPagination = null,
   rowClassName = "",
   rowsPerPage = 10,
@@ -150,12 +153,18 @@ const AimoTable = ({
         containerClassName="paginationContainer"
         disabledArrowClassName="paginationDisabledArrow"
         onPageChange={handlePageChange}
-        pageContainerClassName="paginationPage"
-        pageContainerDisabledClassName="paginationPage paginationDisabledPage"
+        pageContainerClassName={`paginationPage ${paginationPageClassName}`}
+        pageContainerDisabledClassName={`paginationPage 
+          ${paginationPageClassName} 
+          paginationDisabledPage
+          ${paginationDisabledPageClassName}`}
         pageCount={pageCount}
         pageTextClassName="paginationPageText"
         selectedTextClassName="paginationSelectedPageText"
-        selectedContainerClassName="paginationPage paginationSelectedPage"
+        selectedContainerClassName={`paginationPage 
+          ${paginationPageClassName} 
+          paginationSelectedPage 
+          ${paginationSelectedPageClassName}`}
       />
     );
   };
@@ -308,6 +317,9 @@ AimoTable.propTypes = {
   onSort: PropTypes.func,
   operationCellClassName: PropTypes.string,
   operationHeaderClassName: PropTypes.string,
+  paginationDisabledPageClassName: PropTypes.string,
+  paginationPageClassName: PropTypes.string,
+  paginationSelectedPageClassName: PropTypes.string,
   renderPagination: PropTypes.func,
   rowClassName: PropTypes.string,
   rowsPerPage: PropTypes.number,
