@@ -180,20 +180,20 @@ const AimoTable = ({
       {showTitleHeader && (
         <div className="tableTitleContainer">
           {title && <div>{title}</div>}
-          {!disableSearchOperation && (
-            <div className="titleOperationsContainer">
+          <div className="titleOperationsContainer">
+            {!disableSearchOperation && (
               <AimoSearchBar
                 className="titleSearchBar"
                 iconSide="right"
                 onChange={setSearchText}
               />
-              {!disableRefreshOperation && (
-                <div className="titleRefresh" onClick={onRefresh}>
-                  <img alt="↺" className="titleRefreshIcon" src={RefreshIcon} />
-                </div>
-              )}
-            </div>
-          )}
+            )}
+            {!disableRefreshOperation && (
+              <div className="titleRefresh" onClick={onRefresh}>
+                <img alt="↺" className="titleRefreshIcon" src={RefreshIcon} />
+              </div>
+            )}
+          </div>
         </div>
       )}
       <table className="table">

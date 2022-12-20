@@ -185,7 +185,7 @@ $titleTextColor: #474545;
 }
 
 .titleOperationsContainer {
-  @include flexCenterView(row);
+  @include flexView(row, flex-end, center);
   flex-grow: 1;
   > div {
     margin-right: 2px;
