@@ -76,7 +76,11 @@ const AimoTable = ({
     const search = searchText.toLowerCase();
     const filteredData = data.filter((row) => {
       for (const [key, value] of Object.entries(row)) {
-        if (value.toString().toLowerCase().includes(search)) {
+        if (
+          value &&
+          value.toString() &&
+          value.toString().toLowerCase().includes(search)
+        ) {
           return true;
         }
       }
