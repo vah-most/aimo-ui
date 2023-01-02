@@ -27,7 +27,7 @@ class AimoTooltip extends Component {
   tooltipRef = React.createRef();
 
   setHoverClass = () => {
-    const targetCSS = `#${this.props.target}:hover + .tooltipContainer{ visibility: visible }`;
+    const targetCSS = `#${this.props.target}:hover ~ .tooltipContainer{ visibility: visible }`;
     const targetStyle = document.createElement("style");
 
     if (targetStyle.styleSheet) {
