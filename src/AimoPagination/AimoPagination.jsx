@@ -38,7 +38,7 @@ const AimoPagination = ({
   if (pageCount > 1) {
     visiblePages = new Set([1, pageCount]);
 
-    if (pageCount > 4) {
+    if (pageCount > 2) {
       if (currentPage > 1) visiblePages.add(currentPage - 1);
       visiblePages.add(currentPage);
       if (currentPage < pageCount) visiblePages.add(currentPage + 1);
