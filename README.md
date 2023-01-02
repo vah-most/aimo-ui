@@ -22,6 +22,7 @@ These are the components that are part of **aimo-ui** so far:
 | **AimoSideMenu** | An accordion Sidebar Menu | [View][aimo-sidemenu]|
 | **AimoTable** | A powerful table component | [View][aimo-table]|
 | **AimoTitledInput** | An input component with sticky label | [View][aimo-titledinput]|
+| **AimoTooltip** | A simple tooltip component | [View][aimo-tooltip]|
 
 ## License
 
@@ -33,5 +34,6 @@ These are the components that are part of **aimo-ui** so far:
 [aimo-sidemenu]: docs/AimoSideMenu.md
 [aimo-table]: docs/AimoTable.md
 [aimo-titledinput]: docs/AimoTitledInput.md
+[aimo-tooltip]: docs/AimoTooltip.md
 [license]: LICENSE
 [author]: https://github.com/vah-most
