@@ -9,7 +9,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import "./AimoTooltip.scss";
+import "./AimoTooltip.css";
 
 class AimoTooltip extends Component {
   state = {
@@ -140,6 +140,14 @@ class AimoTooltip extends Component {
     );
   }
 }
+
+AimoTooltip.defaultProps = {
+  arrowClassName: "",
+  bodyClassName: "",
+  children: null,
+  containerClassName: "",
+  target: null,
+};
 
 AimoTooltip.propTypes = {
   arrowClassName: PropTypes.string,
