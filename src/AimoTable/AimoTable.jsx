@@ -63,6 +63,16 @@ const AimoTable = ({
 
   const performInnerDataSort = (data) => {
     const sortedData = data.sort((item1, item2) => {
+      if (
+        columnProps[innerSortedBy] &&
+        typeof columnProps[innerSortedBy].sortFunc === "function"
+      )
+        return columnProps[innerSortedBy].sortFunc(
+          item1[innerSortedBy],
+          item2[innerSortedBy],
+          innerSortedDirAsc
+        );
+
       if (item1[innerSortedBy] > item2[innerSortedBy])
         return innerSortedDirAsc ? 1 : -1;
       else return innerSortedDirAsc ? -1 : 1;
