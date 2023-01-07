@@ -43,6 +43,18 @@ class AimoTooltip extends Component {
     const target = document.getElementById(this.props.target);
     if (!target) return null;
 
+    let newParent = document.getElementById(target.id + "-parent");
+    if (!newParent) {
+      const targetParent = target.parentElement;
+      newParent = document.createElement("div");
+      newParent.id = target.id + "-parent";
+      newParent.style.position = "relative";
+      newParent.appendChild(target);
+      newParent.appendChild(this.tooltipRef.current);
+      targetParent.appendChild(newParent);
+      targetParent.removeChild(target);
+    }
+
     const targetSpecs = target.getBoundingClientRect();
     return targetSpecs;
   };
@@ -51,11 +63,15 @@ class AimoTooltip extends Component {
     let place = { bottom: true, left: false };
     if (!window || !window.screen) return place;
 
+    /**TODO: Best-Place calculations are buggy for containers with scrolls.
+            So, I'm temporarily commenting this till later */
+    /*
     const [maxTooltipWidth, maxTooltipHeight] = [200, 200];
 
     if (targetX + maxTooltipWidth > window.screen.availWidth) place.left = true;
     if (targetY + maxTooltipHeight > window.screen.availHeight)
       place.bottom = false;
+    */
 
     this.setState({ place });
     return place;
@@ -72,13 +88,11 @@ class AimoTooltip extends Component {
         this.tooltipRef.current.getBoundingClientRect();
 
       let positionStyle = {};
-      if (place.bottom)
-        positionStyle.top = `${targetSpecs.y + targetSpecs.height + 1}px`;
-      else positionStyle.top = `${targetSpecs.y - tooltipHeight + 1}px`;
+      if (place.bottom) positionStyle.top = `${targetSpecs.height}px`;
+      else positionStyle.top = `0px`;
 
-      if (place.left)
-        positionStyle.left = `${targetSpecs.x - tooltipWidth + 1}px`;
-      else positionStyle.left = `${targetSpecs.x + 1}px`;
+      if (place.left) positionStyle.left = `${targetSpecs.width - 15}px`;
+      else positionStyle.left = `15px`;
 
       this.setState({
         positionStyle,
