@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 
 import AimoPagination from "@aimo.ui/aimo-pagination";
 import AimoSearchBar from "@aimo.ui/aimo-searchbar";
+import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
 import RefreshIcon from "./RefreshIcon.svg";
 
@@ -20,6 +21,7 @@ const AimoTable = ({
   autoAddRowNumbers = false,
   cellClassName = "",
   className = "",
+  cellContentClassName = "",
   columnProps = {},
   data = [],
   disableDeleteOperation = true,
@@ -44,6 +46,9 @@ const AimoTable = ({
   sortedBy = null,
   sortedDirAsc = true,
   title,
+  tooltipArrowClassName = "",
+  tooltipBodyClassName = "",
+  tooltipClassName = "",
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [innerSortedBy, setInnerSortedBy] = useState(sortedBy);
@@ -253,7 +258,9 @@ const AimoTable = ({
               <tr key={index} className={`${rowClassName}`}>
                 {autoAddRowNumbers && (
                   <td className={`centeredText ${cellClassName} rowNumberCell`}>
-                    <div className="centeredText">{row.number}</div>
+                    <div className={`centeredText ${cellContentClassName}`}>
+                      {row.number}
+                    </div>
                   </td>
                 )}
                 {Object.entries(columnProps).map(
@@ -261,12 +268,32 @@ const AimoTable = ({
                     return (
                       <td
                         key={`${index}-${keyName}`}
-                        className={`itemCell ${cellClassName}
-                          ${column.cellClassName ? column.cellClassName : ""}`}
+                        className={`itemCell ${cellClassName}    ${
+                          column.cellClassName ? column.cellClassName : ""
+                        }`}
                       >
-                        {column.renderFunc
-                          ? column.renderFunc(row)
-                          : row[keyName]}
+                        <div
+                          className={`${cellContentClassName}    ${
+                            column.cellContentClassName
+                              ? column.cellContentClassName
+                              : ""
+                          }`}
+                          id={`${keyName}-${index}-id`}
+                        >
+                          {column.renderFunc
+                            ? column.renderFunc(row)
+                            : row[keyName]}
+                        </div>
+                        {column.renderTooltip ? (
+                          <AimoTooltip
+                            arrowClassName={tooltipArrowClassName}
+                            bodyClassName={tooltipBodyClassName}
+                            containerClassName={tooltipClassName}
+                            target={`${keyName}-${index}-id`}
+                          >
+                            {column.renderTooltip(row)}
+                          </AimoTooltip>
+                        ) : null}
                       </td>
                     );
                   }
@@ -316,6 +343,7 @@ const AimoTable = ({
 AimoTable.propTypes = {
   autoAddRowNumbers: PropTypes.bool,
   cellClassName: PropTypes.string,
+  cellContentClassName: PropTypes.string,
   className: PropTypes.string,
   columnProps: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
@@ -340,6 +368,10 @@ AimoTable.propTypes = {
   showPagination: PropTypes.bool,
   sortedBy: PropTypes.string,
   sortedDirAsc: PropTypes.bool,
+  tooltipArrowClassName: PropTypes.string,
+  tooltipBodyClassName: PropTypes.string,
+  tooltipClassName: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default AimoTable;
