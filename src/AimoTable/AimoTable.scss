@@ -6,6 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../Animations.scss";
 @import "../Colors.scss";
 @import "../Display.scss";
 @import "../Texts.scss";
@@ -186,11 +187,19 @@ $titleTextColor: #474545;
 
 .titleSearchBar {
   flex-grow: 1;
+
+  img:hover {
+    @include rotater(2s, infinite);
+  }
 }
 
 .titleRefresh {
   font-size: 16px;
   cursor: pointer;
+
+  &:hover {
+    @include rotater(2s, infinite);
+  }
 }
 
 .titleRefreshIcon {
