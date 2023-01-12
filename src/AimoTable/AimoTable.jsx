@@ -92,6 +92,14 @@ const AimoTable = ({
     const search = searchText.toLowerCase();
     const filteredData = data.filter((row) => {
       for (const [key, value] of Object.entries(row)) {
+        if (typeof columnProps[key] === "undefined") continue;
+
+        if (
+          typeof columnProps[key].searchFunc === "function" &&
+          columnProps[key].searchFunc(row, search)
+        )
+          return true;
+
         if (
           value &&
           value.toString() &&
