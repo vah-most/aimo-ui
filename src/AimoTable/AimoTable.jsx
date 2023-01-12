@@ -39,6 +39,7 @@ const AimoTable = ({
   paginationDisabledPageClassName = "",
   paginationPageClassName = "",
   paginationSelectedPageClassName = "",
+  renderEmptyTableText = null,
   renderPagination = null,
   rowClassName = "",
   rowsPerPage = 10,
@@ -202,6 +203,10 @@ const AimoTable = ({
   }
 
   const showTitleHeader = title || !disableSearchOperation;
+  const columnCount =
+    Object.entries(columnProps).length +
+    (autoAddRowNumbers ? 1 : 0) +
+    (!disableDeleteOperation || !disableEditOperation ? 1 : 0);
 
   return (
     <div className={`tableContainer ${className}`}>
@@ -253,6 +258,11 @@ const AimoTable = ({
           </tr>
         </thead>
         <tbody>
+          {data.length === 0 && renderEmptyTableText && (
+            <tr>
+              <td colSpan={columnCount}>{renderEmptyTableText()}</td>
+            </tr>
+          )}
           {finalData.map((row, index) => {
             return (
               <tr key={index} className={`${rowClassName}`}>
@@ -362,6 +372,7 @@ AimoTable.propTypes = {
   paginationDisabledPageClassName: PropTypes.string,
   paginationPageClassName: PropTypes.string,
   paginationSelectedPageClassName: PropTypes.string,
+  renderEmptyTableText: PropTypes.func,
   renderPagination: PropTypes.func,
   rowClassName: PropTypes.string,
   rowsPerPage: PropTypes.number,
