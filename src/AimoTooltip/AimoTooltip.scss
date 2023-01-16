@@ -10,24 +10,20 @@
 @import "../Display.scss";
 
 .tooltipArrow {
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  width: 0px;
-  height: 0px;
-}
-
-.tooltipArrowBottom {
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid $tooltipBGColor;
-}
-
-.tooltipArrowTop {
-  border-top: 5px solid $tooltipBGColor;
-  border-bottom: 5px solid transparent;
+  width: 10px;
+  height: 8px;
+  padding: 0px;
+  margin: 0px;
+  border-width: 0px;
+  transform: rotate(45deg);
+  top: 5px;
+  position: relative;
+  left: 2px;
+  background-color: $tooltipBGColor;
+  z-index: 1;
 }
 
 .tooltipBody {
-  background-color: $tooltipBGColor;
   color: $tooltipTextColor;
   font-size: 12px;
   padding: 5px;
@@ -35,29 +31,37 @@
   max-width: 200px;
   direction: ltr;
   text-align: center;
+  background-color: $tooltipBGColor;
+  z-index: 2;
 }
 
-.tooltipBodyBottom.tooltipBodyLeft {
-  border-top-left-radius: 0px;
+.tooltipBodyBottom {
+  &.tooltipBodyLeft {
+    border-top-left-radius: 0px;
+  }
+
+  &.tooltipBodyRight {
+    border-top-right-radius: 0px;
+  }
 }
 
-.tooltipBodyBottom.tooltipBodyRight {
-  border-top-right-radius: 0px;
-}
+.tooltipBodyTop {
+  &.tooltipBodyLeft {
+    border-bottom-left-radius: 0px;
+  }
 
-.tooltipBodyTop.tooltipBodyLeft {
-  border-bottom-left-radius: 0px;
-}
-
-.tooltipBodyTop.tooltipBodyRight {
-  border-bottom-right-radius: 0px;
+  &.tooltipBodyRight {
+    border-bottom-right-radius: 0px;
+  }
 }
 
 .tooltipContainer {
+  @include flexCenterView(column);
   position: absolute;
   visibility: hidden;
   z-index: 1;
   display: flex;
+  opacity: 0.85;
 }
 
 .tooltipContainerBottom {

@@ -13,6 +13,7 @@ import "./AimoTooltip.css";
 
 class AimoTooltip extends Component {
   state = {
+    arrowStyle: {},
     place: {
       bottom: true,
       left: false,
@@ -55,7 +56,12 @@ class AimoTooltip extends Component {
       targetParent.removeChild(target);
     }
 
-    const targetSpecs = target.getBoundingClientRect();
+    const targetSpecs = {
+      offsetLeft: target.offsetLeft,
+      offsetTop: target.offsetTop,
+      clientRect: target.getBoundingClientRect(),
+    };
+
     return targetSpecs;
   };
 
@@ -82,19 +88,39 @@ class AimoTooltip extends Component {
       const targetSpecs = this.findTargetPosition();
       if (!targetSpecs) return false;
 
-      const place = this.findBestPlace(targetSpecs.x, targetSpecs.y);
+      const place = this.findBestPlace(
+        targetSpecs.clientRect.x,
+        targetSpecs.clientRect.y
+      );
 
       const { width: tooltipWidth, height: tooltipHeight } =
         this.tooltipRef.current.getBoundingClientRect();
 
       let positionStyle = {};
-      if (place.bottom) positionStyle.top = `${targetSpecs.height}px`;
-      else positionStyle.top = `0px`;
+      /**TODO: Should set tooltip position based on `place` */
+      positionStyle.top = `${targetSpecs.clientRect.height}px`;
+      positionStyle.left = `${
+        targetSpecs.clientRect.width / 2 -
+        tooltipWidth / 2 +
+        targetSpecs.offsetLeft
+      }px`;
 
-      if (place.left) positionStyle.left = `${targetSpecs.width - 15}px`;
-      else positionStyle.left = `15px`;
+      let arrowStyle = {};
+      switch (this.props.arrowPosition) {
+        case "left":
+          arrowStyle = { alignItems: "flex-start" };
+          break;
+        case "right":
+          arrowStyle = { alignItems: "flex-end" };
+          break;
+        case "center":
+        default:
+          arrowStyle = {};
+          break;
+      }
 
       this.setState({
+        arrowStyle,
         positionStyle,
         tooltipDimensions: { width: tooltipWidth, height: tooltipHeight },
       });
@@ -121,7 +147,18 @@ class AimoTooltip extends Component {
   };
 
   render() {
-    let { place, positionStyle } = this.state;
+    let { arrowStyle, place, positionStyle } = this.state;
+
+    let tooltipBodyExtraClassName = "";
+    if (this.props.arrowPosition !== "center") {
+      tooltipBodyExtraClassName += place.left
+        ? " tooltipBodyRight"
+        : " tooltipBodyLeft";
+
+      tooltipBodyExtraClassName += place.bottom
+        ? " tooltipBodyBottom"
+        : " tooltipBodyTop";
+    }
     return (
       <div
         ref={this.tooltipRef}
@@ -130,23 +167,13 @@ class AimoTooltip extends Component {
         } ${place.bottom ? "tooltipContainerBottom" : "tooltipContainerTop"} ${
           this.props.containerClassName
         }`}
-        style={positionStyle}
+        style={{ ...positionStyle, ...arrowStyle }}
       >
-        <div
-          className={`tooltipArrow ${
-            place.left ? "tooltipArrowRight" : "tooltipArrowLeft"
-          } ${place.bottom ? "tooltipArrowBottom" : "tooltipArrowTop"} ${
-            this.props.arrowClassName
-          }`}
-        >
+        <div className={`tooltipArrow ${this.props.arrowClassName}`}>
           &nbsp;
         </div>
         <div
-          className={`tooltipBody ${
-            place.left ? "tooltipBodyRight" : "tooltipBodyLeft"
-          } ${place.bottom ? "tooltipBodyBottom" : "tooltipBodyTop"} ${
-            this.props.bodyClassName
-          }`}
+          className={`tooltipBody ${tooltipBodyExtraClassName} ${this.props.bodyClassName}`}
         >
           {this.props.children}
         </div>
@@ -157,6 +184,7 @@ class AimoTooltip extends Component {
 
 AimoTooltip.defaultProps = {
   arrowClassName: "",
+  arrowPosition: "center",
   bodyClassName: "",
   children: null,
   containerClassName: "",
@@ -165,6 +193,7 @@ AimoTooltip.defaultProps = {
 
 AimoTooltip.propTypes = {
   arrowClassName: PropTypes.string,
+  arrowPosition: PropTypes.oneOf(["left", "center", "right"]),
   bodyClassName: PropTypes.string,
   children: PropTypes.node.isRequired,
   containerClassName: PropTypes.string,
