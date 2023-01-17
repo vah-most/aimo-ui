@@ -6,7 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import AimoPagination from "@aimo.ui/aimo-pagination";
@@ -55,6 +55,11 @@ const AimoTable = ({
   const [innerSortedBy, setInnerSortedBy] = useState(sortedBy);
   const [innerSortedDirAsc, setInnerSortedDirAsc] = useState(sortedDirAsc);
   const [searchText, setSearchText] = useState("");
+  const [tableData, setTableData] = useState(data);
+
+  useEffect(() => {
+    setTableData(data);
+  }, [data]);
 
   const getCurrentPageData = (data) => {
     const startIndex = (currentPage - 1) * rowsPerPage;
@@ -124,6 +129,17 @@ const AimoTable = ({
   const handlePageChange = (selected) => {
     setCurrentPage(selected);
     onPageChange && onPageChange(selected);
+  };
+
+  const handleSearchTextChange = (text) => {
+    if (currentPage > 1) {
+      setTableData([]);
+      setTimeout(() => {
+        setTableData(data);
+      });
+      handlePageChange(1);
+    }
+    setSearchText(text);
   };
 
   const renderTableHeader = (
@@ -197,7 +213,7 @@ const AimoTable = ({
     );
   };
 
-  let finalData = data;
+  let finalData = tableData;
   if (!disableSearchOperation) {
     finalData = filterData(finalData);
   }
@@ -226,7 +242,7 @@ const AimoTable = ({
               <AimoSearchBar
                 className="titleSearchBar"
                 iconSide="right"
-                onChange={setSearchText}
+                onChange={handleSearchTextChange}
               />
             )}
             {!disableRefreshOperation && (
@@ -305,6 +321,7 @@ const AimoTable = ({
                         {column.renderTooltip ? (
                           <AimoTooltip
                             arrowClassName={tooltipArrowClassName}
+                            arrowPosition="center"
                             bodyClassName={tooltipBodyClassName}
                             containerClassName={tooltipClassName}
                             target={`${keyName}-${index}-id`}
