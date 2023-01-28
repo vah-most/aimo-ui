@@ -61,7 +61,8 @@ const AimoTitledInput = ({
     <div
       className={`titledInputContainer ${
         inputVisible ? "titledInputContainerFocused" : ""
-      } ${inputVisible ? activeStateClassName : inactiveStateClassName}`}
+      } ${inputVisible ? activeStateClassName : inactiveStateClassName}
+      ${inputType !== "textarea" ? "normalInputContainer" : ""}`}
       onClick={!inputVisible ? setInputFocus : null}
     >
       <div className="titledInputGroupContainer">
