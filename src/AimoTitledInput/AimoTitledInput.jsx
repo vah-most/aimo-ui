@@ -35,56 +35,57 @@ const AimoTitledInput = ({
     setIsFocued(true);
   };
 
-  const renderInput = () => {
+  const renderInput = (type) => {
     const InputComponent = inputType === "textarea" ? "textarea" : "input";
-    const type =
-      inputType === "password" && !isPasswordHidden ? "text" : inputType;
     return (
-      <React.Fragment>
-        <div className={!inputVisible ? "inputTextContainer" : ""}>
-          <InputComponent
-            autoFocus={true}
-            className={`inputText ${inputClassName}`}
-            onBlur={() => setIsFocued(false)}
-            onChange={(e) => onChange(e.target.value)}
-            onFocus={() => setIsFocued(true)}
-            ref={inputRef}
-            type={type}
-            value={value}
-            {...extra}
-          />
-        </div>
-        {inputType === "password" && showPasswordDisplayIcon && (
-          <div
-            className="passwordEye"
-            onClick={() => setIsPasswordHidden(!isPasswordHidden)}
-          >
-            {isPasswordHidden ? <span>🔒</span> : <span>🔓</span>}
-          </div>
-        )}
-      </React.Fragment>
+      <div className={!inputVisible ? "titledInputTextContainer" : ""}>
+        <InputComponent
+          autoFocus={true}
+          className={`titledInputText ${inputClassName}`}
+          onBlur={() => setIsFocued(false)}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setIsFocued(true)}
+          ref={inputRef}
+          type={type}
+          value={value}
+          {...extra}
+        />
+      </div>
     );
   };
 
+  const type =
+    inputType === "password" && !isPasswordHidden ? "text" : inputType;
+
   return (
     <div
-      className={`inputContainer ${
-        inputVisible ? "inputContainerFocused" : ""
+      className={`titledInputContainer ${
+        inputVisible ? "titledInputContainerFocused" : ""
       } ${inputVisible ? activeStateClassName : inactiveStateClassName}`}
       onClick={!inputVisible ? setInputFocus : null}
     >
-      <div
-        className={`inputPlaceholder ${
-          inputVisible ? "inputPlaceholderFocused" : ""
-        } ${
-          inputVisible
-            ? activeStatePlaceholderClassName
-            : inactiveStatePlaceholderClassName
-        }`}
-      >
-        {placeholder}
+      <div className="titledInputGroupContainer">
+        <div
+          className={`titledInputPlaceholder ${
+            inputVisible ? "titledInputPlaceholderFocused" : ""
+          } ${
+            inputVisible
+              ? activeStatePlaceholderClassName
+              : inactiveStatePlaceholderClassName
+          }`}
+        >
+          {placeholder}
+        </div>
+        {renderInput(type)}
       </div>
-      {renderInput()}
+      {inputType === "password" && showPasswordDisplayIcon && (
+        <div
+          className="inputPasswordEye"
+          onClick={() => setIsPasswordHidden(!isPasswordHidden)}
+        >
+          {isPasswordHidden ? <span>🔒</span> : <span>🔓</span>}
+        </div>
+      )}
     </div>
   );
 };

@@ -13,52 +13,48 @@ $backgroundColor: #f7fbff;
 $backgroundColorFocused: #ffffff;
 $borderColor: #cfcece;
 $borderColorFocused: #c4c4f3;
-$placeHolderColor: #cdd5c5;
-$placeHolderColorFocused: #cdd5c5;
-$textColor: #ffffff;
+$placeHolderColor: #aba8a8;
+$placeHolderColorFocused: #4141b7;
+$textColor: #464646;
 
-.titledInputContainer {
-  @include flexView(row, center);
+.inputContainer2222 {
+  @include flexView(column, center);
 
   position: relative;
   border: 1px solid $borderColor;
+  padding: 2px 5px 5px 5px;
+  background-color: $backgroundColor;
+
   border-radius: 20px;
-  padding: 2px 10px 5px 15px;
-  background: rgba(255, 255, 255, 0.08);
-  border: transparent;
 
   height: 30px;
 }
 
-.titledInputPlaceholder {
-  @include transitionBox(font-size, 0.3s, ease-in-out);
+.inputContainerFocused {
+  border-color: $borderColorFocused;
+  background-color: $backgroundColorFocused;
+  @include flexView(column, flex-start);
+}
+
+.inputPlaceholder {
+  @include transitionBox(font-size, 0.05s, ease-in-out);
   font-size: 16px;
   color: $placeHolderColor;
 }
 
-.titledInputPlaceholderFocused {
+.inputPlaceholderFocused {
   font-size: 10px;
   color: $placeHolderColorFocused;
 }
 
-.titledInputText {
+.inputText {
   border: 0px;
   outline: 0px;
   resize: none;
   color: $textColor;
-  background: transparent;
 }
 
-.titledInputGroupContainer {
-  @include flexView(column, center, unset);
-  flex-grow: 1;
-
-  textarea {
-    padding-top: 10px;
-  }
-}
-
-.titledInputTextContainer {
+.inputTextContainer {
   height: 0px;
 
   & > input,
@@ -68,7 +64,10 @@ $textColor: #ffffff;
   }
 }
 
-.inputPasswordEye {
-  @include flexCenterView(row);
+.passwordEye {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   cursor: pointer;
+  opacity: 0.8;
 }
