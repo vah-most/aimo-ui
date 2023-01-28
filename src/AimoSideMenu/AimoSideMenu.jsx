@@ -12,18 +12,21 @@ import PropTypes from "prop-types";
 import "./AimoSideMenu.css";
 
 const AimoSideMenu = ({
-  containerClassName,
+  containerClassName = "",
+  headerClassName = "",
   headerPosition = "top",
   headerText = "Menu",
   hideCompactView = false,
   hideHeader = false,
-  iconContainerClassName,
+  iconContainerClassName = "",
+  menuItemClassName = "",
   menuItems = [],
   renderHeaderIcon,
   renderHeaderText,
+  renderItem,
   renderSeparator,
   rtl = false,
-  textContainerClassName,
+  textContainerClassName = "",
 }) => {
   if (hideHeader) hideCompactView = true;
   const [compact, setCompact] = useState(hideCompactView ? false : true);
@@ -83,8 +86,6 @@ const AimoSideMenu = ({
   };
 
   const renderItemText = (item, index) => {
-    if (item.isSeparator) return renderRowSeparator(index);
-
     let itemText = null;
     if (typeof item.renderText === "function") itemText = item.renderText();
     else if (item.text) itemText = <span>{item.text}</span>;
@@ -123,23 +124,43 @@ const AimoSideMenu = ({
       style={rtl ? { flexDirection: "row-reverse" } : null}
     >
       {!hideHeader && (
-        <div className="sideMenuHeader">
-          <div className={compact ? "sideMenuFullHidden" : "sideMenuFull"}>
-            {renderMenuHeaderText()}
-            {renderRowSeparator()}
-          </div>
-          <div className="sideMenuCompact">
+        <div className={`sideMenuHeader ${headerClassName}`}>
+          <div className={`sideMenuItem ${menuItemClassName}`}>
+            <div
+              className={`sideMenuItemText ${
+                compact ? "sideMenuItemTextHidden" : ""
+              }`}
+            >
+              {!compact && renderMenuHeaderText()}
+            </div>
             {renderMenuHeaderIcon(compact, setCompact)}
-            {renderRowSeparator()}
           </div>
+          {renderRowSeparator()}
         </div>
       )}
       <div className="sideMenuItems">
-        <div className="sideMenuCompact">
-          {menuItems.map((item, index) => renderItemIcon(item, index))}
-        </div>
-        <div className={compact ? "sideMenuFullHidden" : "sideMenuFull"}>
-          {menuItems.map((item, index) => renderItemText(item, index))}
+        <div className="sideMenuFull">
+          {menuItems.map((item, index) => {
+            if (item.isSeparator) return renderRowSeparator(index);
+            return (
+              <div
+                key={index}
+                className={`sideMenuItem ${menuItemClassName} ${item.className}`}
+              >
+                {renderItem && renderItem(item, index, compact)}
+                {!renderItem && renderItemIcon(item, index)}
+                {!renderItem && (
+                  <div
+                    className={`sideMenuItemText ${
+                      compact ? "sideMenuItemTextHidden" : ""
+                    }`}
+                  >
+                    {!compact && renderItemText(item, index)}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -148,14 +169,17 @@ const AimoSideMenu = ({
 
 AimoSideMenu.propTypes = {
   containerClassName: PropTypes.string,
+  headerClassName: PropTypes.string,
   headerPosition: PropTypes.oneOf(["top", "bottom"]),
   headerText: PropTypes.string,
   hideCompactView: PropTypes.bool,
   hideHeader: PropTypes.bool,
   iconContainerClassName: PropTypes.string,
+  menuItemClassName: PropTypes.string,
   menuItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   renderHeaderIcon: PropTypes.func,
   renderHeaderText: PropTypes.func,
+  renderItem: PropTypes.func,
   renderSeparator: PropTypes.func,
   rtl: PropTypes.bool,
   textContainerClassName: PropTypes.string,

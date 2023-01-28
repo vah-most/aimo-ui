@@ -17,35 +17,25 @@
 
 .sideMenuCompact {
   @include flexCenterView(column);
-
-  width: 40px;
 }
 
 .sideMenuContainer {
   @include flexView(column, flex-start, unset);
 
   height: 100%;
-  flex-grow: 1;
   background-color: $colorGray;
   color: $colorWhite;
   font-size: 16px;
-  padding: 0px 10px 0px 10px;
+}
+
+.sideMenuContainerCompact {
 }
 
 .sideMenuContainerBottom {
   @include flexView(column-reverse, space-between, unset);
 
   .sideMenuHeader {
-    .sideMenuFullHidden {
-      flex-direction: column-reverse;
-    }
-
-    .sideMenuFull {
-      flex-direction: column-reverse;
-    }
-    .sideMenuCompact {
-      flex-direction: column-reverse;
-    }
+    flex-direction: column-reverse;
   }
 }
 
@@ -55,29 +45,24 @@
 }
 
 .sideMenuHeader {
-  font-weight: 700;
+  font-weight: unset;
 }
 
 .sideMenuFull {
   @include flexView(column);
-  @include transitionBox(max-width, 1s);
-
-  max-width: 800px;
-  flex-grow: 1;
+  width: 100%;
 }
 
 .sideMenuFullHidden {
   @include flexView(column);
-  @include transitionBox(max-width, 0.5s, cubic-bezier(0, 0.52, 0, 1));
-
-  max-width: 0px !important;
 }
 
 .sideMenuHeaderIcon,
 .sideMenuItemIcon {
-  @include flexView(row, unset, center);
+  @include flexCenterView(row);
 
   height: 40px;
+  width: 40px;
 }
 
 .sideMenuHeaderText,
@@ -85,9 +70,12 @@
   @include flexView(row, unset, center);
 
   height: 40px;
-  padding-left: 0px;
+  padding-left: 5px;
   width: 100%;
-  min-width: max-content;
+}
+
+.sideMenuItemTextHidden {
+  width: 0px;
 }
 
 .sideMenuHeaderText {
@@ -103,4 +91,8 @@
   width: 100%;
   height: 1px;
   background-color: $colorWhitish;
+}
+
+.sideMenuItem {
+  @include flexView(row);
 }
