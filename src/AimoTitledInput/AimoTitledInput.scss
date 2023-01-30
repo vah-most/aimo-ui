@@ -12,10 +12,11 @@
 $backgroundColor: #f7fbff;
 $backgroundColorFocused: #ffffff;
 $borderColor: #cfcece;
-$borderColorFocused: #c4c4f3;
+$borderColorFocused: #d5d1d1;
 $placeHolderColor: #cdd5c5;
 $placeHolderColorFocused: #cdd5c5;
 $textColor: #ffffff;
+$passwordEyeColor: $d5d1d1;
 
 .titledInputContainer {
   @include flexView(row, center);
@@ -26,6 +27,11 @@ $textColor: #ffffff;
   padding: 2px 10px 5px 15px;
   background: rgba(255, 255, 255, 0.08);
   border: transparent;
+
+  &:hover {
+    border: 1px solid $borderColorFocused;
+    background: rgba(255, 255, 255, 0);
+  }
 }
 
 .normalInputContainer {
@@ -49,6 +55,7 @@ $textColor: #ffffff;
   resize: none;
   color: $textColor;
   background: transparent;
+  cursor: default;
 }
 
 .titledInputGroupContainer {
@@ -70,7 +77,19 @@ $textColor: #ffffff;
   }
 }
 
-.inputPasswordEye {
+.inputPasswordEyeContainer {
   @include flexCenterView(row);
   cursor: pointer;
+  color: $passwordEyeColor;
+}
+
+.inputPasswordEye {
+  position: relative;
+  top: 2px;
+}
+
+.inputPasswordHider {
+  position: absolute;
+  left: 5px;
+  top: -1px;
 }

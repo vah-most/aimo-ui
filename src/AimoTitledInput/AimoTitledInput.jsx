@@ -97,15 +97,16 @@ const AimoTitledInput = ({
       </div>
       {inputType === "password" && showPasswordDisplayIcon && (
         <div
-          className="inputPasswordEye"
+          className="inputPasswordEyeContainer"
           onClick={() => setIsPasswordHidden(!isPasswordHidden)}
         >
           {passwordTogglerRenderFunc ? (
             passwordTogglerRenderFunc(isPasswordHidden)
-          ) : isPasswordHidden ? (
-            <span>🔒</span>
           ) : (
-            <span>🔓</span>
+            <div className="inputPasswordEye">
+              👁
+              {isPasswordHidden && <div className="inputPasswordHider">/</div>}
+            </div>
           )}
         </div>
       )}
