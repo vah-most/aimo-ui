@@ -6,7 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import "./AimoTitledInput.css";
@@ -19,6 +19,7 @@ const AimoTitledInput = ({
   inputClassName,
   inputType = "text",
   onChange,
+  passwordTogglerRenderFunc,
   placeholder,
   showPasswordDisplayIcon = true,
   value,
@@ -27,6 +28,8 @@ const AimoTitledInput = ({
   const [isFocused, setIsFocued] = useState(false);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const inputVisible = (value && value.length > 0) || isFocused ? true : false;
+  const [firstValue, setFirstValue] = useState(true);
+  const [inputValue, setInputValue] = useState(value);
 
   const inputRef = useRef(null);
 
@@ -34,6 +37,10 @@ const AimoTitledInput = ({
     window.setTimeout(() => inputRef.current.focus(), 0);
     setIsFocued(true);
   };
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const renderInput = (type) => {
     const InputComponent = inputType === "textarea" ? "textarea" : "input";
@@ -43,11 +50,20 @@ const AimoTitledInput = ({
           autoFocus={true}
           className={`titledInputText ${inputClassName}`}
           onBlur={() => setIsFocued(false)}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            onChange(value);
+            if (firstValue && value.length > 0) {
+              setFirstValue(false);
+              setInputValue("");
+            } else {
+              setInputValue(value);
+            }
+          }}
           onFocus={() => setIsFocued(true)}
           ref={inputRef}
           type={type}
-          value={value}
+          value={inputValue}
           {...extra}
         />
       </div>
@@ -84,7 +100,13 @@ const AimoTitledInput = ({
           className="inputPasswordEye"
           onClick={() => setIsPasswordHidden(!isPasswordHidden)}
         >
-          {isPasswordHidden ? <span>🔒</span> : <span>🔓</span>}
+          {passwordTogglerRenderFunc ? (
+            passwordTogglerRenderFunc(isPasswordHidden)
+          ) : isPasswordHidden ? (
+            <span>🔒</span>
+          ) : (
+            <span>🔓</span>
+          )}
         </div>
       )}
     </div>
@@ -99,6 +121,7 @@ AimoTitledInput.propTypes = {
   inputClassName: PropTypes.string,
   inputType: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  passwordTogglerRenderFunc: PropTypes.func,
   placeholder: PropTypes.string,
   showPasswordDisplayIcon: PropTypes.bool,
   value: PropTypes.string.isRequired,
