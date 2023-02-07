@@ -16,7 +16,7 @@ $borderColorFocused: #d5d1d1;
 $placeHolderColor: #cdd5c5;
 $placeHolderColorFocused: #cdd5c5;
 $textColor: #ffffff;
-$passwordEyeColor: $d5d1d1;
+$passwordEyeColor: #d5d1d1;
 
 .titledInputContainer {
   @include flexView(row, center);
