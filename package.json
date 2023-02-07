@@ -44,6 +44,7 @@
     "@aimo.ui/aimo-sidemenu": "^1.0.0",
     "@aimo.ui/aimo-table": "^1.1.1",
     "@aimo.ui/aimo-titledinput": "^1.0.0",
+    "@aimo.ui/aimo-tooltip": "^1.0.1",
     "font-awesome": "^4.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
