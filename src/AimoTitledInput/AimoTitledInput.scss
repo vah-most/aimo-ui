@@ -13,10 +13,15 @@ $backgroundColor: #f7fbff;
 $backgroundColorFocused: #ffffff;
 $borderColor: #cfcece;
 $borderColorFocused: #d5d1d1;
+$errorColor: #ff6060;
 $placeHolderColor: #cdd5c5;
 $placeHolderColorFocused: #cdd5c5;
 $textColor: #ffffff;
 $passwordEyeColor: #d5d1d1;
+
+.titledInputWithError {
+  width: 100%;
+}
 
 .titledInputContainer {
   @include flexView(row, center);
@@ -56,6 +61,12 @@ $passwordEyeColor: #d5d1d1;
   color: $textColor;
   background: transparent;
   cursor: default;
+}
+
+.titledInputError {
+  color: $errorColor;
+  font-size: 10px;
+  padding-left: 15px;
 }
 
 .titledInputGroupContainer {

@@ -14,6 +14,8 @@ import "./AimoTitledInput.css";
 const AimoTitledInput = ({
   activeStateClassName,
   activeStatePlaceholderClassName,
+  error,
+  errorClassName,
   inactiveStateClassName,
   inactiveStatePlaceholderClassName,
   inputClassName,
@@ -74,41 +76,48 @@ const AimoTitledInput = ({
     inputType === "password" && !isPasswordHidden ? "text" : inputType;
 
   return (
-    <div
-      className={`titledInputContainer ${
-        inputVisible ? "titledInputContainerFocused" : ""
-      } ${inputVisible ? activeStateClassName : inactiveStateClassName}
+    <div className="titledInputWithError">
+      <div
+        className={`titledInputContainer ${
+          inputVisible ? "titledInputContainerFocused" : ""
+        } ${inputVisible ? activeStateClassName : inactiveStateClassName}
       ${inputType !== "textarea" ? "normalInputContainer" : ""}`}
-      onClick={!inputVisible ? setInputFocus : null}
-    >
-      <div className="titledInputGroupContainer">
-        <div
-          className={`titledInputPlaceholder ${
-            inputVisible ? "titledInputPlaceholderFocused" : ""
-          } ${
-            inputVisible
-              ? activeStatePlaceholderClassName
-              : inactiveStatePlaceholderClassName
-          }`}
-        >
-          {placeholder}
+        onClick={!inputVisible ? setInputFocus : null}
+      >
+        <div className="titledInputGroupContainer">
+          <div
+            className={`titledInputPlaceholder ${
+              inputVisible ? "titledInputPlaceholderFocused" : ""
+            } ${
+              inputVisible
+                ? activeStatePlaceholderClassName
+                : inactiveStatePlaceholderClassName
+            }`}
+          >
+            {placeholder}
+          </div>
+          {renderInput(type)}
         </div>
-        {renderInput(type)}
+        {inputType === "password" && showPasswordDisplayIcon && (
+          <div
+            className="inputPasswordEyeContainer"
+            onClick={() => setIsPasswordHidden(!isPasswordHidden)}
+          >
+            {passwordTogglerRenderFunc ? (
+              passwordTogglerRenderFunc(isPasswordHidden)
+            ) : (
+              <div className="inputPasswordEye">
+                👁
+                {isPasswordHidden && (
+                  <div className="inputPasswordHider">/</div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      {inputType === "password" && showPasswordDisplayIcon && (
-        <div
-          className="inputPasswordEyeContainer"
-          onClick={() => setIsPasswordHidden(!isPasswordHidden)}
-        >
-          {passwordTogglerRenderFunc ? (
-            passwordTogglerRenderFunc(isPasswordHidden)
-          ) : (
-            <div className="inputPasswordEye">
-              👁
-              {isPasswordHidden && <div className="inputPasswordHider">/</div>}
-            </div>
-          )}
-        </div>
+      {error && (
+        <div className={`titledInputError ${errorClassName}`}>{error}</div>
       )}
     </div>
   );
@@ -117,6 +126,8 @@ const AimoTitledInput = ({
 AimoTitledInput.propTypes = {
   activeStateClassName: PropTypes.string,
   activeStatePlaceholderClassName: PropTypes.string,
+  error: PropTypes.string,
+  errorClassName: PropTypes.string,
   inactiveStateClassName: PropTypes.string,
   inactiveStatePlaceholderClassName: PropTypes.string,
   inputClassName: PropTypes.string,
