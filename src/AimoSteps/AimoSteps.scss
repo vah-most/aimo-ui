@@ -1,0 +1,45 @@
+/*
+ * Created on Fri Nov 25 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../Display.scss";
+
+.stepsContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: aliceblue;
+  overflow: auto;
+}
+
+.stepContainer {
+  @include flexCenterView(row);
+  position: absolute;
+  background-color: #36d536;
+  border-radius: 10px;
+  color: #ffffff;
+  margin: 1px;
+}
+
+.stepsSVG {
+  position: absolute;
+  z-index: 10;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.stepRelationLine {
+  animation: drawByDash 10s linear forwards;
+}
+
+@keyframes drawByDash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
