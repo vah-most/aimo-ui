@@ -20,6 +20,7 @@ These are the components that are part of **aimo-ui** so far:
 | **AimoPagination** | A fully-controllable table-pagination component | [View][aimo-pagination]|
 | **AimoSearchBar** | An accordion search-bar | [View][aimo-searchbar]|
 | **AimoSideMenu** | An accordion Sidebar Menu | [View][aimo-sidemenu]|
+| **AimoSteps** | A component to display flow-chart and work-flows | [View][aimo-steps]|
 | **AimoTable** | A powerful table component | [View][aimo-table]|
 | **AimoTitledInput** | An input component with sticky label | [View][aimo-titledinput]|
 | **AimoTooltip** | A simple tooltip component | [View][aimo-tooltip]|
@@ -32,6 +33,7 @@ These are the components that are part of **aimo-ui** so far:
 [aimo-pagination]: docs/AimoPagination.md
 [aimo-searchbar]: docs/AimoSearchBar.md
 [aimo-sidemenu]: docs/AimoSideMenu.md
+[aimo-steps]: docs/AimoSteps.md
 [aimo-table]: docs/AimoTable.md
 [aimo-titledinput]: docs/AimoTitledInput.md
 [aimo-tooltip]: docs/AimoTooltip.md
