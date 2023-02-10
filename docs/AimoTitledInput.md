@@ -4,9 +4,9 @@
 
 **AimoTitledInput** is an input component with sticky title/placeholder on the top. It supports different types of input and text-area. Also for passwords it supports hide/unhide icon to toggle password display.
 
-<div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
-<img src="AimoTitledInput2.gif" />
-<img src="AimoTitledInput1.gif" />
+<div style="text-align: center">
+<img src="AimoTitledInput2.gif" height="212px" style="padding-right: 20px" />
+<img src="AimoTitledInput1.gif" height="212px"/>
 </div>
 
 ## Contents
