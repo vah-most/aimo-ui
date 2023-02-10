@@ -58,13 +58,14 @@ const App= () => {
 
 Below is the list of all the props that can be used with `<AimoTooltip>` component.
 
-| Name                   | Type       | Default | Description                                                             |
-| ---------------------- | ---------- | ------- | ----------------------------------------------------------------------- |
-| **arrowClassName**     | `string`   | `''`    | Extra class name for the arrow of the tooltip bubble                    |
-| **bodyClassName**      | `string`   | `''`    | Extra class name for the body of the tooltip bubble                     |
-| **children**           | `node`     | `null`  | **Required.** Tooltip content                                           |
-| **containerClassName** | `function` | `''`    | Extra class name for tooltip bubble container                           |
-| **target**             | `string`   | `null`  | **Required.** `id` of the element you want tooltip to get displayed for |
+| Name                   | Type       | Default    | Description                                                                          |
+| ---------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------ |
+| **arrowClassName**     | `string`   | `''`       | Extra class name for the arrow of the tooltip bubble                                 |
+| **arrowPosition**      | `string`   | `'center'` | Specify tooltip arrow position (valid values are `'left'`, `'center'` and `'right'`) |
+| **bodyClassName**      | `string`   | `''`       | Extra class name for the body of the tooltip bubble                                  |
+| **children**           | `node`     | `null`     | **Required.** Tooltip content                                                        |
+| **containerClassName** | `function` | `''`       | Extra class name for tooltip bubble container                                        |
+| **target**             | `string`   | `null`     | **Required.** `id` of the element you want tooltip to get displayed for              |
 
 ## License
 
