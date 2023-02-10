@@ -17,6 +17,8 @@ class AimoSteps extends Component {
     relations: [],
   };
 
+  PLACE = { TOP: 0, RIGHT: 1, BOTTOM: 2, LEFT: 3 };
+
   horizontalSpaceBetween = 50;
   verticalStart = 50;
   requiredDimensionSize = { width: 0, height: 0 };
@@ -69,9 +71,13 @@ class AimoSteps extends Component {
     this.requiredDimensionSize = { width: 0, height: 0 };
     let steps = [...this.props.steps];
     steps.forEach((step, index) => {
+      if (typeof step.cell === "undefined") step.cell = {};
+      if (typeof step.cell.row === "undefined") step.cell.row = 0;
+      if (typeof step.cell.col === "undefined") step.cell.col = index;
+
       step.position = {
-        left: index * (stepWidth + this.horizontalSpaceBetween),
-        top: this.verticalStart,
+        left: step.cell.col * (stepWidth + this.horizontalSpaceBetween),
+        top: this.verticalStart + (stepHeight + 20) * step.cell.row,
       };
       step.dimensions = {
         width: stepWidth,
@@ -86,17 +92,78 @@ class AimoSteps extends Component {
 
   setStepRelations = (steps) => {
     let relations = [];
-    for (let i = 1; i < steps.length; ++i) {
-      const start = {
-        x: steps[i - 1].position.left + steps[i - 1].dimensions.width,
-        y: steps[i - 1].position.top + steps[i - 1].dimensions.height / 2,
-      };
-      const end = {
-        x: steps[i].position.left,
-        y: steps[i].position.top + steps[i].dimensions.height / 2,
-      };
-      relations.push({ start, end });
+
+    let stepIds = {};
+    steps.forEach((step) => {
+      if (step.id) stepIds[`i${step.id}`] = step;
+    });
+
+    let { arrows } = this.props;
+    if (typeof arrows === "undefined") {
+      arrows = [];
+      for (let i = 1; i < steps.length; ++i) {
+        arrows.push({ from: steps[i - 1].id, to: steps[i].id });
+      }
     }
+
+    const getPlace = (src, dst) => {
+      if (
+        src.cell.row < dst.cell.row - 1 ||
+        (src.cell.row < dst.cell.row && src.cell.col === dst.cell.col)
+      )
+        return this.PLACE.BOTTOM;
+      if (
+        src.cell.row > dst.cell.row + 1 ||
+        (src.cell.row > dst.cell.row && src.cell.col === dst.cell.col)
+      )
+        return this.PLACE.TOP;
+      if (src.cell.col < dst.cell.col) return this.PLACE.RIGHT;
+      return this.PLACE.LEFT;
+    };
+    const getPosition = (place, step) => {
+      switch (place) {
+        case this.PLACE.TOP:
+          return {
+            x: step.position.left + step.dimensions.width / 2,
+            y: step.position.top,
+          };
+        case this.PLACE.BOTTOM:
+          return {
+            x: step.position.left + step.dimensions.width / 2,
+            y: step.position.top + step.dimensions.height,
+          };
+        case this.PLACE.LEFT:
+          return {
+            x: step.position.left,
+            y: step.position.top + step.dimensions.height / 2,
+          };
+        case this.PLACE.RIGHT:
+        default:
+          return {
+            x: step.position.left + step.dimensions.width,
+            y: step.position.top + step.dimensions.height / 2,
+          };
+      }
+    };
+
+    arrows.forEach((arrow) => {
+      if (!arrow.from) return;
+      if (!arrow.to) arrow.to = arrow.from + 1;
+
+      const startPlace = getPlace(
+        stepIds[`i${arrow.from}`],
+        stepIds[`i${arrow.to}`]
+      );
+      const endPlace = getPlace(
+        stepIds[`i${arrow.to}`],
+        stepIds[`i${arrow.from}`]
+      );
+
+      const start = getPosition(startPlace, stepIds[`i${arrow.from}`]);
+      const end = getPosition(endPlace, stepIds[`i${arrow.to}`]);
+
+      relations.push({ start, startPlace, end, endPlace });
+    });
 
     return relations;
   };
@@ -126,24 +193,57 @@ class AimoSteps extends Component {
   renderStepRelation = (relation, index) => {
     const { disableAnimation } = this.props;
 
-    let d = `M ${relation.start.x} ${relation.start.y}`;
-    if (relation.start.x <= relation.end.x) {
-      d += ` L ${relation.start.x} ${relation.end.y} ${relation.end.x} ${
-        relation.end.y
-      }  ${relation.end.x - 5} ${relation.end.y - 5} ${relation.end.x - 5} ${
-        relation.end.y + 5
-      } ${relation.end.x} ${relation.end.y}`;
-    } else {
-      d += ` L ${relation.start.x} ${
-        relation.start.y + (relation.end.y - relation.start.y) / 2
-      } ${relation.end.x - 10} ${
-        relation.start.y + (relation.end.y - relation.start.y) / 2
-      }  ${relation.end.x - 10} ${relation.end.y} ${relation.end.x} ${
-        relation.end.y
-      } ${relation.end.x - 5} ${relation.end.y - 5} ${relation.end.x - 5} ${
-        relation.end.y + 5
-      } ${relation.end.x} ${relation.end.y}`;
-    }
+    const p2str = (points) => {
+      const pointsStr = points.map((point) => `${point.x} ${point.y}`);
+      return pointsStr.join(" ");
+    };
+
+    const getArrowTip = (endPos, endPlace) => {
+      switch (endPlace) {
+        case this.PLACE.TOP:
+          return [
+            { x: endPos.x, y: endPos.y - 10 },
+            endPos,
+            { x: endPos.x - 5, y: endPos.y - 5 },
+            { x: endPos.x + 5, y: endPos.y - 5 },
+            endPos,
+          ];
+        case this.PLACE.BOTTOM:
+          return [
+            { x: endPos.x, y: endPos.y + 10 },
+            endPos,
+            { x: endPos.x - 5, y: endPos.y + 5 },
+            { x: endPos.x + 5, y: endPos.y + 5 },
+            endPos,
+          ];
+        case this.PLACE.LEFT:
+          return [
+            { x: endPos.x - 10, y: endPos.y },
+            endPos,
+            { x: endPos.x - 5, y: endPos.y - 5 },
+            { x: endPos.x - 5, y: endPos.y + 5 },
+            endPos,
+          ];
+        case this.PLACE.RIGHT:
+        default:
+          return [
+            { x: endPos.x + 10, y: endPos.y },
+            endPos,
+            { x: endPos.x + 5, y: endPos.y - 5 },
+            { x: endPos.x + 5, y: endPos.y + 5 },
+            endPos,
+          ];
+      }
+    };
+
+    const startPos = { x: relation.start.x, y: relation.start.y };
+    const endPos = { x: relation.end.x, y: relation.end.y };
+    const arrowTip = getArrowTip(endPos, relation.endPlace);
+
+    const arrow = [...arrowTip];
+
+    const d = `M ${p2str([startPos])} ${p2str(arrow)}`;
+
     return (
       <path
         key={index}
