@@ -4,8 +4,9 @@
 
 **AimoTitledInput** is an input component with sticky title/placeholder on the top. It supports different types of input and text-area. Also for passwords it supports hide/unhide icon to toggle password display.
 
-<div style="text-align: center">
-<img src="AimoTitledInput.gif" />
+<div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+<img src="AimoTitledInput2.gif" />
+<img src="AimoTitledInput1.gif" />
 </div>
 
 ## Contents
@@ -66,18 +67,21 @@ Also you can check out [**Aimo-TitledInput Sample Usage Code**][demo-titledinput
 
 Below is the list of all the props that can be used with `<AimoTitledInput>` component.
 
-| Name                                  | Type       | Default  | Description                                                                                                                      |
-| ------------------------------------- | ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| **activeStateClassName**              | `string`   | `''`     | Extra class name for input container when input is active (is focused or not empty)                                              |
-| **activeStatePlaceholderClassName**   | `string`   | `''`     | Extra class name for placeholder when input is active (is focused or not empty)                                                  |
-| **inactiveStateClassName**            | `string`   | `''`     | Extra class name for input container when input is inactive (is empty and not focused)                                           |
-| **inactiveStatePlaceholderClassName** | `string`   | `''`     | Extra class name for placeholder when input is inactive (is empty and not focused)                                               |
-| **inputClassName**                    | `string`   | `''`     | Extra class name for input container                                                                                             |
-| **inputType**                         | `string`   | `'text'` | One of the standard text-based input types (text, email, password, ...). `textarea` type is also supported for multi-line input. |
-| **onChange**                          | `function` | `null`   | **Required.** Callback function for onChange event. input value will be passed to given function.                                |
-| **placeholder**                       | `string`   | `''`     | Placeholder/Label of the input .                                                                                                 |
-| **showPasswordDisplayIcon**           | `boolean`  | `true`   | Whether to display `password` hide/unhide icon.                                                                                  |
-| **value**                             | `string`   | `''`     | **Required.** Input value                                                                                                        |
+| Name                                  | Type       | Default  | Description                                                                                                                                      |
+| ------------------------------------- | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **activeStateClassName**              | `string`   | `null`   | Extra class name for input container when input is active (is focused or not empty)                                                              |
+| **activeStatePlaceholderClassName**   | `string`   | `null`   | Extra class name for placeholder when input is active (is focused or not empty)                                                                  |
+| **error**                             | `string`   | `null`   | Text to show as input error                                                                                                                      |
+| **errorClassName**                    | `string`   | `null`   | Extra class name of the error container                                                                                                          |
+| **inactiveStateClassName**            | `string`   | `null`   | Extra class name for input container when input is inactive (is empty and not focused)                                                           |
+| **inactiveStatePlaceholderClassName** | `string`   | `null`   | Extra class name for placeholder when input is inactive (is empty and not focused)                                                               |
+| **inputClassName**                    | `string`   | `null`   | Extra class name for input container                                                                                                             |
+| **inputType**                         | `string`   | `'text'` | One of the standard text-based input types (text, email, password, ...). `textarea` type is also supported for multi-line input.                 |
+| **onChange**                          | `function` | `null`   | **Required.** Callback function for onChange event. input value will be passed to given function.                                                |
+| **passwordTogglerRenderFunc**         | `function` | `null`   | Render function for displaying password-displayer icon. A boolean value which shows if the password is hidden, will be passed to given function. |
+| **placeholder**                       | `string`   | `null`   | Placeholder/Label of the input .                                                                                                                 |
+| **showPasswordDisplayIcon**           | `boolean`  | `true`   | Whether to display `password` hide/unhide icon.                                                                                                  |
+| **value**                             | `string`   | `null`   | **Required.** Input value                                                                                                                        |
 
 ## License
 
