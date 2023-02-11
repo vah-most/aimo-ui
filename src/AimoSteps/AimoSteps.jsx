@@ -183,18 +183,58 @@ class AimoSteps extends Component {
     if (step.color) colorStyle.backgroundColor = step.color;
     if (step.textColor) colorStyle.color = step.textColor;
 
+    const getShape = (step) => {
+      switch (step.shape) {
+        case "oval":
+          return (
+            <ellipse
+              fill={step.color || this.DEFAULTS.STEP_BG_COLOR}
+              cx={step.position.left + step.dimensions.width / 2}
+              cy={step.position.top + step.dimensions.height / 2}
+              rx={step.dimensions.width / 2}
+              ry={step.dimensions.height / 2}
+            />
+          );
+        case "diamond":
+          return (
+            <polygon
+              fill={step.color || this.DEFAULTS.STEP_BG_COLOR}
+              points={`
+                ${step.position.left + step.dimensions.width / 2} ${
+                step.position.top
+              }
+                ${step.position.left + step.dimensions.width} ${
+                step.position.top + step.dimensions.height / 2
+              }
+                ${step.position.left + step.dimensions.width / 2} ${
+                step.position.top + step.dimensions.height
+              }
+                ${step.position.left} ${
+                step.position.top + step.dimensions.height / 2
+              }
+                `}
+            />
+          );
+
+        case "rect":
+        default:
+          return (
+            <rect
+              fill={step.color || this.DEFAULTS.STEP_BG_COLOR}
+              x={step.position.left}
+              y={step.position.top}
+              width={step.dimensions.width}
+              height={step.dimensions.height}
+              rx="5"
+              ry="5"
+            />
+          );
+      }
+    };
+
     return (
       <g key={`step-${index}`}>
-        <rect
-          className={`stepContainer ${this.props.stepClassName}`}
-          fill={step.color || this.DEFAULTS.STEP_BG_COLOR}
-          x={step.position.left}
-          y={step.position.top}
-          width={step.dimensions.width}
-          height={step.dimensions.height}
-          rx="5"
-          ry="5"
-        />
+        {getShape(step)};
         <text
           x={step.position.left + step.dimensions.width / 2}
           y={step.position.top + step.dimensions.height / 2}
