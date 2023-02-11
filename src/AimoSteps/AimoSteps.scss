@@ -16,15 +16,6 @@
   overflow: auto;
 }
 
-.stepContainer {
-  @include flexCenterView(row);
-  position: absolute;
-  background-color: #36d536;
-  border-radius: 10px;
-  color: #ffffff;
-  margin: 1px;
-}
-
 .stepsSVG {
   position: absolute;
   z-index: 10;

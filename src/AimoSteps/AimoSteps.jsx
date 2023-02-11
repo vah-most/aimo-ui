@@ -18,9 +18,13 @@ class AimoSteps extends Component {
   };
 
   PLACE = { TOP: 0, RIGHT: 1, BOTTOM: 2, LEFT: 3 };
+  DEFAULTS = {
+    STEP_BG_COLOR: "#36d536",
+    STEP_TEXT_COLOR: "#ffffff",
+    HORIZ_SPACE: 50,
+    VERT_SPACE: 50,
+  };
 
-  horizontalSpaceBetween = 50;
-  verticalStart = 50;
   requiredDimensionSize = { width: 0, height: 0 };
 
   reinitialize = () => {
@@ -75,16 +79,22 @@ class AimoSteps extends Component {
       if (typeof step.cell.row === "undefined") step.cell.row = 0;
       if (typeof step.cell.col === "undefined") step.cell.col = index;
 
-      step.position = {
-        left: step.cell.col * (stepWidth + this.horizontalSpaceBetween),
-        top: this.verticalStart + (stepHeight + 20) * step.cell.row,
-      };
-      step.dimensions = {
-        width: stepWidth,
-        height: stepHeight,
-      };
+      if (typeof step.position === "undefined") step.position = {};
+      if (typeof step.position.left === "undefined")
+        step.position.left =
+          step.cell.col * (stepWidth + this.DEFAULTS.HORIZ_SPACE);
+      if (typeof step.position.top === "undefined")
+        step.position.top =
+          this.verticalStart + (stepHeight + 20) * step.cell.row;
+
+      if (typeof step.dimensions === "undefined") step.dimensions = {};
+      if (typeof step.dimensions.height === "undefined")
+        step.dimensions.height = stepHeight;
+      if (typeof step.dimensions.width === "undefined")
+        step.dimensions.width = stepWidth;
+
       this.requiredDimensionSize.width +=
-        stepWidth + this.horizontalSpaceBetween;
+        step.dimensions.width + this.DEFAULTS.HORIZ_SPACE;
     });
 
     return steps;
@@ -174,19 +184,27 @@ class AimoSteps extends Component {
     if (step.textColor) colorStyle.color = step.textColor;
 
     return (
-      <div
-        key={`${step.title}-${index}`}
-        className={`stepContainer ${this.props.stepClassName}`}
-        style={{
-          left: `${step.position.left}px`,
-          top: `${step.position.top}px`,
-          width: `${step.dimensions.width}px`,
-          height: `${step.dimensions.height}px`,
-          ...colorStyle,
-        }}
-      >
-        <span className="stepText">{step.title}</span>
-      </div>
+      <g key={`step-${index}`}>
+        <rect
+          className={`stepContainer ${this.props.stepClassName}`}
+          fill={step.color || this.DEFAULTS.STEP_BG_COLOR}
+          x={step.position.left}
+          y={step.position.top}
+          width={step.dimensions.width}
+          height={step.dimensions.height}
+          rx="5"
+          ry="5"
+        />
+        <text
+          x={step.position.left + step.dimensions.width / 2}
+          y={step.position.top + step.dimensions.height / 2}
+          fill={step.textColor || this.DEFAULTS.STEP_TEXT_COLOR}
+          dominantBaseline="middle"
+          textAnchor="middle"
+        >
+          {step.title}
+        </text>
+      </g>
     );
   };
 
@@ -263,13 +281,16 @@ class AimoSteps extends Component {
 
     return (
       <div className={`stepsContainer ${this.props.className}`}>
-        {steps.map((step, index) => {
+        {/* {steps.map((step, index) => {
           return this.renderStep(step, index);
-        })}
+        })} */}
         <svg
           className="stepsSVG"
           style={{ width: `${this.requiredDimensionSize.width}px` }}
         >
+          {steps.map((step, index) => {
+            return this.renderStep(step, index);
+          })}
           {relations.map((rel, index) => {
             return this.renderStepRelation(rel, index);
           })}
