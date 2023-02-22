@@ -6,6 +6,7 @@
 
 <div style="text-align: center">
 <img src="AimoSteps.gif" />
+<img src="AimoSteps2.gif" />
 </div>
 
 ## Contents
