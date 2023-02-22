@@ -2,6 +2,22 @@
 
 A collection of useful react components
 
+<table style="text-align: center">
+<tr>
+<td colspan="2">
+<img src="docs/AimoTable2.gif" />
+</td>
+</tr>
+<tr>
+<td>
+<img src="docs/AimoTitledInput2.gif" height="106" width="188" />
+</td>
+<td>
+<img src="docs/AimoSteps2.gif" height="265" width="450" />
+</td>
+</tr>
+</table>
+
 ## Contents
 
 - [What is this?](#what-is-this)
