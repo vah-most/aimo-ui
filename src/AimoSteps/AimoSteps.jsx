@@ -15,6 +15,7 @@ class AimoSteps extends Component {
   state = {
     steps: [],
     relations: [],
+    movingStep: {},
   };
 
   PLACE = { TOP: 0, RIGHT: 1, BOTTOM: 2, LEFT: 3 };
@@ -118,17 +119,17 @@ class AimoSteps extends Component {
 
     const getPlace = (src, dst) => {
       if (
-        src.cell.row < dst.cell.row - 1 ||
-        (src.cell.row < dst.cell.row && src.cell.col === dst.cell.col)
-      )
-        return this.PLACE.BOTTOM;
-      if (
-        src.cell.row > dst.cell.row + 1 ||
-        (src.cell.row > dst.cell.row && src.cell.col === dst.cell.col)
-      )
-        return this.PLACE.TOP;
-      if (src.cell.col < dst.cell.col) return this.PLACE.RIGHT;
-      return this.PLACE.LEFT;
+        Math.abs(src.position.top - dst.position.top) <
+        Math.abs(src.position.left - dst.position.left)
+      ) {
+        return src.position.left < dst.position.left
+          ? this.PLACE.RIGHT
+          : this.PLACE.LEFT;
+      } else {
+        return src.position.top < dst.position.top
+          ? this.PLACE.BOTTOM
+          : this.PLACE.TOP;
+      }
     };
     const getPosition = (place, step) => {
       switch (place) {
@@ -179,9 +180,7 @@ class AimoSteps extends Component {
   };
 
   renderStep = (step, index) => {
-    let colorStyle = {};
-    if (step.color) colorStyle.backgroundColor = step.color;
-    if (step.textColor) colorStyle.color = step.textColor;
+    const { movingStep } = this.state;
 
     const getShape = (step) => {
       switch (step.shape) {
@@ -220,6 +219,11 @@ class AimoSteps extends Component {
         default:
           return (
             <rect
+              className={
+                movingStep && movingStep.step && step.id === movingStep.id
+                  ? "movingStep"
+                  : ""
+              }
               fill={step.color || this.DEFAULTS.STEP_BG_COLOR}
               x={step.position.left}
               y={step.position.top}
@@ -233,7 +237,24 @@ class AimoSteps extends Component {
     };
 
     return (
-      <g key={`step-${index}`}>
+      <g
+        key={`step-${index}`}
+        onMouseDown={(e) => {
+          const movingStep = {
+            step: step,
+            stepPosition: {
+              left: step.position.left,
+              top: step.position.top,
+            },
+            coords: { x: e.pageX, y: e.pageY },
+          };
+          this.setState({ movingStep });
+        }}
+        onMouseUp={(e) => {
+          this.setState({ movingStep: {} });
+        }}
+        draggable={true}
+      >
         {getShape(step)};
         <text
           x={step.position.left + step.dimensions.width / 2}
@@ -321,12 +342,34 @@ class AimoSteps extends Component {
 
     return (
       <div className={`stepsContainer ${this.props.className}`}>
-        {/* {steps.map((step, index) => {
-          return this.renderStep(step, index);
-        })} */}
         <svg
           className="stepsSVG"
           style={{ width: `${this.requiredDimensionSize.width}px` }}
+          onMouseUp={() => {
+            this.setState({ movingStep: {} });
+          }}
+          onMouseMove={(e) => {
+            const { movingStep, steps } = this.state;
+            if (!movingStep || !movingStep.step) return;
+            const newMouseX = e.pageX;
+            const newMouseY = e.pageY;
+            movingStep.step.position.left = Math.max(
+              movingStep.stepPosition.left + newMouseX - movingStep.coords.x,
+              0
+            );
+            movingStep.step.position.top = Math.max(
+              movingStep.stepPosition.top + newMouseY - movingStep.coords.y,
+              0
+            );
+            let stepIndex = steps.findIndex((s) => s.id === movingStep.step.id);
+            if (stepIndex < 0) return;
+            steps[stepIndex] = { ...movingStep.step };
+            const relations = this.setStepRelations(steps);
+            this.setState({ steps, relations });
+          }}
+          onMouseLeave={() => {
+            this.setState({ movingStep: {} });
+          }}
         >
           {steps.map((step, index) => {
             return this.renderStep(step, index);
