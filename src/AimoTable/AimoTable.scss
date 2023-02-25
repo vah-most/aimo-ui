@@ -206,17 +206,3 @@ $titleTextColor: #474545;
   width: 12px;
   height: 12px;
 }
-
-@media (max-width: $minNormalWidth) {
-  .smallTableAddButton {
-    display: block;
-  }
-
-  .table tr td {
-    max-width: 100px;
-  }
-
-  .table tr td:first-child {
-    display: none;
-  }
-}
