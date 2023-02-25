@@ -291,7 +291,9 @@ const AimoTable = ({
             return (
               <tr key={index} className={`${rowClassName}`}>
                 {autoAddRowNumbers && (
-                  <td className={`centeredText ${cellClassName} rowNumberCell`}>
+                  <td
+                    className={`itemCell centeredText ${cellClassName} rowNumberCell`}
+                  >
                     <div className={`centeredText ${cellContentClassName}`}>
                       {row.number}
                     </div>
