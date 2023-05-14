@@ -26,8 +26,10 @@ const AimoTable = ({
   data = [],
   disableDeleteOperation = true,
   disableEditOperation = true,
+  disableExportOperation = true,
   disableRefreshOperation = true,
   disableSearchOperation = true,
+  exportFileName = null,
   headerClassName = "",
   onPageChange = null,
   onRefresh = null,
@@ -213,6 +215,60 @@ const AimoTable = ({
     );
   };
 
+  const prepareValueToExport = (value) => {
+    let innerValue = value === null || !value.toString ? "" : value.toString();
+    if (value instanceof Date) {
+      innerValue = value.toLocaleString();
+    }
+    let result = innerValue.replace(/"/g, '""');
+    if (result.search(/("|,|\n)/g) >= 0) result = '"' + result + '"';
+    return result;
+  };
+
+  const handleExport = () => {
+    let dataHeader = Object.values(columnProps).map((col) => col.headerTitle);
+
+    if (addDataRowNumber) dataHeader.unshift("#");
+    let finalData = data;
+    if (!disableSearchOperation) {
+      finalData = filterData(finalData);
+    }
+    let csvRows = finalData.map((row, index) => {
+      let rowItems = [];
+      if (addDataRowNumber) rowItems.push(index + 1);
+      Object.entries(columnProps).forEach(([keyName, column], cIndex) => {
+        const value = column.exportableValue
+          ? column.exportableValue(row)
+          : row[keyName] && typeof row[keyName].toString !== "undefined"
+          ? row[keyName].toString()
+          : null;
+        rowItems.push(prepareValueToExport(value));
+      });
+      return rowItems.join(",");
+    });
+    csvRows.unshift(
+      dataHeader.map((value) => prepareValueToExport(value)).join(",")
+    );
+
+    const csv = csvRows.join("\n");
+    const filename = exportFileName
+      ? typeof exportFileName === "function"
+        ? exportFileName()
+        : exportFileName
+      : `export-${new Date().toLocaleString()}.csv`;
+
+    const link = document.createElement("a");
+    if (link.download !== undefined) {
+      link.setAttribute(
+        "href",
+        `data:text/csv;charset=utf-8,%EF%BB%BF` + encodeURIComponent(csv)
+      );
+      link.setAttribute("download", filename);
+      link.style.visibility = "hidden";
+      link.click();
+    }
+  };
+
   let finalData = tableData;
   if (!disableSearchOperation) {
     finalData = filterData(finalData);
@@ -250,10 +306,15 @@ const AimoTable = ({
                 <img alt="↺" className="titleRefreshIcon" src={RefreshIcon} />
               </div>
             )}
+            {!disableExportOperation && (
+              <div className="titleExport" onClick={handleExport}>
+                <span className="titleExportIcon">🖶</span>
+              </div>
+            )}
           </div>
         </div>
       )}
-      <table className="table">
+      <table>
         <thead>
           <tr>
             {autoAddRowNumbers && (
@@ -386,8 +447,10 @@ AimoTable.propTypes = {
   data: PropTypes.array.isRequired,
   disableDeleteOperation: PropTypes.bool,
   disableEditOperation: PropTypes.bool,
+  disableExportOperation: PropTypes.bool,
   disableRefreshOperation: PropTypes.bool,
   disableSearchOperation: PropTypes.bool,
+  exportFileName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   headerClassName: PropTypes.string,
   onPageChange: PropTypes.func,
   onRefresh: PropTypes.func,
@@ -409,7 +472,7 @@ AimoTable.propTypes = {
   tooltipArrowClassName: PropTypes.string,
   tooltipBodyClassName: PropTypes.string,
   tooltipClassName: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.string | PropTypes.element,
 };
 
 export default AimoTable;

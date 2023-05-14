@@ -6,6 +6,6 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AimoTable from "./dist/AimoTable";
+const AimoTable = require("./dist/AimoTable");
 
-export default AimoTable;
+module.exports = AimoTable;

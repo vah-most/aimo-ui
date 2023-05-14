@@ -193,6 +193,16 @@ $titleTextColor: #474545;
   }
 }
 
+.titleExport {
+  font-size: 16px;
+  cursor: pointer;
+  padding-inline-start: 4px;
+
+  &:hover {
+    @include rotater(2s, infinite);
+  }
+}
+
 .titleRefresh {
   font-size: 16px;
   cursor: pointer;

@@ -1,13 +1,15 @@
 {
   "name": "@aimo.ui/aimo-table",
-  "version": "1.8.3",
+  "version": "1.9.10",
   "description": "A powerful fully customizable table component for react",
   "main": "index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "index.js",
     "dist/*.css",
     "dist/*.js",
-    "dist/*.svg"
+    "dist/*.svg",
+    "dist/types/*.ts"
   ],
   "scripts": {
     "cleandist": "run-script-os",
@@ -35,6 +37,7 @@
   "dependencies": {
     "@aimo.ui/aimo-pagination": "^1.0.3",
     "@aimo.ui/aimo-searchbar": "^1.0.1",
-    "@aimo.ui/aimo-tooltip": "^1.0.1"
+    "@aimo.ui/aimo-tooltip": "^1.0.1",
+    "jspdf": "^2.5.1"
   }
 }
