@@ -58,7 +58,15 @@ const AimoTable = ({
   const [tableData, setTableData] = useState(data);
 
   useEffect(() => {
-    setTableData(data);
+    if (currentPage > 1) {
+      setTableData([]);
+      setTimeout(() => {
+        setTableData(data);
+      });
+      handlePageChange(1);
+    } else {
+      setTableData(data);
+    }
   }, [data]);
 
   const getCurrentPageData = (data) => {
