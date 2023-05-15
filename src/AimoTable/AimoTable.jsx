@@ -1,7 +1,5 @@
 /*
- * Created on Sat Jun 25 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
@@ -472,7 +470,7 @@ AimoTable.propTypes = {
   tooltipArrowClassName: PropTypes.string,
   tooltipBodyClassName: PropTypes.string,
   tooltipClassName: PropTypes.string,
-  title: PropTypes.string | PropTypes.element,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 export default AimoTable;
