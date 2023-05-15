@@ -1,6 +1,6 @@
 {
   "name": "@aimo.ui/aimo-table",
-  "version": "1.9.13",
+  "version": "1.9.14",
   "description": "A powerful fully customizable table component for react",
   "main": "index.js",
   "types": "dist/types/index.d.ts",
