@@ -81,6 +81,7 @@ const AimoTable = ({
   };
 
   const performInnerDataSort = (data) => {
+    if (!innerSortedBy) return data;
     const sortedData = data.sort((item1, item2) => {
       if (
         columnProps[innerSortedBy] &&
