@@ -1,12 +1,10 @@
 /*
- * Created on Tue Aug 09 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import "./AimoSideMenu.css";
@@ -30,6 +28,17 @@ const AimoSideMenu = ({
 }) => {
   if (hideHeader) hideCompactView = true;
   const [compact, setCompact] = useState(hideCompactView ? false : true);
+  const [maxWidths, setMaxWidth] = useState({ full: 0, compact: 0 });
+  const containerRef = useRef();
+  const iconRef = useRef();
+
+  useEffect(() => {
+    if (maxWidths.compact === 0)
+      setMaxWidth({
+        ...maxWidths,
+        compact: iconRef.current.clientWidth,
+      });
+  }, []);
 
   const renderMenuHeaderIcon = (isCompact, toggleCompact) => {
     let icon = null;
@@ -37,14 +46,42 @@ const AimoSideMenu = ({
     else if (hideCompactView)
       icon = <span onClick={() => toggleCompact(false)}>☰</span>;
     else if (isCompact)
-      icon = <span onClick={() => toggleCompact(false)}>≫</span>;
-    else icon = <span onClick={() => toggleCompact(true)}>≪</span>;
+      icon = (
+        <span
+          onClick={() => {
+            if (maxWidths.compact === 0)
+              setMaxWidth({
+                ...maxWidths,
+                compact: iconRef.current.clientWidth,
+              });
+            toggleCompact(false);
+          }}
+        >
+          ≫
+        </span>
+      );
+    else
+      icon = (
+        <span
+          onClick={() => {
+            if (maxWidths.full === 0)
+              setMaxWidth({
+                ...maxWidths,
+                full: containerRef.current.clientWidth,
+              });
+            toggleCompact(true);
+          }}
+        >
+          ≪
+        </span>
+      );
 
     return (
       <div
         className={`sideMenuHeaderIcon 
         ${hideCompactView ? null : "sideMenuClickableItem"}
         ${iconContainerClassName}`}
+        ref={iconRef}
       >
         {icon}
       </div>
@@ -111,6 +148,11 @@ const AimoSideMenu = ({
     return <div key={key} className="sideMenuSeparator" />;
   };
 
+  let style = {};
+  if (rtl) style["flexDirection"] = "row-reverse";
+  if (compact && maxWidths.compact > 0) style["maxWidth"] = maxWidths.compact;
+  else if (!compact && maxWidths.full > 0) style["maxWidth"] = maxWidths.full;
+
   return (
     <div
       className={`sideMenuContainer 
@@ -121,19 +163,20 @@ const AimoSideMenu = ({
       }
       ${compact ? "sideMenuContainerCompact" : "sideMenuContainerFull"} 
       ${containerClassName}`}
-      style={rtl ? { flexDirection: "row-reverse" } : null}
+      ref={containerRef}
+      style={style}
     >
       {!hideHeader && (
         <div className={`sideMenuHeader ${headerClassName}`}>
           <div className={`sideMenuItem ${menuItemClassName}`}>
+            {renderMenuHeaderIcon(compact, setCompact)}
             <div
               className={`sideMenuItemText ${
                 compact ? "sideMenuItemTextHidden" : ""
               }`}
             >
-              {!compact && renderMenuHeaderText()}
+              {renderMenuHeaderText()}
             </div>
-            {renderMenuHeaderIcon(compact, setCompact)}
           </div>
           {renderRowSeparator()}
         </div>
@@ -150,12 +193,8 @@ const AimoSideMenu = ({
                 {renderItem && renderItem(item, index, compact)}
                 {!renderItem && renderItemIcon(item, index)}
                 {!renderItem && (
-                  <div
-                    className={`sideMenuItemText ${
-                      compact ? "sideMenuItemTextHidden" : ""
-                    }`}
-                  >
-                    {!compact && renderItemText(item, index)}
+                  <div className={`sideMenuItemText`}>
+                    {renderItemText(item, index)}
                   </div>
                 )}
               </div>
