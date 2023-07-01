@@ -72,12 +72,14 @@ Below is the list of all the props that we can use with `<AimoSideMenu>` compone
 
 | Name                       | Type       | Default  | Description                                                                                                                                                                                                                                                          |
 | -------------------------- | ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **compactView**            | `boolean`  | `true`   | Initial / Currrent compact-view state                                                                                                                                                                                                                                |
 | **containerClassName**     | `string`   | `''`     | Extra class name for Side-Menu container                                                                                                                                                                                                                             |
 | **headerClassName**        | `string`   | `''`     | Extra class name for menu header                                                                                                                                                                                                                                     |
 | **headerPosition**         | `string`   | `'top'`  | Specify header position (valid values are `'top'` and `'bottom'`)                                                                                                                                                                                                    |
 | **headerText**             | `string`   | `'Menu'` | Menu title text                                                                                                                                                                                                                                                      |
 | **hideCompactView**        | `boolean`  | `false`  | Whether to hide compact view (icons-only view)                                                                                                                                                                                                                       |
 | **hideHeader**             | `boolean`  | `false`  | Whether to hide menu title                                                                                                                                                                                                                                           |
+| **hideIcons**              | `boolean`  | `false`  | Whether to hide menu icons                                                                                                                                                                                                                                           |
 | **iconContainerClassName** | `string`   | `''`     | Extra class name for each menu-item icon                                                                                                                                                                                                                             |
 | **menuItemClassName**      | `string`   | `''`     | Extra class name for each menu-item                                                                                                                                                                                                                                  |
 | **menuItems**              | `array`    | `[]`     | **Required.** Array of menu-item objects. See below for avaiable properties of menu-item objects                                                                                                                                                                     |
@@ -89,13 +91,14 @@ Below is the list of all the props that we can use with `<AimoSideMenu>` compone
 
 **menuItems** property is an array of objects with the following properties:
 
-| Name            | Type       | Default | Description                                                                                                         |
-| --------------- | ---------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
-| **isSeparator** | `boolean`  | `false` | Display a separator line after last item                                                                            |
-| **onClick**     | `function` | `null`  | Function to call when user clicks on menu-item                                                                      |
-| **text**        | `string`   | `null`  | Menu-item text                                                                                                      |
-| **renderIcon**  | `function` | `null`  | Render function for displaying icon of the menu-item                                                                |
-| **renderText**  | `function` | `null`  | Render function for displaying text of the menu-item. Setting one of `text` or `renderText` properties is required. |
+| Name            | Type       | Default | Description                                                                                                                                                               |
+| --------------- | ---------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **isSeparator** | `boolean`  | `false` | Display a separator line after last item                                                                                                                                  |
+| **onClick**     | `function` | `null`  | Function to call when user clicks on menu-item                                                                                                                            |
+| **text**        | `string`   | `null`  | Menu-item text                                                                                                                                                            |
+| **renderFunc**  | `function` | `null`  | Render function for displaying the whole item row. three arguments (`item`, `index`, `compact`) will be sent to given function to help conditional rendering of the item. |
+| **renderIcon**  | `function` | `null`  | Render function for displaying icon of the menu-item                                                                                                                      |
+| **renderText**  | `function` | `null`  | Render function for displaying text of the menu-item. Setting one of `text` or `renderText` properties is required.                                                       |
 
 ## License
 
