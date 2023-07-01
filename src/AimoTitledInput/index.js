@@ -6,6 +6,6 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AimoTitledInput from "./dist/AimoTitledInput";
+const AimoTitledInput = require("./dist/AimoTitledInput");
 
-export default AimoTitledInput;
+module.exports = AimoTitledInput;
