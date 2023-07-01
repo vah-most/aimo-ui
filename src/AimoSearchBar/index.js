@@ -6,6 +6,6 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AimoSearchBar from "./dist/AimoSearchBar";
+const AimoSearchBar = require("./dist/AimoSearchBar");
 
-export default AimoSearchBar;
+module.exports = AimoSearchBar;

@@ -1,7 +1,5 @@
 /*
- * Created on Wed Jul 06 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
@@ -37,6 +35,7 @@ const AimoSearchBar = ({
           }`}
         >
           <input
+            autoFocus={true}
             className={`searchInput ${inputClassName} ${
               displayInput ? "" : "searchInputHidden"
             }`}
