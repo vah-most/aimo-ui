@@ -58,7 +58,7 @@ const AimoTable = ({
   const [tableData, setTableData] = useState(data);
 
   useEffect(() => {
-    if (currentPage > 1) {
+    if (currentPage > 1 && (currentPage - 1) * rowsPerPage > data.length) {
       setTableData([]);
       setTimeout(() => {
         setTableData(data);
