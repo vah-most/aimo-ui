@@ -6,6 +6,6 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AimoPagination from "./dist/AimoPagination";
+const AimoPagination = require("./dist/AimoPagination");
 
-export default AimoPagination;
+module.exports = AimoPagination;
