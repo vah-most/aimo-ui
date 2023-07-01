@@ -53,7 +53,9 @@ class AimoTooltip extends Component {
       newParent.appendChild(target);
       newParent.appendChild(this.tooltipRef.current);
       targetParent.appendChild(newParent);
-      targetParent.removeChild(target);
+      try {
+        targetParent.removeChild(target);
+      } catch (err) {}
     }
 
     const targetSpecs = {

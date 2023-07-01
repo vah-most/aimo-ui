@@ -6,6 +6,6 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AimoTooltip from "./dist/AimoTooltip";
+const AimoTooltip = require("./dist/AimoTooltip");
 
-export default AimoTooltip;
+module.exports = AimoTooltip;
