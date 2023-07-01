@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import "./AimoSideMenu.css";
 
 const AimoSideMenu = ({
+  compactView = true,
   containerClassName = "",
   headerClassName = "",
   headerPosition = "top",
@@ -26,19 +27,22 @@ const AimoSideMenu = ({
   rtl = false,
   textContainerClassName = "",
 }) => {
-  if (hideHeader) hideCompactView = true;
-  const [compact, setCompact] = useState(hideCompactView ? false : true);
+  const [compact, setCompact] = useState(hideCompactView ? false : compactView);
   const [maxWidths, setMaxWidth] = useState({ full: 0, compact: 0 });
   const containerRef = useRef();
-  const iconRef = useRef();
+  let iconRef = null;
 
   useEffect(() => {
-    if (maxWidths.compact === 0)
+    if (maxWidths.compact === 0 && iconRef)
       setMaxWidth({
         ...maxWidths,
         compact: iconRef.current.clientWidth,
       });
   }, []);
+
+  useEffect(() => {
+    setCompact(compactView);
+  }, [compactView]);
 
   const renderMenuHeaderIcon = (isCompact, toggleCompact) => {
     let icon = null;
@@ -49,7 +53,7 @@ const AimoSideMenu = ({
       icon = (
         <span
           onClick={() => {
-            if (maxWidths.compact === 0)
+            if (maxWidths.compact === 0 && iconRef)
               setMaxWidth({
                 ...maxWidths,
                 compact: iconRef.current.clientWidth,
@@ -81,7 +85,6 @@ const AimoSideMenu = ({
         className={`sideMenuHeaderIcon 
         ${hideCompactView ? null : "sideMenuClickableItem"}
         ${iconContainerClassName}`}
-        ref={iconRef}
       >
         {icon}
       </div>
@@ -105,6 +108,12 @@ const AimoSideMenu = ({
   const renderItemIcon = (item, index) => {
     if (item.isSeparator) return renderRowSeparator(index);
 
+    let ref = null;
+    if (!iconRef) {
+      iconRef = useRef();
+      ref = iconRef;
+    }
+
     return (
       <div
         key={index}
@@ -112,6 +121,7 @@ const AimoSideMenu = ({
           item.onClick ? "sideMenuClickableItem" : ""
         } sideMenuItemIcon`}
         onClick={item.onClick ? () => item.onClick(item) : null}
+        ref={ref}
       >
         {typeof item.renderIcon === "function" ? (
           item.renderIcon()
@@ -185,14 +195,19 @@ const AimoSideMenu = ({
         <div className="sideMenuFull">
           {menuItems.map((item, index) => {
             if (item.isSeparator) return renderRowSeparator(index);
+            const customRenderFunc = item.renderFunc
+              ? item.renderFunc
+              : renderItem
+              ? renderItem
+              : null;
             return (
               <div
                 key={index}
                 className={`sideMenuItem ${menuItemClassName} ${item.className}`}
               >
-                {renderItem && renderItem(item, index, compact)}
-                {!renderItem && renderItemIcon(item, index)}
-                {!renderItem && (
+                {customRenderFunc && customRenderFunc(item, index, compact)}
+                {!customRenderFunc && renderItemIcon(item, index)}
+                {!customRenderFunc && (
                   <div className={`sideMenuItemText`}>
                     {renderItemText(item, index)}
                   </div>
@@ -207,6 +222,7 @@ const AimoSideMenu = ({
 };
 
 AimoSideMenu.propTypes = {
+  compactView: PropTypes.bool,
   containerClassName: PropTypes.string,
   headerClassName: PropTypes.string,
   headerPosition: PropTypes.oneOf(["top", "bottom"]),
