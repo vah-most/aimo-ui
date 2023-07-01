@@ -17,6 +17,7 @@ const AimoSideMenu = ({
   headerText = "Menu",
   hideCompactView = false,
   hideHeader = false,
+  hideIcons = false,
   iconContainerClassName = "",
   menuItemClassName = "",
   menuItems = [],
@@ -28,15 +29,15 @@ const AimoSideMenu = ({
   textContainerClassName = "",
 }) => {
   const [compact, setCompact] = useState(hideCompactView ? false : compactView);
-  const [maxWidths, setMaxWidth] = useState({ full: 0, compact: 0 });
+  const [maxWidths, setMaxWidth] = useState({ full: -1, compact: -1 });
   const containerRef = useRef();
   let iconRef = null;
 
   useEffect(() => {
-    if (maxWidths.compact === 0 && iconRef)
+    if (maxWidths.compact < 0 && iconRef)
       setMaxWidth({
         ...maxWidths,
-        compact: iconRef.current.clientWidth,
+        compact: hideIcons ? 0 : iconRef.current.clientWidth,
       });
   }, []);
 
@@ -45,6 +46,8 @@ const AimoSideMenu = ({
   }, [compactView]);
 
   const renderMenuHeaderIcon = (isCompact, toggleCompact) => {
+    if (hideIcons) return null;
+
     let icon = null;
     if (renderHeaderIcon) icon = renderHeaderIcon(isCompact, toggleCompact);
     else if (hideCompactView)
@@ -53,7 +56,7 @@ const AimoSideMenu = ({
       icon = (
         <span
           onClick={() => {
-            if (maxWidths.compact === 0 && iconRef)
+            if (maxWidths.compact < 0 && iconRef)
               setMaxWidth({
                 ...maxWidths,
                 compact: iconRef.current.clientWidth,
@@ -68,7 +71,7 @@ const AimoSideMenu = ({
       icon = (
         <span
           onClick={() => {
-            if (maxWidths.full === 0)
+            if (maxWidths.full < -1)
               setMaxWidth({
                 ...maxWidths,
                 full: containerRef.current.clientWidth,
@@ -106,6 +109,8 @@ const AimoSideMenu = ({
   };
 
   const renderItemIcon = (item, index) => {
+    if (hideIcons) return null;
+
     if (item.isSeparator) return renderRowSeparator(index);
 
     let ref = null;
@@ -160,8 +165,8 @@ const AimoSideMenu = ({
 
   let style = {};
   if (rtl) style["flexDirection"] = "row-reverse";
-  if (compact && maxWidths.compact > 0) style["maxWidth"] = maxWidths.compact;
-  else if (!compact && maxWidths.full > 0) style["maxWidth"] = maxWidths.full;
+  if (compact && maxWidths.compact >= 0) style["maxWidth"] = maxWidths.compact;
+  else if (!compact && maxWidths.full >= 0) style["maxWidth"] = maxWidths.full;
 
   return (
     <div
@@ -171,7 +176,13 @@ const AimoSideMenu = ({
           ? "sideMenuContainerBottom"
           : ""
       }
-      ${compact ? "sideMenuContainerCompact" : "sideMenuContainerFull"} 
+      ${
+        compact
+          ? hideIcons
+            ? "sideMenuContainerHide"
+            : "sideMenuContainerCompact"
+          : "sideMenuContainerFull"
+      } 
       ${containerClassName}`}
       ref={containerRef}
       style={style}
@@ -229,6 +240,7 @@ AimoSideMenu.propTypes = {
   headerText: PropTypes.string,
   hideCompactView: PropTypes.bool,
   hideHeader: PropTypes.bool,
+  hideIcons: PropTypes.bool,
   iconContainerClassName: PropTypes.string,
   menuItemClassName: PropTypes.string,
   menuItems: PropTypes.arrayOf(PropTypes.object).isRequired,
