@@ -1,0 +1,71 @@
+/*
+ * Copyright (c) 2023 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../Colors.scss";
+@import "../Display.scss";
+
+.scCalendarContainer {
+  @include flexCenterView(row);
+  flex-wrap: wrap;
+  height: 90%;
+  width: 100%;
+
+  .scCalendarDoWTitle,
+  .scCalendarDoW {
+    border: 1px solid lightblue;
+    padding: 5px;
+
+    width: calc(calc(100% / 7) - 10px - 10px);
+  }
+
+  .scCalendarDoWTitle {
+    @include flexView(column, center, center);
+    background-color: #555555;
+    border-color: #f0f8ff;
+    color: #f0f8ff;
+    height: 50px;
+  }
+
+  .scCalendarDoW {
+    @include flexView(column, flex-end, center);
+    border-color: #e9e9e9;
+    height: 85px;
+
+    &.scCalendarDoWToday {
+      background-color: #d7ffd7;
+    }
+  }
+
+  .scCalendarItemDate {
+    @include flexCenterView(row);
+    color: #b3b3b3;
+    font-size: 11px;
+    height: 20px;
+  }
+
+  .scCalendarItemEvents {
+    @include flexView(column, flex-start, center);
+    flex-grow: 1;
+    width: 100%;
+
+    .scCalendarEvent {
+      $scCalendarEvent_padding: 5px;
+      background-color: #fdfeff;
+      border: 1px solid #1a6d1a;
+
+      border-radius: 10px;
+      color: #1a6d1a;
+      font-size: 11px;
+      margin: 2px 0px;
+      overflow: hidden;
+      padding: $scCalendarEvent_padding;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: calc(100% - calc(2 * $scCalendarEvent_padding));
+    }
+  }
+}

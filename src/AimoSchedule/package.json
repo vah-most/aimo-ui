@@ -1,0 +1,44 @@
+{
+  "name": "@aimo.ui/aimo-schedule",
+  "version": "0.0.1",
+  "description": "Calendar and Scheduler component for React",
+  "main": "index.ts",
+  "files": [
+    "index.ts",
+    "index.js",
+    "dist/*.css",
+    "dist/*.js"
+  ],
+  "scripts": {
+    "cleandist": "run-script-os",
+    "cleandist:win32": "del /S /Q .\\dist\\*",
+    "cleandist:default": "rm -R ./dist/*",
+    "prepublish": "npm run cleandist & node-sass ./ -o dist/ & npx babel ./ --out-dir dist --copy-files",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vah-most/aimo-ui.git"
+  },
+  "keywords": [
+    "popup on hover",
+    "tooltip"
+  ],
+  "author": "Mostafa Vahabzadeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vah-most/aimo-ui/issues"
+  },
+  "homepage": "https://github.com/vah-most/aimo-ui#readme",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.22.5",
+    "run-script-os": "^1.1.6"
+  },
+  "dependencies": {
+    "moment": "^2.29.4",
+    "react-moment": "^1.1.3"
+  }
+}
